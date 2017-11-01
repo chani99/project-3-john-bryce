@@ -1,0 +1,44 @@
+<section>
+    <div class="container">
+        <button class=" btn btn-danger btn-xs" id="delete_student{{num}}">Delete</button>
+    </div>
+
+    <!-- <div class="container"> -->
+    <div class=" hoverable">
+        <div class="form-signin">
+            <h5 class="form-signin-heading">{{form_name}}</h5>
+            <label for="inputname" class="">Student Name</label>
+            <input type="name" id="inputname" class="form-control" placeholder="Student Name" required autofocus>
+            <label for="inputphone" class="">Phone</label>
+            <input type="phone" id="inputphone" class="form-control" placeholder="Student Phone" required autofocus>
+            <label for="inputemail" class="">e-mail</label>
+            <input type="email" id="inputemail" class="form-control" placeholder="Student e-mail" required autofocus>
+            <div class="padding_top">
+
+                <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
+                <input name="userImage" type="file" id="st_photo" class="inputFile" />
+            </div>
+            <div class="padding_top">
+
+                <div id="course-checkbox">
+                    <h5>Cuorse List:<br></h5>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <button class=" btn btn-primary btn-lg float-right" value="{{new?}}" id="saveStud{{num}}">Save Student</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+</section>

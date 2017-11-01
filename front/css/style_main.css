@@ -1,0 +1,86 @@
+body {
+  padding-top: 54px;
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+.padding_top {
+  padding-top: "30px;";
+}
+#logo {
+  max-width: 200px;
+}
+.mainscreen {
+  padding: 20px;
+}
+.container2 {
+  padding-top: 20px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center {
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.brand {
+  width: 200px;
+}
+.block {
+  display: inline-block;
+  float: left;
+}
+header.masthead {
+  background: url('../../back/images/banner-01.jpg') no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+header.masthead > .overlay {
+  padding: 5rem 0;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  header.masthead > .overlay {
+    padding: 4rem 0;
+  }
+}
+button {
+  border: none;
+  background-color: #c9c8c8;
+}
+.main-school {
+  margin-top: 10px;
+  background-color: white;
+  height: 100%;
+  padding: 50px;
+}
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-item1 {
+  padding-top: 6px;
+  -webkit-flex: 4;
+  flex: 4;
+}
+.flex-item2 {
+  -webkit-flex: 1;
+  flex: 1;
+}
+.gray {
+  background-color: #c9c8c8;
+}
+.nopadding {
+  margin: 0;
+  padding: 0;
+}

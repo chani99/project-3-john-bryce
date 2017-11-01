@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <meta name="description" content="">
+    <meta name="author" content=""> -->
+
+    <title>
+        School Project
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="front/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="front/css/style_main.css" rel="stylesheet">
+    <link href="front/css/login.css" rel="stylesheet">
+    <link href="front/css/curse-temp.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <img src="back/images/logo_codeschool.PNG" id="logo" class="mylogo" alt="logo">
+            <div class="float-left">
+
+                <div id="navlist">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">School
+                                <span class="sr-only">(current)</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Administration</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="login" class="float-right">
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- login screen changes to header when logedin -->
+    <header class="masthead">
+        <div class="overlay">
+            <div class="container" id="schoolHeader">
+                <h3 class="display-4 text-white">SCHOOL PROJECT</h3>
+            </div>
+            <div id="loginform" class="container hoverable">
+                <form class="form-signin">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <label for="loginame" class="sr-only">User name</label>
+                    <input type="name" id="loginame" class="form-control" placeholder="User name" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- school empty containr to fill with a template -->
+    <section class="mainscreen gray">
+        <div class="container school-body">
+            <div class="row">
+                <div class="col-md-3 order-3">
+                    <div class="flex-container">
+                        <h5 class="flex-item1">Courses List:</h5>
+                        <button class="flex-item2"><h3>+</h3></button>
+                    </div>
+                    <div id="course" class="allCourses"></div>
+                </div>
+
+
+                <div class="col-md-3 order-3 ">
+                    <div class="flex-container">
+                        <h5 class="flex-item1">Student List:</h5>
+                        <button class="flex-item2"><h3>+</h3></button>
+                    </div>
+                    <div id="Students"></div>
+                </div>
+
+                <div class="col-md-6 order-6">
+                    <div class="main-school" id="main-scool">
+                        <img class="center" src="back/images/logo_dark.PNG" style="width:65%; margin-bottom:15px;">
+
+                        <h5 class="container2">Total courses in Code School:&nbsp;
+                            <A3 id="Csum"></A3>
+                        </h5> <br>
+                        <h5 class="container2">Total students in Code School:&nbsp;
+                            <A3 id="Ssum"></A3>
+                        </h5>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- administrator empty containr to fill with a template -->
+    <section>
+        <div class="container admin-body">
+            <div class="row">
+                <div class="col-md-3 order-2">
+                </div>
+
+
+                <div class="col-md-9 order-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Chani Abrahami</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="front/vendor/jquery/jquery.min.js"></script>
+    <script src="front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src='front/scripts/onload.js'></script>
+    <script src='front/scripts/column1_director.js'></script>
+    <script src='front/scripts/column2_director.js'></script>
+    <script src='front/scripts/column3_director.js'></script>
+    <script src='front/scripts/CourseModel.js'></script>
+    <script src='front/scripts/StudentModel.js'></script>
+    <script src='front/scripts/course_model_Controller.js'></script>
+    <script src='front/scripts/student_model_Controller.js'></script>
+    <script src="front/scripts/Validation-CS.js"></script>
+    <script src="front/scripts/ajax.js"></script>
+    <script src="front/scripts/callback.js"></script>
+
+
+</body>
+
+</html>
