@@ -1,7 +1,7 @@
     // Administrator module
 
 
-    function Studebt(data) {
+    function Student(data) {
         // let valN = validate.All(data);
         // if (!valN)
         //     throw "error";

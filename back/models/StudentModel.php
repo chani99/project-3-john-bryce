@@ -30,11 +30,11 @@
             return $this->id;
         }
 
-        public function phone(){
+        public function getphone(){
             return $this->phone;
         }
 
-        public function email(){
+        public function getemail(){
             return $this->email;
         }
 

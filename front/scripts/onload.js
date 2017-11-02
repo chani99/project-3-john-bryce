@@ -33,35 +33,6 @@
      }
 
 
-     //get data from form - move to????
-     function getFormValues(calltype, id) {
-         let name;
-         let phone;
-         let image;
-         let file_name;
-         let email;
-         let courses;
-         let value = $('#' + id).val();
-         switch (value) {
-             case 'update':
-                 name = $('#inputname').val();
-                 phone = $('#inputphone').val();
-                 email = $('#inputemail').val();
-                 image = $('#st_photo').prop('files')[0];
-                 courses = $('input[name="courses"]:checked').serialize();
-
-
-                 if (image != undefined) {
-                     file_name = image.name;
-                     let form_data = new FormData();
-                     form_data.append('file', image);
-                     sendFileToServer(form_data, 'upload');
-                 }
-
-                 student_model.updateStudent(name, phone, file_name, email, coursrs);
-                 break;
-         }
-     }
 
  });
 

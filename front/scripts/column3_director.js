@@ -82,8 +82,9 @@ var column3_director = function() {
                     //  to do: remove Delete Button
                 }
 
-
                 c = c.replace("{{num}}", studen_id);
+                c = c.replace("{{num2}}", studen_id);
+
                 let d = document.createElement('div');
                 d.innerHTML = c;
                 $('#main-scool').html("");
@@ -92,29 +93,26 @@ var column3_director = function() {
                 $("#inputemail").val(details.mail);
                 $("#inputname").val(details.name);
 
-
+                //add event to student save
                 column3 = new column3_director();
                 column3.AddCheckbox(student_courses);
 
-                //add event to student save
-                const num = 'saveStud' + studen_id; // elemnt id                 
-                $(document).on('click', '#' + num, function() {
-                    getFormValues("getform", $(this).attr("id"));
-                });
-
+            });
+            const num = 'saveStud' + studen_id; // elemnt id                 
+            $(document).on('click', '#' + num, function() {
+                let student_model = new StudentModelController();
+                student_model.getFormValues("getform", $(this).attr("id"));
             });
 
+
         },
+
         //  create cuorses checkbox list
         AddCheckbox: function(student_courses) {
-
-
-
             var CoursesArray = []; //gets all courses list from DOM
             $(".allCourses span h6").each(function(i, sp) {
                 CoursesArray.push($(sp).attr("id"));
             });
-
 
             for (var i = 0; i < CoursesArray.length; i++) {
                 var checkbox = document.createElement('input');

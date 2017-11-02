@@ -15,7 +15,7 @@
     function sendFileToServer(data, calltype) {
         $.ajax({
             dataType: 'text', // what to expect back from the PHP script, if anything
-            url: "../../back/api/fileAPI.php", // point to server-side PHP script 
+            url: "back/api/fileAPI.php", // point to server-side PHP script 
             cache: false,
             contentType: false,
             processData: false,

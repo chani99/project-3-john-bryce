@@ -1,33 +1,42 @@
 <?php 
     require_once 'controller.php';
-    require_once '../models/StudentModel.php';
+    require_once '../models/Student_Course_Model.php';
     require_once '../data/bl.php';
     require_once '../common/validation.php';
     
     
 
-    class StudentController extends Controller {
+    class S_C_Controller extends Controller {
         private $db;
         private $model;
         private $validation;        
-        private $table_name = "student";
-        private $classneame = "StudentController";
+        private $table_name = "student_course";
+        private $classneame = "S_C_Controller";
         
 
         function __construct($param) {
             $this->db = new BL();
-            $this->validation = new validation;
-            // $validate_result =$this->validation->validations($param);
-            // if ($validate_result == true) {
-            $this->model = new StudentModel($param);
-            // }
-            // else (
-            //     return $validate_result;
-            // )
+            $this->validation = new validation;       
+            $this->model = new Student_CourseModel($param);
+          
             
         }
         
 
+        // Creates a new line in a table
+                function UpdateTable($param) {
+                    $courses = $this->model->getc_id();
+                    for($i=0; $i<count($courses); $i++) {
+                            $updateValues= "c_id =  '".$courses[i]."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
+                            $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+                        return $this->checkIsWasGood($update);
+                    }else{
+                        return false;
+                    }
+                }
+                   
+                }
+        
         // Creates a new line in a table
         function CreateNewRow($param) {
             $rows = $this->model->getRows();
@@ -49,41 +58,20 @@
         
             return $CourseSelect; 
         }
-        
-
-
-        function getById($id) {
-            if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                
-                $OneStudent =  $this->db->getLineById($this->table_name, $this->model->getId());
-                return  $OneStudent;
-            }
-        }
+    
 
 
         // Selects all from Courses table and returns a object array
-        function getAllStudents(){
+        function getAllCourses() {
             $getall = $this->db->SelectAllFromTable($this->table_name, $this->classneame);
-            $allStudents = array();            
+            $allCourses = array();            
             for($i=0; $i<count($getall); $i++) {
-                $c = new StudentModel($getall[$i]);
-                array_push($allStudents, $c->jsonSerialize());
+                $c = new CourseModel($getall[$i]);
+                array_push($allCourses, $c->jsonSerialize());
             }
-            return $allStudents;   
+            return $allCourses;   
         }
 
-
-
-        // SELECT course.name, course.image
-        // FROM course
-        // INNER JOIN student_course ON course.id = student_course.c_id
-        // INNER JOIN student ON student.id = student_course.s_id
-        
-
-        // Selects all from directors table and returns a object array
-
-
-        
 
 
         // Checks if a id exists
@@ -118,7 +106,7 @@
         function UpdateById($param) {
                 if($this->model->getId() != false || $this->model->getId() != false){
                     if($this->model->getName() != false) {
-                        $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";
+                        $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
                         $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
                     return $this->checkIsWasGood($update);
                 }else{
@@ -129,7 +117,44 @@
         }
 
 
+        
+
+ 
+        function getCoursesInnerJoin($param) {
+            $innerJoinCourses = array();
+
+            $selected_rows = "course.name, course.image";
+            $table2 = 'student';
+            $table3 = 'student_course';
+            $Column_equal_to = 'course.id = student_course.c_id';
+            $Column_equal_to2 = 'student.id = student_course.s_id';
+            $where = 'student.id = ' . $param["id"];
+            
+
+            $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
+            for($i=0; $i<count($getall); $i++) {
+                $c = new CourseModel($getall[$i]);
+                array_push($innerJoinCourses, $c->jsonSerialize());
+            }
+            return $innerJoinCourses;   
+        }
+        
+
+// SELECT course.name, course.image
+// FROM course
+// INNER JOIN student_course ON course.id = student_course.c_id
+// INNER JOIN student ON student.id = student_course.s_id
+
+
+// SELECT course.name, course.image
+// FROM course
+// INNER JOIN student_course ON course.id = student_course.c_id
+// INNER JOIN student ON student.id = student_course.s_id
+// WHERE student.id = 5
 
 
 
 }
+
+
+
