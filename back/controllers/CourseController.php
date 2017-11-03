@@ -114,7 +114,7 @@
         function getCoursesInnerJoin($param) {
             $innerJoinCourses = array();
 
-            $selected_rows = "course.name, course.image";
+            $selected_rows = "course.id, course.name, course.image";
             $table2 = 'student';
             $table3 = 'student_course';
             $Column_equal_to = 'course.id = student_course.c_id';
@@ -129,6 +129,58 @@
             }
             return $innerJoinCourses;   
         }
+
+
+        function compare_courses($id, $old_course, $new_courses) {
+            $add_courses =[];
+            $remove_courses =[];
+        if ($old_course == $new_courses) {
+                return true;
+        } else {
+                //check what courses to remove
+            for ($i = 0; $i < count($old_course); $i++) {
+                $temp = 0;
+                        for ($x = 0; $x < count($new_courses); $x++) {
+                            if ($old_course[$i] == $new_courses[$x]) {
+                                $temp = 1;
+                            }
+                        }
+                if ($temp == 0) {
+                    array_push($remove_courses, $old_course[$i]);
+                }
+            }
+
+                //check what courses to add
+            for ($z = 0; $z < count($new_courses); $z++) {
+                $temp = 0;
+                        for ($y = 0; $y < count($old_course); $y++) {
+                            if ($new_courses[$z] == $old_course[$y]) {
+                                $temp = 1;
+                            }
+                        }
+
+                if ($temp == 0) {
+                    array_push($add_courses, $new_courses[$z]);
+                    }    
+            }
+
+                 //send new_courses to DB
+            for ($c = 0; $c < count($add_courses); $c++) {
+                $param = [
+                    "id" => $id,
+                    "courses" => $add_courses[$c] 
+         
+               ];
+            $S_C = new S_C_Controller();
+              $S_C->CreateNewRow($param);
+            }
+        }
+       
+    }
+}
+         
+        
+            
         
 
 // SELECT course.name, course.image
@@ -142,10 +194,5 @@
 // INNER JOIN student_course ON course.id = student_course.c_id
 // INNER JOIN student ON student.id = student_course.s_id
 // WHERE student.id = 5
-
-
-
-}
-
 
 

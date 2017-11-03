@@ -72,7 +72,7 @@
                         email = $('#inputemail').val();
                         image = $('#st_photo').prop('files')[0];
                         $("input:checkbox[name='courses']:checked").each(function() {
-                            courses.push($(this).val());
+                            courses.push($(this).attr("id"));
                         });
 
                         if (image != undefined) {

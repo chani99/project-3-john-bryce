@@ -3,7 +3,37 @@ var column3_director = function() {
     var course_model = new CourseModuleController();
     let column3;
 
+    function tempNameFunction(details, student_courses, studen_id, calltype, callback) {
+        $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
+            var c = updateTemplate;
+            if (calltype == "edit") {
+                c = c.replace("{{form_name}}", "Update student: " + details.name);
+                c = c.replace("{{new?}}", "update");
+                //  to do: add Delete Button
 
+            } else {
+                c = c.replace("{{form_name}}", "NEW STUDENT");
+                //  to do: remove Delete Button
+            }
+
+            c = c.replace("{{num}}", studen_id);
+            c = c.replace("{{num2}}", studen_id);
+
+            let d = document.createElement('div');
+            d.innerHTML = c;
+            $('#main-scool').html("");
+            $('#main-scool').append(d);
+            $("#inputphone").val(0 + details.phone);
+            $("#inputemail").val(details.mail);
+            $("#inputname").val(details.name);
+
+            //add event to student save
+            column3 = new column3_director();
+            column3.AddCheckbox(student_courses);
+
+            callback();
+        });
+    }
 
     return {
 
@@ -44,7 +74,7 @@ var column3_director = function() {
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
                     c = c.replace("{{name}}", data[i].Course_name);
-                    c = c.replace("{{course_name}}", data[i].Course_name);
+                    c = c.replace("{{course_id}}", data[i].Course_id);
                     c = c.replace("{{descrip}}", "");
                     c = c.replace("{{imgsrc}}", "back/images/" + data[i].Course_image);
                     let d = document.createElement('div');
@@ -69,35 +99,16 @@ var column3_director = function() {
                 student_courses.push($(sp).attr("id"));
             });
 
+            tempNameFunction(details, student_courses, studen_id, calltype, function() {
 
-            $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
-                var c = updateTemplate;
-                if (calltype == "edit") {
-                    c = c.replace("{{form_name}}", "Update student: " + details.name);
-                    c = c.replace("{{new?}}", "update");
-                    //  to do: add Delete Button
+                const num = 'saveStud' + studen_id; // elemnt id                 
+                $(document).on('click', '#' + num, function() {
+                    let student_model = new StudentModelController();
+                    student_model.getFormValues("getform", $(this).attr("id"));
+                });
+            })
 
-                } else {
-                    c = c.replace("{{form_name}}", "NEW STUDENT");
-                    //  to do: remove Delete Button
-                }
-
-                c = c.replace("{{num}}", studen_id);
-                c = c.replace("{{num2}}", studen_id);
-
-                let d = document.createElement('div');
-                d.innerHTML = c;
-                $('#main-scool').html("");
-                $('#main-scool').append(d);
-                $("#inputphone").val(0 + details.phone);
-                $("#inputemail").val(details.mail);
-                $("#inputname").val(details.name);
-
-                //add event to student save
-                column3 = new column3_director();
-                column3.AddCheckbox(student_courses);
-
-            });
+           
             const num = 'saveStud' + studen_id; // elemnt id                 
             $(document).on('click', '#' + num, function() {
                 let student_model = new StudentModelController();
@@ -114,15 +125,20 @@ var column3_director = function() {
                 CoursesArray.push($(sp).attr("id"));
             });
 
+            var Coursesid = []; //gets all courses list from DOM
+            $(".allCourses .col-md-3").each(function(i, sp) {
+                Coursesid.push($(sp).attr("id"));
+            });
+
             for (var i = 0; i < CoursesArray.length; i++) {
                 var checkbox = document.createElement('input');
                 checkbox.type = "checkbox";
                 checkbox.name = "courses";
                 checkbox.value = CoursesArray[i];
-                checkbox.id = i + 1;
+                checkbox.id = Coursesid[i];
 
                 for (var x = 0; x < student_courses.length; x++) {
-                    if (CoursesArray[i] == student_courses[x]) {
+                    if (Coursesid[i] == student_courses[x]) {
                         checkbox.checked = true;
                     }
                 }

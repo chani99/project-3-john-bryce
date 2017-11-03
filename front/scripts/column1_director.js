@@ -12,11 +12,11 @@ var column1_director = function() {
             $.ajax('front/views/course_temp.html').always(function(courseTemplate) {
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
-                    c = c.replace("{{num}}", i);
+                    c = c.replace("{{num}}", data[i].Course_id);
                     c = c.replace("{{name}}", data[i].Course_name);
                     c = c.replace("{{descrip}}", data[i].Course_name);
                     c = c.replace("{{imgsrc}}", "back/images/" + data[i].Course_image);
-                    c = c.replace("{{course_name}}", data[i].Course_name);
+                    c = c.replace("{{course_id}}", data[i].Course_name);
 
                     let d = document.createElement('div');
                     d.innerHTML = c;

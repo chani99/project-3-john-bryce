@@ -34,7 +34,12 @@
 
         // Update a Students
         function Update($params) {
-            $Students =$this->controller->UpdateById($params);
+            if (array_key_exists("courses", $params)) {
+                $courses = new CourseController($params);
+                $Stu_old_courses = $courses->getCoursesInnerJoin($params);
+                $compare_courses = $courses->compare_courses( $params["id"], $Stu_old_courses, $params["courses"]);
+            }
+                $Students =$this->controller->UpdateById($params);
             return $Students;
             }
 
