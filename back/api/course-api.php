@@ -28,7 +28,7 @@
                             
                         }else{
                             
-                        $result = $this->controller->getById($params);
+                        $result = $this->controller->getCourseById($params);
                         return $result;
                         }
                     }

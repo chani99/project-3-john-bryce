@@ -29,7 +29,7 @@ var column2_director = function() {
                     $('#Students').append(d);
 
 
-                    $(document).unbind('click', '#' + num);
+                    // $(document).unbind('click', '#' + num);
 
                     $(document).on('click', '#' + num, function() {
                         let student_model = new StudentModelController();

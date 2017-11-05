@@ -38,6 +38,13 @@
 
             },
 
+            getOneCourse: function(id) {
+                data.id = id;
+                sendAJAX("GET", CourseApiUrl, data, 'getcourse');
+
+            }
+
+
 
 
         }

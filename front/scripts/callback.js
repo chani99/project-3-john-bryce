@@ -30,6 +30,13 @@ function callback(response_text, calltype) {
             column3.get_one_student(respnse);
             break;
 
+
+        case 'getcourse':
+            column3 = new column3_director();
+            column3.get_one_course(respnse);
+            break;
+
+
         case 'getinnerJoin':
             column3 = new column3_director();
             column3.getinnerJoin(respnse);

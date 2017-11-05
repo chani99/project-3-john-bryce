@@ -65,17 +65,24 @@
         }
 
 
-
-        // Checks if a id exists
+         // get one course by id
          function getCourseById($param){
-                if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $check =  $this->db->Check_if_id_exists($this->table_name, $c->getId());
-                return $this->checkIsWasGood($check);
-                }else{
-                    return false;
-                }
-
+            if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
+                $OneCourse =  $this->db->getLineById($this->table_name, $this->model->getId());
+                return  $OneCourse;
             }
+        }
+
+        
+        // Checks if a id exists
+        function checkifidexists($param){
+        if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
+            $check =  $this->db->Check_if_id_exists($this->table_name, $c->getId());
+            return $this->checkIsWasGood($check);
+            }else{
+                return false;
+            }
+        }
 
 
 
