@@ -24,18 +24,16 @@
         
 
         // Creates a new line in a table
-                function UpdateTable($param) {
-                    $courses = $this->model->getc_id();
-                    for($i=0; $i<count($courses); $i++) {
-                            $updateValues= "c_id =  '".$courses[i]."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
-                            $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
-                        return $this->checkIsWasGood($update);
-                    }else{
-                        return false;
-                    }
-                }
+        function UpdateTable($param) {
+            $courses = $this->model->getc_id();
+            for($i=0; $i<count($courses); $i++) {
+            $updateValues= "c_id =  '".$courses[i]."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
+            $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+            return $this->checkIsWasGood($update);
+            }
+        }
                    
-                }
+                
         
         // Creates a new line in a table
         function CreateNewRow($param) {
@@ -90,8 +88,8 @@
 
         // Deletes a line from Courses table
         function DeleteCourseById($param) {
-                if($this->model->getId() != false){
-                $deleted =  $this->db->DeleteRow($this->table_name, $c->getId());
+                if($this->model->getc_id() != false){
+                $deleted =  $this->db->DeleteRow($this->table_name, $c->getc_id());
                 return $this->checkIsWasGood($deleted);
                 }else{
                     return false;
@@ -99,7 +97,19 @@
 
     
         }
+        
 
+        // Deletes a line from Courses table
+        function DeleteCourseByRowName($param) {
+            if($this->model->getc_id() != false){
+            $deleted =  $this->db->DeleteRowbyRowName($this->table_name, 'c_id', $this->model->getc_id(), 's_id', $this->model->gets_id());
+            return $this->checkIsWasGood($deleted);
+            }else{
+                return false;
+            }
+
+
+    }
 
 
         // Updates a line in directos table
@@ -120,24 +130,24 @@
         
 
  
-        function getCoursesInnerJoin($param) {
-            $innerJoinCourses = array();
+        // function getCoursesInnerJoin($param) {
+        //     $innerJoinCourses = array();
 
-            $selected_rows = "course.name, course.image";
-            $table2 = 'student';
-            $table3 = 'student_course';
-            $Column_equal_to = 'course.id = student_course.c_id';
-            $Column_equal_to2 = 'student.id = student_course.s_id';
-            $where = 'student.id = ' . $param["id"];
+        //     $selected_rows = "course.name, course.image";
+        //     $table2 = 'student';
+        //     $table3 = 'student_course';
+        //     $Column_equal_to = 'course.id = student_course.c_id';
+        //     $Column_equal_to2 = 'student.id = student_course.s_id';
+        //     $where = 'student.id = ' . $param["id"];
             
 
-            $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
-            for($i=0; $i<count($getall); $i++) {
-                $c = new CourseModel($getall[$i]);
-                array_push($innerJoinCourses, $c->jsonSerialize());
-            }
-            return $innerJoinCourses;   
-        }
+        //     $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
+        //     for($i=0; $i<count($getall); $i++) {
+        //         $c = new CourseModel($getall[$i]);
+        //         array_push($innerJoinCourses, $c->jsonSerialize());
+        //     }
+        //     return $innerJoinCourses;   
+        // }
         
 
 // SELECT course.name, course.image

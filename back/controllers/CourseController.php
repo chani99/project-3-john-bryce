@@ -1,5 +1,6 @@
 <?php 
     require_once 'controller.php';
+    require_once 'Course_Student_Controller.php';
     require_once '../models/CourseModel.php';
     require_once '../data/bl.php';
     require_once '../common/validation.php';
@@ -138,15 +139,16 @@
                 return true;
         } else {
                 //check what courses to remove
+                    
             for ($i = 0; $i < count($old_course); $i++) {
                 $temp = 0;
                         for ($x = 0; $x < count($new_courses); $x++) {
-                            if ($old_course[$i] == $new_courses[$x]) {
+                            if ($old_course[$i]['Course_id'] == $new_courses[$x]) {
                                 $temp = 1;
                             }
                         }
                 if ($temp == 0) {
-                    array_push($remove_courses, $old_course[$i]);
+                    array_push($remove_courses, $old_course[$i]['Course_id']);
                 }
             }
 
@@ -154,29 +156,58 @@
             for ($z = 0; $z < count($new_courses); $z++) {
                 $temp = 0;
                         for ($y = 0; $y < count($old_course); $y++) {
-                            if ($new_courses[$z] == $old_course[$y]) {
+                            if ($new_courses[$z] == $old_course[$y]['Course_id']) {
                                 $temp = 1;
                             }
                         }
-
                 if ($temp == 0) {
                     array_push($add_courses, $new_courses[$z]);
                     }    
             }
 
-                 //send new_courses to DB
-            for ($c = 0; $c < count($add_courses); $c++) {
-                $param = [
-                    "id" => $id,
-                    "courses" => $add_courses[$c] 
-         
-               ];
-            $S_C = new S_C_Controller();
-              $S_C->CreateNewRow($param);
-            }
+            $this->addCuorses($add_courses, $id);
+            $this->RemoveCourses($remove_courses, $id);
+
         }
        
     }
+
+      //send new_courses to DB
+     function addCuorses($add_courses, $id)
+    {
+               for ($c = 0; $c < count($add_courses); $c++) {
+                $param = [
+                    "id" => $id,
+                    "courses" => $add_courses[$c] 
+                ];
+   
+            $S_C = new S_C_Controller($param);
+            $S_C->CreateNewRow($param);
+            }
+    }
+
+
+    //delete courses from DB
+    function RemoveCourses($remove_courses, $id){
+            for ($c = 0; $c < count($remove_courses); $c++) {
+                $courses;
+                if (array_key_exists("Course_id", $remove_courses[$c])) {
+                    $courses = $remove_courses[$c]['Course_id'];  
+                } 
+                else{
+                    $courses = $remove_courses[$c];
+                }
+                
+                $param = [
+                    "id" => $id,
+                    "courses" => $courses
+                    ];
+                
+            $S_C = new S_C_Controller($param);
+            $S_C->DeleteCourseByRowName($param);
+            }
+    }
+
 }
          
         

@@ -48,11 +48,25 @@ private $DB;
 
 }
 
+
+function selectlastRow($table_name){
+    $selcet = $this->DB->getLineById("SELECT * FROM ".$table_name." ORDER BY Id DESC LIMIT 1");
+    return $selcet;
+    
+}
+
  function DeleteRow($table_name, $id) {
         $delete = $this->DB->deleteSQL("DELETE FROM ".$table_name." WHERE id =". $id);
         return $delete;
 
 }
+
+function DeleteRowbyRowName($table_name, $rowname, $param1, $rowname2, $param2) {
+    $delete = $this->DB->deleteSQL("DELETE FROM ".$table_name." WHERE " . $rowname. " = ". $param1. " AND " . $rowname2. " = ". $param2);
+    return $delete;
+
+}
+
 
 
 function innerJoin($selected_tables, $table1, $table2, $Column_equal_to) {

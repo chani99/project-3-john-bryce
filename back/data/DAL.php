@@ -55,11 +55,12 @@ function getLineById($query) {
     return $mytable = $table->fetchAll();
 }
 
+
+
 function updateSQL($query) {
     $DB = $this->getDB();
     $table = $DB->prepare($query);
     $table->execute();
-
     return true;
 }
 
@@ -68,9 +69,9 @@ function insertSQL($query, $exicute) {
     $DB = $this->getDB();
     $table = $DB->prepare($query);
     $table->execute($exicute);
-
     return true;
 }
+
 
 function deleteSQL($query) {
     $DB = $this->getDB();
@@ -85,7 +86,7 @@ function innerJoion($query) {
     $DB = $this->getDB();
     $table = $DB->prepare($query);
     $table->execute();
-    
+
     return $mytable = $table->fetchAll();
 }
 

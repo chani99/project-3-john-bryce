@@ -17,19 +17,14 @@
         function __construct($param) {
             $this->db = new BL();
             $this->validation = new validation;
-            // $validate_result =$this->validation->validations($param);
-            // if ($validate_result == true) {
             $this->model = new StudentModel($param);
-            // }
-            // else (
-            //     return $validate_result;
-            // )
+      
             
         }
         
 
         // Creates a new line in a table
-        function CreateNewRow($param) {
+        function CreateStudents($param) {
             $rows = $this->model->getRows();
             $sql_data = $this->CreateRow($rows, $this->model);
             $update = $this->db->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
@@ -37,7 +32,10 @@
        
         }
 
-
+        function selectLastId() {
+            $new_id = $this->db->selectlastRow($this->table_name);
+            return $new_id;
+        }
 
         // Updates a line in directos table
         function ReturnSelect() {
@@ -103,7 +101,7 @@
         // Deletes a line from Courses table
         function DeleteCourseById($param) {
                 if($this->model->getId() != false){
-                $deleted =  $this->db->DeleteRow($this->table_name, $c->getId());
+                $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
                 }else{
                     return false;
@@ -117,16 +115,21 @@
         // Updates a line in directos table
         function UpdateById($param) {
                 if($this->model->getId() != false || $this->model->getId() != false){
-                    if($this->model->getName() != false) {
-                        $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";
-                        $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+                            if($this->model->getimage() != "" ) {
+                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";
+                            }else{
+                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "'";    
+                            }
+                    $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
                     return $this->checkIsWasGood($update);
                 }else{
                     return false;
                 }
-            }
-
         }
+
+        
+
+
 
 
 

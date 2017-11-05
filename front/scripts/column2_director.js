@@ -4,10 +4,12 @@ var column2_director = function() {
     var column2_data = {};
 
 
+
     return {
         allstudends: function(data) {
 
             $('#Students').html("");
+
             $('#Ssum').html(data.length);
 
             // ajax for STUDENT list
@@ -26,6 +28,9 @@ var column2_director = function() {
                     d.innerHTML = c;
                     $('#Students').append(d);
 
+
+                    $(document).unbind('click', '#' + num);
+
                     $(document).on('click', '#' + num, function() {
                         let student_model = new StudentModelController();
                         student_model.getStudent($(this).data('studentid'));
@@ -36,6 +41,9 @@ var column2_director = function() {
             });
 
 
+
         }
+
+
     }
 }

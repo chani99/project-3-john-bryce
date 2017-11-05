@@ -40,11 +40,37 @@ function callback(response_text, calltype) {
             break;
 
         case 'delete':
-            wasDone(respnse, 'deleted');
+            column3 = new column3_director();
+            column3.UasDone(response_text, calltype);
             break;
 
         case 'update':
-            wasDone(respnse, 'updated');
+            if (response_text != "true") {
+
+                alert("The " + calltype + " faild, please try again");
+            } else {
+                alert("The " + calltype + " was successful!");
+                //refresh cuorse list & student list
+
+                $.ajax('front/views/main_screen.html').always(function(maintemp) {
+                    $('#main-scool').html("");
+
+                    var c = maintemp;
+                    let d = document.createElement('div');
+                    d.innerHTML = c;
+                    $('#main-scool').append(d);
+                });
+
+
+                // let course_model = new CourseModuleController();
+                // course_model.GetAllCourse(function() {
+                //     let student_model = new StudentModelController();
+                //     student_model.GetAllStudents();
+
+                // });
+            }
+
+            // wasDone(respnse, 'updated');
             break;
 
         case 'selectlist':
