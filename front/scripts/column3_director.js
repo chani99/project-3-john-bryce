@@ -39,12 +39,15 @@ var column3_director = function() {
             c = c.replace("{{form_name}}", "NEW STUDENT");
             c = c.replace("{{new?}}", "new");
             c = c.replace("{{num2}}", 'new');
+            c = c.replace("{{num}}", '');
+            
 
 
             let d = document.createElement('div');
             d.innerHTML = c;
             $('#main-scool').html("");
             $('#main-scool').append(d);
+            $('#delete_student').hide();
 
             column3 = new column3_director();
             column3.AddCheckbox();
@@ -142,8 +145,8 @@ var column3_director = function() {
                 const edit_id = 'saveStud' + studen_id; // elemnt id   
                 const delete_id = 'delete_student' + studen_id; // elemnt id  
                 let student_model = new StudentModelController();
-
-                $(document).on('click', '#' + edit_id, function() {
+                $(document).one('click', '#' + edit_id, function() {
+                    
                     student_model.updateStudent($(this).attr("id"));
                 });
 
