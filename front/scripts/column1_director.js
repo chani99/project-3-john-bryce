@@ -29,7 +29,7 @@ var column1_director = function() {
 
                     $(document).on('click', '#' + num, function() {
                         let course_model = new CourseModuleController();
-                        course_model.getOneCourse($(this).data('courseid'));
+                        course_model.getOneCourse($(this).data('courseid'), $(this).attr('id'));
                     });
 
                 }

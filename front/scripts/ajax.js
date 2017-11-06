@@ -21,9 +21,6 @@
             processData: false,
             data: data,
             type: 'POST',
-            success: function(response_text) {
-                callback(response_text, calltype);
-
-            }
+            success: function() {}
         });
     }

@@ -48,7 +48,7 @@
                     
                 //  Delete 1 result   
                  function Delete($params) {
-                    $result = $this->controller->DeleteById($params);
+                    $result = $this->controller->DeleteCourseById($params);
                     return $result;
                     
                 }

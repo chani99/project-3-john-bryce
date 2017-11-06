@@ -33,8 +33,10 @@ var column2_director = function() {
 
                     $(document).on('click', '#' + num, function() {
                         let student_model = new StudentModelController();
-                        student_model.getStudent($(this).data('studentid'));
+                        student_model.getStudent($(this).data('studentid'), $(this).attr('id'));
                     });
+
+
 
                 }
 

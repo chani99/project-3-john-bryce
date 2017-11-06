@@ -45,7 +45,7 @@
 
         return {
 
-            createCourse: function() {
+            createStudent: function() {
                 getFormValues('new', function() {
                     sendAJAX("POST", ApiUrl, data, 'create');
 
@@ -62,23 +62,27 @@
 
 
 
-            getStudent: function(id) {
+            getStudent: function(id, but_id) {
                 data.id = id;
                 let manu = 'get_one';
                 sendAJAX("GET", ApiUrl, data, 'get_one', manu);
+                $("#" + but_id).unbind("click", handler);
+
             },
 
 
             deleteStudent: function(but_id) {
                 data.id = but_id.substr(14);
                 sendAJAX("DELETE", ApiUrl, data, 'delete');
+                $("#" + but_id).unbind("click", handler);
+
             },
 
 
             updateStudent: function(but_id) {
                 getFormValues(but_id, function() {
                     sendAJAX("PUT", ApiUrl, data, 'update');
-
+                    $("#" + but_id).unbind("click", handler);
                 });
             }
 
@@ -94,17 +98,28 @@
 
 
 
-    function deleteStudent(but_id) {
-        let student_model = new StudentModelController();
-        student_model.deleteStudent(but_id);
-    }
+    // function deleteStudent(but_id) {
+    //     let student_model = new StudentModelController();
+    //     student_model.deleteStudent(but_id);
+    // }
 
+    // function updateStudent(but_id) {
+    //     let student_model = new StudentModelController();
+    //     student_model.updateStudent(but_id);
+    // }
 
-    function updateStudent(but_id) {
-        let student_model = new StudentModelController();
-        student_model.updateStudent(but_id);
-    }
+    // function CreateStudent(id) {
+    //     let student_model = new StudentModelController();
+    //     student_model.createCourse();
+    // }
 
+    // function getStudent(id) {
+    //     let student_model = new StudentModelController();
+    //     student_model.getStudent(id);
+    // }
+
+    // let student_model = new StudentModelController();
+    // student_model.getStudent($(this).data('studentid'));
 
 
     //     editStudentOnclick: function() {

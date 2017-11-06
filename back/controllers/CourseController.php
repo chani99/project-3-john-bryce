@@ -90,7 +90,7 @@
         // Deletes a line from Courses table
         function DeleteCourseById($param) {
                 if($this->model->getId() != false){
-                $deleted =  $this->db->DeleteRow($this->table_name, $c->getId());
+                $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
                 }else{
                     return false;
@@ -104,13 +104,14 @@
         // Updates a line in directos table
         function UpdateById($param) {
                 if($this->model->getId() != false || $this->model->getId() != false){
-                    if($this->model->getName() != false) {
+                    if($this->model->getimage() != "" ) {
                         $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
-                        $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
-                    return $this->checkIsWasGood($update);
-                }else{
-                    return false;
-                }
+                    }else{
+                        $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "'";
+                    }
+                $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+                return $this->checkIsWasGood($update);
+              
             }
 
         }

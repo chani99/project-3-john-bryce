@@ -9,6 +9,29 @@
         let send;
 
 
+        function getFormValues(but_id, callback) {
+            let image;
+            if (but_id != "new") {
+                data.id = but_id.substr(10);
+            }
+            data.name = $('#inputname').val();
+            data.description = $('#inputdetails').val();
+
+            image = $('#st_photo').prop('files')[0]; //send photo to server
+            if (image != undefined) {
+                data.image = image.name;
+                let form_data = new FormData();
+                form_data.append('file', image);
+                sendFileToServer(form_data, 'upload');
+            }
+            callback();
+
+        }
+
+
+
+
+
         return {
 
             createCourse: function(name, file_name, manu) {
@@ -23,6 +46,19 @@
                 }
             },
 
+            updateCourses: function(but_id) {
+                getFormValues(but_id, function() {
+                    sendAJAX("PUT", CourseApiUrl, data, 'update');
+                    $("#" + but_id).unbind("click", handler);
+                });
+            },
+
+            deleteCourse: function(but_id) {
+                data.id = but_id.substr(12);
+                sendAJAX("DELETE", CourseApiUrl, data, 'delete');
+                $("#" + but_id).unbind("click", handler);
+
+            },
 
 
             GetAllCourse: function(callback) {
@@ -38,9 +74,11 @@
 
             },
 
-            getOneCourse: function(id) {
+            getOneCourse: function(id, but_id) {
                 data.id = id;
                 sendAJAX("GET", CourseApiUrl, data, 'getcourse');
+                $("#" + but_id).unbind("click", handler);
+
 
             }
 

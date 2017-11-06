@@ -5,7 +5,7 @@ var column3_director = function() {
 
 
 
-    function tempNameFunction(details, student_courses, studen_id, calltype) {
+    function tempNameFunction(details, student_courses, studen_id, calltype, callback) {
         $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update student: " + details.name);
@@ -15,12 +15,15 @@ var column3_director = function() {
 
             c = c.replace("{{num}}", studen_id);
             c = c.replace("{{num2}}", studen_id);
+            // c = c.replace("{{funcName}}", 'updateStudent');
+
+
 
             let d = document.createElement('div');
             d.innerHTML = c;
             $('#main-scool').html("");
             $('#main-scool').append(d);
-            $("#inputphone").val(0 + details.phone);
+            $("#inputphone").val(details.phone);
             $("#inputemail").val(details.mail);
             $("#inputname").val(details.name);
 
@@ -28,7 +31,7 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox(student_courses);
 
-            // callback();
+            callback();
         });
     }
 
@@ -40,8 +43,7 @@ var column3_director = function() {
             c = c.replace("{{new?}}", "new");
             c = c.replace("{{num2}}", 'new');
             c = c.replace("{{num}}", '');
-
-
+            // c = c.replace("{{funcName}}", 'CreateStudent');
 
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -58,22 +60,89 @@ var column3_director = function() {
 
     }
 
-    // function main_screen(callback) {
-    //     $.ajax('front/views/main_screen.html').always(function(maintemp) {
-    //         $('#main-scool').html("");
+    function NewCoursetemp(callback) {
+        $.ajax('front/views/new_update_course_temp.html').always(function(NewCourseTemplate) {
 
-    //         var c = maintemp;
-    //         let d = document.createElement('div');
-    //         d.innerHTML = c;
-    //         $('#main-scool').append(d);
-    //         callback();
+            var c = NewCourseTemplate;
+            c = c.replace("{{form_name}}", "NEW COURSE");
+            c = c.replace("{{new?}}", "new");
+            c = c.replace("{{num2}}", 'new');
+            c = c.replace("{{num}}", '');
+            // c = c.replace("{{funcName}}", 'CreateStudent');
 
-    //     });
+            let d = document.createElement('div');
+            d.innerHTML = c;
+            $('#main-scool').html("");
+            $('#main-scool').append(d);
+            $('#deleteCourse').hide();
 
-    // }
+            callback();
+
+        });
+
+
+
+    }
+
+    function UpdatesCourseTemp(calltype, course_id) {
+
+        var details = {
+            name: $("#course_name").html(),
+            description: $("#course_details").html(),
+        };
+
+
+        CouseUpdateTemp(details, course_id, calltype, function() {
+
+            const edit_id = 'saveCourse' + course_id;
+            const delete_id = 'deleteCourse' + course_id;
+            let course_model = new CourseModuleController();
+
+            $(document).one('click', '#' + edit_id, function() {
+                course_model.updateCourses($(this).attr("id"));
+            });
+
+            $(document).one('click', '#' + delete_id, function() {
+                course_model.deleteCourse($(this).attr("id"));
+            });
+        });
+
+
+    }
+
+    function CouseUpdateTemp(details, course_id, calltype, callback) {
+        $.ajax('front/views/new_update_course_temp.html').always(function(updateTemplate) {
+            var c = updateTemplate;
+            c = c.replace("{{form_name}}", "Update Course: " + details.name);
+            c = c.replace("{{new?}}", "update");
+            c = c.replace("{{num}}", course_id);
+            c = c.replace("{{num2}}", course_id);
+
+            let d = document.createElement('div');
+            d.innerHTML = c;
+            $('#main-scool').html("");
+            $('#main-scool').append(d);
+            $("#inputdetails").val(details.description);
+            $("#inputname").val(details.name);
+
+            callback();
+        });
+    }
+
+
 
 
     return {
+        main_screen: function() {
+            $.ajax('front/views/main_screen.html').always(function(main_temp) {
+                var c = main_temp;
+                $('#main-scool').html("");
+                let d = document.createElement('div');
+                d.innerHTML = c;
+                $('#main-scool').append(d);
+            });
+        },
+
 
         get_one_student: function(data) {
 
@@ -140,21 +209,22 @@ var column3_director = function() {
                 student_courses.push($(sp).attr("id"));
             });
 
-            tempNameFunction(details, student_courses, studen_id, calltype);
 
-            // const edit_id = 'saveStud' + studen_id; // elemnt id   
-            // const delete_id = 'delete_student' + studen_id; // elemnt id  
+            tempNameFunction(details, student_courses, studen_id, calltype, function() {
 
-            // $(document).one('click', '#' + edit_id, function() {
-            //     let student_model = new StudentModelController();
-            //     student_model.updateStudent($(this).attr("id"));
-            // });
+                const edit_id = 'saveStud' + studen_id; // elemnt id   
+                const delete_id = 'delete_student' + studen_id; // elemnt id  
 
-            //     $(document).one('click', '#' + delete_id, function() {
-            //         let student_model = new StudentModelController();
-            //         student_model.deleteStudent($(this).attr("id"));
-            //     });
-            // });
+                $(document).one('click', '#' + edit_id, function() {
+                    let student_model = new StudentModelController();
+                    student_model.updateStudent($(this).attr("id"));
+                });
+
+                $(document).one('click', '#' + delete_id, function() {
+                    let student_model = new StudentModelController();
+                    student_model.deleteStudent($(this).attr("id"));
+                });
+            });
 
 
         },
@@ -229,12 +299,21 @@ var column3_director = function() {
         },
 
 
-        newStudentScreen: function() {
+        newCourseScreen: function() {
+            NewCoursetemp(function() {
+                $(document).on('click', '#savecoursenew', function() {
+                    let course_model = new CourseModuleController();
+                    course_model.createCourse($(this).attr("id"));
+                });
+            });
+        },
 
+
+        newStudentScreen: function() {
             NewStudenttemp(function() {
                 $(document).on('click', '#saveStudnew', function() {
                     let student_model = new StudentModelController();
-                    student_model.createCourse($(this).attr("id"));
+                    student_model.createStudent($(this).attr("id"));
                 });
             });
 
