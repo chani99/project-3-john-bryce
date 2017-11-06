@@ -245,7 +245,7 @@ var column3_director = function() {
 
             var Coursesid = []; //gets all courses list from DOM
             $(".allCourses button").each(function(i, sp) {
-                Coursesid.push($(sp).attr("id"));
+                Coursesid.push($(sp).attr("courseid"));
             });
 
             for (var i = 0; i < CoursesArray.length; i++) {

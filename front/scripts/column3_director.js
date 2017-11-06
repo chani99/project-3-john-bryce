@@ -98,7 +98,7 @@ var column3_director = function() {
 
                 $(document).on('click', '#' + num, function() {
                     column3 = new column3_director();
-                    column3.UpdatestudentTemp("edit", $(this).data('editid'));
+                    column3.Update_studentTemp("edit", $(this).data('editid'));
                 });
 
             });
@@ -127,7 +127,7 @@ var column3_director = function() {
 
 
         // founction to load the main student update/new window
-        UpdatestudentTemp: function(calltype, studen_id, data) {
+        Update_studentTemp: function(calltype, studen_id, data) {
 
             var details = {
                 name: $("#student_name").html(),
@@ -144,13 +144,14 @@ var column3_director = function() {
 
                 const edit_id = 'saveStud' + studen_id; // elemnt id   
                 const delete_id = 'delete_student' + studen_id; // elemnt id  
-                let student_model = new StudentModelController();
-                $(document).one('click', '#' + edit_id, function() {
 
+                $(document).one('click', '#' + edit_id, function() {
+                    let student_model = new StudentModelController();
                     student_model.updateStudent($(this).attr("id"));
                 });
 
-                $(document).on('click', '#' + delete_id, function() {
+                $(document).one('click', '#' + delete_id, function() {
+                    let student_model = new StudentModelController();
                     student_model.deleteStudent($(this).attr("id"));
                 });
             });
@@ -167,7 +168,7 @@ var column3_director = function() {
 
             var Coursesid = []; //gets all courses list from DOM
             $(".allCourses button").each(function(i, sp) {
-                Coursesid.push($(sp).attr("id"));
+                Coursesid.push($(sp).data("courseid"));
             });
 
             for (var i = 0; i < CoursesArray.length; i++) {

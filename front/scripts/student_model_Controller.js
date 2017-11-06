@@ -27,7 +27,6 @@
             data.courses = courses;
 
 
-
             image = $('#st_photo').prop('files')[0]; //send photo to server
             if (image != undefined) {
                 data.image = image.name;
@@ -35,9 +34,9 @@
                 form_data.append('file', image);
                 sendFileToServer(form_data, 'upload');
             }
+
+
             callback();
-            // let student_model = new StudentModelController();
-            // student_model.updateStudent(id, name, phone, file_name, email, courses);
 
         }
 
