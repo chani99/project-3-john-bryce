@@ -5,7 +5,7 @@ var column3_director = function() {
 
 
 
-    function tempNameFunction(details, student_courses, studen_id, calltype, callback) {
+    function tempNameFunction(details, student_courses, studen_id, calltype) {
         $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update student: " + details.name);
@@ -28,7 +28,7 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox(student_courses);
 
-            callback();
+            // callback();
         });
     }
 
@@ -140,24 +140,25 @@ var column3_director = function() {
                 student_courses.push($(sp).attr("id"));
             });
 
-            tempNameFunction(details, student_courses, studen_id, calltype, function() {
+            tempNameFunction(details, student_courses, studen_id, calltype);
 
-                const edit_id = 'saveStud' + studen_id; // elemnt id   
-                const delete_id = 'delete_student' + studen_id; // elemnt id  
+            // const edit_id = 'saveStud' + studen_id; // elemnt id   
+            // const delete_id = 'delete_student' + studen_id; // elemnt id  
 
-                $(document).one('click', '#' + edit_id, function() {
-                    let student_model = new StudentModelController();
-                    student_model.updateStudent($(this).attr("id"));
-                });
+            // $(document).one('click', '#' + edit_id, function() {
+            //     let student_model = new StudentModelController();
+            //     student_model.updateStudent($(this).attr("id"));
+            // });
 
-                $(document).one('click', '#' + delete_id, function() {
-                    let student_model = new StudentModelController();
-                    student_model.deleteStudent($(this).attr("id"));
-                });
-            });
+            //     $(document).one('click', '#' + delete_id, function() {
+            //         let student_model = new StudentModelController();
+            //         student_model.deleteStudent($(this).attr("id"));
+            //     });
+            // });
 
 
         },
+
 
         //  create cuorses checkbox list
         AddCheckbox: function(student_courses = false) {

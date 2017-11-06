@@ -83,10 +83,39 @@
             }
 
 
-            //get data from form student form 
+            // get data from form student form
 
 
         }
 
 
     }
+
+
+
+
+    function deleteStudent(but_id) {
+        let student_model = new StudentModelController();
+        student_model.deleteStudent(but_id);
+    }
+
+
+    function updateStudent(but_id) {
+        let student_model = new StudentModelController();
+        student_model.updateStudent(but_id);
+    }
+
+
+
+    //     editStudentOnclick: function() {
+    //     let student_model = new StudentModelController();
+    //     student_model.updateStudent($(this).attr("id"));
+
+    // },
+
+    // deleteStudentOnclick: function() {
+    //     let student_model = new StudentModelController();
+    //     student_model.deleteStudent($(this).attr("id"));
+
+
+    // },
