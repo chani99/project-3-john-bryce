@@ -14,6 +14,7 @@ var column1_director = function() {
                     var c = courseTemplate;
 
                     c = c.replace("{{courseid}}", data[i].Course_id);
+                    c = c.replace("{{singleCourse}}", 'singleCourse');
                     c = c.replace("{{name}}", data[i].Course_name);
                     c = c.replace("{{descrip}}", data[i].Course_name);
                     c = c.replace("{{imgsrc}}", "back/images/" + data[i].Course_image);

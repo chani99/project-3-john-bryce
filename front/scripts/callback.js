@@ -11,63 +11,63 @@ function callback(response_text, calltype) {
 
     switch (calltype) {
 
-        case 'getall':
-            column1 = new column1_director();
-            column1.allcourses(respnse);
-            break;
+        // case 'getall':
+        //     column1 = new column1_director();
+        //     column1.allcourses(respnse);
+        //     break;
 
-        case 'getallStudents':
-            column2 = new column2_director();
-            column2.allstudends(respnse);
-            break;
+        // case 'getallStudents':
+        //     column2 = new column2_director();
+        //     column2.allstudends(respnse);
+        //     break;
 
-        case 'get_one':
-            column3 = new column3_director();
-            column3.get_one_student(respnse);
-            break;
+        // case 'get_one':
+        //     column3 = new column3_director();
+        //     column3.get_one_student(respnse);
+        //     break;
 
-        case 'getcourse':
-            column3 = new column3_director();
-            column3.get_one_course(respnse);
-            break;
+        // case 'getcourse':
+        //     column3 = new column3_director();
+        //     column3.get_one_course(respnse);
+        //     break;
 
-        case 'getinnerJoin':
-            column3 = new column3_director();
-            column3.getinnerJoin(respnse);
-            break;
+        // case 'getinnerJoin':
+        //     column3 = new column3_director();
+        //     column3.getinnerJoin(respnse);
+        //     break;
 
-        case 'delete':
-            wasDone(respnse, calltype);
-            break;
+        // case 'delete':
+        //     wasDone(respnse, calltype);
+        //     break;
 
-        case 'create':
-            wasDone(respnse, calltype);
-            break;
+        // case 'create':
+        //     wasDone(respnse, calltype);
+        //     break;
 
-        case 'update':
-            wasDone(respnse, calltype);
-            break;
+//         case 'update':
+//             wasDone(respnse, calltype);
+//             break;
 
-        default:
-            alert(respnse);
-    }
-}
+//         default:
+//             alert(respnse);
+//     }
+// }
 
 
 
 
 // Gets data from AJAX callback and send's it to html
-function wasDone(response_text, calltype) {
-    if (response_text == true) {
-        alert("your request was " + calltype + " sucssesfuly.");
-        let loadmain = new main_screen;
-        loadmain.loadmaindcreen();
+// function wasDone(response_text, calltype) {
+//     if (response_text == true) {
+//         alert("your request was " + calltype + " sucssesfuly.");
+//         let loadmain = new main_screen;
+//         loadmain.loadmaindcreen();
 
-    } else {
-        alert(response_text);
-    }
+//     } else {
+//         alert(response_text);
+//     }
 
-}
+// }
 
 // inserts the select list into the html
 

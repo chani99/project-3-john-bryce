@@ -49,26 +49,35 @@ var StudentModelController = function() {
     }
 
 
+    function wasDone(response_text) {
+        if (response_text == true) {
+            alert("your request was done sucssesfuly.");
+            let loadmain = new main_screen;
+            loadmain.loadmaindcreen();
+
+        } else {
+            alert(response_text);
+        }
+
+    }
 
 
     return {
 
         createStudent: function() {
             getFormValues('new', function() {
-                sendAJAX("POST", ApiUrl, data, 'create');
-
+                sendAJAX("POST", ApiUrl, data, function(respnse){
+                    wasDone(respnse);                    
+                });
             });
-
-
         },
 
 
 
         GetAllStudents: function() {
-            let allStudents = sendAJAX("GET", ApiUrl, data, function(returned_data) {
+            let allStudents = sendAJAX("GET", ApiUrl, data, function(respnse) {
                 column2 = new column2_director();
-                column2.allstudends(returned_data);
-
+                column2.allstudends(respnse);
             });
         },
 
@@ -77,24 +86,34 @@ var StudentModelController = function() {
         getStudent: function(id, but_id) {
             data.id = id;
             let manu = 'get_one';
-            sendAJAX("GET", ApiUrl, data, 'get_one', manu);
+            sendAJAX("GET", ApiUrl, data, function(respnse){
+            column3 = new column3_director();
+            column3.get_one_student(respnse);
             $("#" + but_id).unbind("click", handler);
+            });
+
 
         },
 
 
         deleteStudent: function(but_id) {
             data.id = but_id.substr(14);
-            sendAJAX("DELETE", ApiUrl, data, 'delete');
-            $("#" + but_id).unbind("click", handler);
+            sendAJAX("DELETE", ApiUrl, data, function(respnse){
+                wasDone(respnse); 
+                $("#" + but_id).unbind("click", handler);
+                
+                
+            });
 
         },
 
 
         updateStudent: function(but_id) {
             getFormValues(but_id, function() {
-                sendAJAX("PUT", ApiUrl, data, 'update');
-                $("#" + but_id).unbind("click", handler);
+                sendAJAX("PUT", ApiUrl, data, function(respnse){
+                    wasDone(respnse);
+                    $("#" + but_id).unbind("click", handler);  
+                });
             });
         }
 
@@ -109,40 +128,26 @@ var StudentModelController = function() {
 
 
 
+// add event to student details
+$(document).on('click', '#singleStudent', function() {
+    let student_model = new StudentModelController();
+      student_model.getStudent($(this).data('studentid'));
+   });
 
-// function deleteStudent(but_id) {
-//     let student_model = new StudentModelController();
-//     student_model.deleteStudent(but_id);
-// }
+       //add event to student edit
+       $(document).on('click', '#editStudent', function() {
+        column3 = new column3_director();
+        column3.Update_studentTemp("edit", $(this).data('editid'));
+    });
 
-// function updateStudent(but_id) {
-//     let student_model = new StudentModelController();
-//     student_model.updateStudent(but_id);
-// }
+       //add event to save or update student 
+    $(document).one('click', '#saveStud', function() {
+        let student_model = new StudentModelController();
+        student_model.updateStudent($(this).attr("id"));
+    });
 
-// function CreateStudent(id) {
-//     let student_model = new StudentModelController();
-//     student_model.createCourse();
-// }
-
-// function getStudent(id) {
-//     let student_model = new StudentModelController();
-//     student_model.getStudent(id);
-// }
-
-// let student_model = new StudentModelController();
-// student_model.getStudent($(this).data('studentid'));
-
-
-//     editStudentOnclick: function() {
-//     let student_model = new StudentModelController();
-//     student_model.updateStudent($(this).attr("id"));
-
-// },
-
-// deleteStudentOnclick: function() {
-//     let student_model = new StudentModelController();
-//     student_model.deleteStudent($(this).attr("id"));
-
-
-// },
+       //add event to student delete
+    $(document).one('click', '#delete_student', function() {
+        let student_model = new StudentModelController();
+        student_model.deleteStudent($(this).attr("id"));
+    });

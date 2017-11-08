@@ -1,20 +1,17 @@
 var column3_director = function() {
     var column3_data = {};
-    // var course_model = new CourseModuleController();
+    var course_model = new CourseModuleController();
     let column3;
 
 
 
-    function tempNameFunction(details, student_courses, studen_id, calltype, callback) {
+    function tempNameFunction(details, student_courses, studen_id, calltype) {
         $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update student: " + details.name);
             c = c.replace("{{new?}}", "update");
-            //  to do: add Delete Button
-
-            c = c.replace("{{num}}", studen_id);
-            c = c.replace("{{num2}}", studen_id);
-            // c = c.replace("{{funcName}}", 'updateStudent');
+            c = c.replace("{{saveid}}", studen_id);
+            c = c.replace("{{deleteid}}", studen_id);            
 
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -28,20 +25,19 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox(student_courses);
 
-            callback();
+            // callback();
         });
     }
 
 
-    function NewStudenttemp(callback) {
+    function NewStudenttemp() {
         $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
 
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "NEW STUDENT");
             c = c.replace("{{new?}}", "new");
-            c = c.replace("{{num2}}", 'new');
-            c = c.replace("{{num}}", '');
-            // c = c.replace("{{funcName}}", 'CreateStudent');
+            c = c.replace("{{saveid}}", 'new');
+            c = c.replace("{{deleteid}}", '');            
 
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -51,7 +47,7 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox();
 
-            callback();
+            // callback();
 
         });
 
@@ -158,15 +154,15 @@ var column3_director = function() {
                 let d = document.createElement('div');
                 d.innerHTML = c;
                 $('#main-scool').append(d);
+
                 course_model.GetCourseForStudent(data[0].id);
 
+                // const num = 'editStud' + data[0].id; // elemnt id  
                 //add event to student edit
-                const num = 'editStud' + data[0].id; // elemnt id  
-
-                $(document).on('click', '#' + num, function() {
-                    column3 = new column3_director();
-                    column3.Update_studentTemp("edit", $(this).data('editid'));
-                });
+                // $(document).on('click', '#editStudent', function() {
+                //     column3 = new column3_director();
+                //     column3.Update_studentTemp("edit", $(this).data('editid'));
+                // });
 
             });
 
@@ -181,6 +177,7 @@ var column3_director = function() {
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
                     c = c.replace("{{name}}", data[i].Course_name);
+                    c = c.replace("{{singleCourse}}", 'singlecourseIJ');
                     c = c.replace("{{course_id}}", data[i].Course_id);
                     c = c.replace("{{descrip}}", "");
                     c = c.replace("{{imgsrc}}", "back/images/" + data[i].Course_image);
@@ -207,23 +204,7 @@ var column3_director = function() {
                 student_courses.push($(sp).attr("id"));
             });
 
-
-            tempNameFunction(details, student_courses, studen_id, calltype, function() {
-
-                const edit_id = 'saveStud' + studen_id; // elemnt id   
-                const delete_id = 'delete_student' + studen_id; // elemnt id  
-
-                $(document).one('click', '#' + edit_id, function() {
-                    let student_model = new StudentModelController();
-                    student_model.updateStudent($(this).attr("id"));
-                });
-
-                $(document).one('click', '#' + delete_id, function() {
-                    let student_model = new StudentModelController();
-                    student_model.deleteStudent($(this).attr("id"));
-                });
-            });
-
+            tempNameFunction(details, student_courses, studen_id, calltype);
 
         },
 

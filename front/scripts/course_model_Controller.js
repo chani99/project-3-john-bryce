@@ -57,8 +57,9 @@ var CourseModuleController = function() {
         createCourse: function(but_id) {
             getFormValues(but_id, function() {
                 let course = new Course(data);
-                let newCourse = sendAJAX("POST", CourseApiUrl, course, 'create');
-                wasDone(newCourse);
+                sendAJAX("POST", CourseApiUrl, course, function(respnse){
+                    wasDone(respnse);                    
+                });
             });
 
         },
@@ -66,7 +67,9 @@ var CourseModuleController = function() {
         updateCourses: function(but_id) {
             getFormValues(but_id, function() {
                 let course = new Course(data);
-                sendAJAX("PUT", CourseApiUrl, course, 'update');
+                sendAJAX("PUT", CourseApiUrl, course, function(respnse){
+                    wasDone(respnse);   
+                });
             });
         },
 
@@ -74,7 +77,9 @@ var CourseModuleController = function() {
         deleteCourse: function(but_id) {
             data.id = but_id;
             let course = new Course(data);
-            sendAJAX("DELETE", CourseApiUrl, course, 'delete');
+            sendAJAX("DELETE", CourseApiUrl, course, function(respnse){
+                wasDone(respnse); 
+            });
         },
 
 
@@ -94,14 +99,21 @@ var CourseModuleController = function() {
             data.id = id;
             data.inner = true;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, 'getinnerJoin');
+            sendAJAX("GET", CourseApiUrl, course, function(respnse){
+                column3 = new column3_director();
+                column3.getinnerJoin(respnse);
+    
+            });
         },
 
 
         getOneCourse: function(id) {
             data.id = id;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, 'getcourse');
+            sendAJAX("GET", CourseApiUrl, course, function(respnse){
+                column3 = new column3_director();
+                column3.get_one_course(respnse);    
+            });
         }
 
     }
