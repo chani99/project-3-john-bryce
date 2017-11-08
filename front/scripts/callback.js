@@ -49,7 +49,7 @@ function callback(response_text, calltype) {
             break;
 
         default:
-            alert('Erorr!');
+            alert(respnse);
     }
 }
 
@@ -64,7 +64,7 @@ function wasDone(response_text, calltype) {
         loadmain.loadmaindcreen();
 
     } else {
-        alert("error");
+        alert(response_text);
     }
 
 }
