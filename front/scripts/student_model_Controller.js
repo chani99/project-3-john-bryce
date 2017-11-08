@@ -20,10 +20,9 @@ var StudentModelController = function() {
     function getFormValues(but_id, callback) {
         let image;
         let courses = [];
-        // let value = $('#' + but_id).val();
 
         if (but_id != "new") {
-            data.id = but_id.substr(8);
+            data.id = but_id;
         }
         data.name = $('#inputname').val();
         data.phone = $('#inputphone').val();
@@ -34,7 +33,6 @@ var StudentModelController = function() {
         });
         data.courses = courses;
 
-
         image = $('#st_photo').prop('files')[0]; //send photo to server
         if (image != undefined) {
             data.image = image.name;
@@ -42,10 +40,7 @@ var StudentModelController = function() {
             form_data.append('file', image);
             sendFileToServer(form_data, 'upload');
         }
-
-
         callback();
-
     }
 
 
@@ -65,9 +60,9 @@ var StudentModelController = function() {
     return {
 
         createStudent: function() {
-            getFormValues('new', function() {
-                sendAJAX("POST", ApiUrl, data, function(respnse){
-                    wasDone(respnse);                    
+            getFormValues("new", function() {
+                sendAJAX("POST", ApiUrl, data, function(respnse) {
+                    wasDone(respnse);
                 });
             });
         },
@@ -86,10 +81,10 @@ var StudentModelController = function() {
         getStudent: function(id, but_id) {
             data.id = id;
             let manu = 'get_one';
-            sendAJAX("GET", ApiUrl, data, function(respnse){
-            column3 = new column3_director();
-            column3.get_one_student(respnse);
-            $("#" + but_id).unbind("click", handler);
+            sendAJAX("GET", ApiUrl, data, function(respnse) {
+                column3 = new column3_director();
+                column3.get_one_student(respnse);
+                $("#" + but_id).unbind("click", handler);
             });
 
 
@@ -97,12 +92,12 @@ var StudentModelController = function() {
 
 
         deleteStudent: function(but_id) {
-            data.id = but_id.substr(14);
-            sendAJAX("DELETE", ApiUrl, data, function(respnse){
-                wasDone(respnse); 
+            data.id = but_id;
+            sendAJAX("DELETE", ApiUrl, data, function(respnse) {
+                wasDone(respnse);
                 $("#" + but_id).unbind("click", handler);
-                
-                
+
+
             });
 
         },
@@ -110,15 +105,12 @@ var StudentModelController = function() {
 
         updateStudent: function(but_id) {
             getFormValues(but_id, function() {
-                sendAJAX("PUT", ApiUrl, data, function(respnse){
+                sendAJAX("PUT", ApiUrl, data, function(respnse) {
                     wasDone(respnse);
-                    $("#" + but_id).unbind("click", handler);  
+                    $("#" + but_id).unbind("click", handler);
                 });
             });
         }
-
-
-        // get data from form student form
 
 
     }
@@ -131,23 +123,26 @@ var StudentModelController = function() {
 // add event to student details
 $(document).on('click', '#singleStudent', function() {
     let student_model = new StudentModelController();
-      student_model.getStudent($(this).data('studentid'));
-   });
+    student_model.getStudent($(this).data('studentid'));
+});
 
-       //add event to student edit
-       $(document).on('click', '#editStudent', function() {
-        column3 = new column3_director();
-        column3.Update_studentTemp("edit", $(this).data('editid'));
-    });
+//add event to student edit
+$(document).on('click', '#editStudent', function() {
+    column3 = new column3_director();
+    column3.Update_studentTemp("edit", $(this).data('editid'));
+});
 
-       //add event to save or update student 
-    $(document).one('click', '#saveStud', function() {
-        let student_model = new StudentModelController();
-        student_model.updateStudent($(this).attr("id"));
-    });
+//add event to save or update student 
+$(document).on('click', '#saveStud', function() {
+    let student_model = new StudentModelController();
+    let student_id = $(this).data('savestudent');
+    if (student_id == 'new') {
+        student_model.createStudent();
+    } else { student_model.updateStudent(student_id); }
+});
 
-       //add event to student delete
-    $(document).one('click', '#delete_student', function() {
-        let student_model = new StudentModelController();
-        student_model.deleteStudent($(this).attr("id"));
-    });
+//add event to student delete
+$(document).on('click', '#delete_student', function() {
+    let student_model = new StudentModelController();
+    student_model.deleteStudent($(this).data('deletestudent'));
+});

@@ -21,11 +21,13 @@
         // Create a new Students
         function Create($params) {
             $this->controller->CreateStudents($params);
+            if (array_key_exists('courses', $params)){
             $corses_new_user = $params['courses'];
             $get_new_row =  $this->controller->selectLastId();
             $new_id = $get_new_row[0]['id'];
             $courses = new CourseController($params);
-            $new_courses = $courses->addCuorses($corses_new_user, $new_id);
+            $new_courses = $courses->addCuorses($corses_new_user, $new_id);            
+            }
             return true;
              
             

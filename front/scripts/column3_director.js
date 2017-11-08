@@ -11,7 +11,7 @@ var column3_director = function() {
             c = c.replace("{{form_name}}", "Update student: " + details.name);
             c = c.replace("{{new?}}", "update");
             c = c.replace("{{saveid}}", studen_id);
-            c = c.replace("{{deleteid}}", studen_id);            
+            c = c.replace("{{deleteid}}", studen_id);
 
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -21,11 +21,10 @@ var column3_director = function() {
             $("#inputemail").val(details.mail);
             $("#inputname").val(details.name);
 
-            //add event to student save
+            //add checkbox
             column3 = new column3_director();
             column3.AddCheckbox(student_courses);
 
-            // callback();
         });
     }
 
@@ -37,7 +36,7 @@ var column3_director = function() {
             c = c.replace("{{form_name}}", "NEW STUDENT");
             c = c.replace("{{new?}}", "new");
             c = c.replace("{{saveid}}", 'new');
-            c = c.replace("{{deleteid}}", '');            
+            c = c.replace("{{deleteid}}", '');
 
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -47,7 +46,6 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox();
 
-            // callback();
 
         });
 
@@ -62,39 +60,18 @@ var column3_director = function() {
             c = c.replace("{{C_id2}}", 'new');
             c = c.replace("{{num}}", '');
 
-            // c = c.replace("{{funcName}}", 'CreateStudent');
-
             let d = document.createElement('div');
             d.innerHTML = c;
             $('#main-scool').html("");
             $('#main-scool').append(d);
             $('#deleteCourse').hide();
 
-            // callback();
 
         });
 
 
 
     }
-
-
-
-
-    // CouseUpdateTemp(details, course_id, calltype, function() {
-
-    //     const edit_id = 'saveCourse' + course_id;
-    //     const delete_id = 'deleteCourse' + course_id;
-    //     let course_model = new CourseModuleController();
-
-    //     $(document).one('click', '#' + edit_id, function() {
-    //         course_model.updateCourses($(this).attr("id"));
-    //     });
-
-    //     $(document).one('click', '#' + delete_id, function() {
-    //         course_model.deleteCourse($(this).attr("id"));
-    //     });
-    // });
 
 
 
@@ -114,7 +91,6 @@ var column3_director = function() {
             $("#inputdetails").val(details.description);
             $("#inputname").val(details.name);
 
-            // callback();
         });
     }
 
@@ -156,13 +132,6 @@ var column3_director = function() {
                 $('#main-scool').append(d);
 
                 course_model.GetCourseForStudent(data[0].id);
-
-                // const num = 'editStud' + data[0].id; // elemnt id  
-                //add event to student edit
-                // $(document).on('click', '#editStudent', function() {
-                //     column3 = new column3_director();
-                //     column3.Update_studentTemp("edit", $(this).data('editid'));
-                // });
 
             });
 
