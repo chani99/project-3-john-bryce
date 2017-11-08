@@ -1,7 +1,7 @@
 var main_screen = function() {
     // let column1ApiMethod = 'Student';
     // let ApiUrl = "back/api/api.php";
-    var column1_data = {};
+    // var column1_data = {};
 
 
     return {
@@ -10,12 +10,15 @@ var main_screen = function() {
         loadmaindcreen: function() {
 
             //get cuorse list & student list
-            let column3 = new column3_director();
-            column3.main_screen();
-            let course_model = new CourseModuleController();
-            course_model.GetAllCourse(function() {
-                let student_model = new StudentModelController();
-                student_model.GetAllStudents();
+            let column33 = new column3_director();
+            column33.main_screen(function() {
+                let courseController = new CourseModuleController();
+                courseController.GetAllCourse(function() {
+                    let studentController = new StudentModelController();
+                    studentController.GetAllStudents();
+
+                });
+
 
             });
 

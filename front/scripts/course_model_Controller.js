@@ -39,13 +39,26 @@ var CourseModuleController = function() {
         callback();
     }
 
+    function wasDone(response_text) {
+        if (response_text == true) {
+            alert("your request was done sucssesfuly.");
+            let loadmain = new main_screen;
+            loadmain.loadmaindcreen();
+
+        } else {
+            alert(response_text);
+        }
+
+    }
+
 
     return {
 
         createCourse: function(but_id) {
             getFormValues(but_id, function() {
                 let course = new Course(data);
-                sendAJAX("POST", CourseApiUrl, course, 'create');
+                let newCourse = sendAJAX("POST", CourseApiUrl, course, 'create');
+                wasDone(newCourse);
             });
 
         },
@@ -67,7 +80,12 @@ var CourseModuleController = function() {
 
         GetAllCourse: function(callback) {
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, 'getall');
+            sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
+                let column1 = new column1_director();
+                column1.allcourses(returned_data);
+
+            });
+
             callback();
         },
 

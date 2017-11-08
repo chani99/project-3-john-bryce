@@ -65,7 +65,11 @@ var StudentModelController = function() {
 
 
         GetAllStudents: function() {
-            sendAJAX("GET", ApiUrl, data, 'getallStudents');
+            let allStudents = sendAJAX("GET", ApiUrl, data, function(returned_data) {
+                column2 = new column2_director();
+                column2.allstudends(returned_data);
+
+            });
         },
 
 

@@ -1,6 +1,6 @@
 var column3_director = function() {
     var column3_data = {};
-    var course_model = new CourseModuleController();
+    // var course_model = new CourseModuleController();
     let column3;
 
 
@@ -128,7 +128,7 @@ var column3_director = function() {
     return {
 
 
-        main_screen: function() {
+        main_screen: function(callback) {
             $.ajax('front/views/main_screen.html').always(function(main_temp) {
                 var c = main_temp;
                 $('#main-scool').html("");
@@ -136,6 +136,7 @@ var column3_director = function() {
                 d.innerHTML = c;
                 $('#main-scool').append(d);
             });
+            callback();
         },
 
 
