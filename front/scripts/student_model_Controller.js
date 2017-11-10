@@ -1,9 +1,13 @@
 //student model
 function Student(data) {
-    this.name = data.name;
-    this.phone = data.phone;
-    this.email = data.email;
-    this.image = data.image;
+    if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
+    if ('id' in data && data.id != "") this.id = data.id;
+    if ('name' in data && data.name != "") this.name = data.name;
+    if ('phone' in data && data.phone != "") this.phone = data.phone;
+    if ('email' in data && data.email != "") this.email = data.email;
+    if ('image' in data && data.image != "") this.image = data.image;
+    if ('courses' in data && data.courses != "") this.courses = data.courses;
+
 }
 
 
@@ -61,7 +65,8 @@ var StudentModelController = function() {
 
         createStudent: function() {
             getFormValues("new", function() {
-                sendAJAX("POST", ApiUrl, data, function(respnse) {
+                let student = new Student(data);
+                sendAJAX("POST", ApiUrl, student, function(respnse) {
                     wasDone(respnse);
                 });
             });
@@ -70,7 +75,8 @@ var StudentModelController = function() {
 
 
         GetAllStudents: function() {
-            let allStudents = sendAJAX("GET", ApiUrl, data, function(respnse) {
+            let student = new Student(data);
+            let allStudents = sendAJAX("GET", ApiUrl, student, function(respnse) {
                 column2 = new column2_director();
                 column2.allstudends(respnse);
             });
@@ -81,10 +87,10 @@ var StudentModelController = function() {
         getStudent: function(id, but_id) {
             data.id = id;
             let manu = 'get_one';
-            sendAJAX("GET", ApiUrl, data, function(respnse) {
+            let student = new Student(data);
+            sendAJAX("GET", ApiUrl, student, function(respnse) {
                 column3 = new column3_director();
                 column3.get_one_student(respnse);
-                $("#" + but_id).unbind("click", handler);
             });
 
 
@@ -93,9 +99,9 @@ var StudentModelController = function() {
 
         deleteStudent: function(but_id) {
             data.id = but_id;
-            sendAJAX("DELETE", ApiUrl, data, function(respnse) {
+            let student = new Student(data);
+            sendAJAX("DELETE", ApiUrl, student, function(respnse) {
                 wasDone(respnse);
-                $("#" + but_id).unbind("click", handler);
 
 
             });
@@ -105,9 +111,9 @@ var StudentModelController = function() {
 
         updateStudent: function(but_id) {
             getFormValues(but_id, function() {
-                sendAJAX("PUT", ApiUrl, data, function(respnse) {
+                let student = new Student(data);
+                sendAJAX("PUT", ApiUrl, student, function(respnse) {
                     wasDone(respnse);
-                    $("#" + but_id).unbind("click", handler);
                 });
             });
         }

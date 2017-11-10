@@ -1,13 +1,54 @@
-var validate = {
-    // clears the error when user types a new value
-    emptyError: $("input").change(function() {
-        $("#result").html("");
-    }),
-    // checks if the field is not empty
-    NotEmpty: function(inputtxt) {
+var validation = function() {
+
+    function NotEmpty(input) {
         if ((inputtxt == "") || (inputtxt == undefined)) {
+            alert("You must fill all input fields!");
             return false;
+        } else {
+            return true;
         }
+    }
+
+    function matchTextPattern(input) {
+        var pattern = /[0-9a-zA-Zא-ת\s!?=+-.,']+$/m;
+        if (!pattern.test(input)) {
+            alert("The field contains invalid characters, only letters or numbers must be entered!");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    return {
+        validat_input: function(type, input) {
+            switch (type) {
+                case 'name':
+                    if ((NotEmpty(input) == true) && (matchTextPattern(input) == true)) {
+                        return true;
+                    }
+                    break;
+                case 'phone':
+
+                    break;
+                case 'email':
+
+                    break;
+                case 'image':
+
+                    break;
+                default:
+            }
+        }
+    }
+
+
+
+}
+var validate = {
+
+        // checks if the field is not empty
     },
 
     // Validation for name input

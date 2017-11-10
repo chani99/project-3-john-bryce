@@ -1,10 +1,10 @@
 // course module
 function Course(data) {
     if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ('id' in data && data.ctrl != "") this.id = data.id;
-    if ('name' in data && data.ctrl != "") this.name = data.name;
-    if ('description' in data && data.ctrl != "") this.description = data.description;
-    if ('image' in data && data.ctrl != "") this.image = data.image;
+    if ('id' in data && data.id != "") this.id = data.id;
+    if ('name' in data && data.name != "") this.name = data.name;
+    if ('description' in data && data.description != "") this.description = data.description;
+    if ('image' in data && data.image != "") this.image = data.image;
     if ('inner' in data && data.inner != "") this.inner = data.inner;
 
 }
@@ -57,8 +57,8 @@ var CourseModuleController = function() {
         createCourse: function(but_id) {
             getFormValues(but_id, function() {
                 let course = new Course(data);
-                sendAJAX("POST", CourseApiUrl, course, function(respnse){
-                    wasDone(respnse);                    
+                sendAJAX("POST", CourseApiUrl, course, function(respnse) {
+                    wasDone(respnse);
                 });
             });
 
@@ -67,8 +67,8 @@ var CourseModuleController = function() {
         updateCourses: function(but_id) {
             getFormValues(but_id, function() {
                 let course = new Course(data);
-                sendAJAX("PUT", CourseApiUrl, course, function(respnse){
-                    wasDone(respnse);   
+                sendAJAX("PUT", CourseApiUrl, course, function(respnse) {
+                    wasDone(respnse);
                 });
             });
         },
@@ -77,8 +77,8 @@ var CourseModuleController = function() {
         deleteCourse: function(but_id) {
             data.id = but_id;
             let course = new Course(data);
-            sendAJAX("DELETE", CourseApiUrl, course, function(respnse){
-                wasDone(respnse); 
+            sendAJAX("DELETE", CourseApiUrl, course, function(respnse) {
+                wasDone(respnse);
             });
         },
 
@@ -99,10 +99,10 @@ var CourseModuleController = function() {
             data.id = id;
             data.inner = true;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(respnse){
+            sendAJAX("GET", CourseApiUrl, course, function(respnse) {
                 column3 = new column3_director();
                 column3.getinnerJoin(respnse);
-    
+
             });
         },
 
@@ -110,9 +110,9 @@ var CourseModuleController = function() {
         getOneCourse: function(id) {
             data.id = id;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(respnse){
+            sendAJAX("GET", CourseApiUrl, course, function(respnse) {
                 column3 = new column3_director();
-                column3.get_one_course(respnse);    
+                column3.get_one_course(respnse);
             });
         }
 
