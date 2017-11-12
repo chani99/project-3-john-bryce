@@ -3,7 +3,6 @@
     require_once 'Course_Student_Controller.php';
     require_once '../models/CourseModel.php';
     require_once '../data/bl.php';
-    require_once '../common/validation.php';
     
     
 
@@ -17,14 +16,8 @@
 
         function __construct($param) {
             $this->db = new BL();
-            $this->validation = new validation;
-            // $validate_result =$this->validation->validations($param);
-            // if ($validate_result == true) {
             $this->model = new CourseModel($param);
-            // }
-            // else (
-            //     return $validate_result;
-            // )
+
             
         }
         
@@ -119,18 +112,15 @@
 
         
 
- 
+        // get the courses for a student by id
         function getCoursesInnerJoin($param) {
             $innerJoinCourses = array();
-
             $selected_rows = "course.id, course.name, course.image";
             $table2 = 'student';
             $table3 = 'student_course';
             $Column_equal_to = 'course.id = student_course.c_id';
             $Column_equal_to2 = 'student.id = student_course.s_id';
             $where = 'student.id = ' . $param["id"];
-            
-
             $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
             for($i=0; $i<count($getall); $i++) {
                 $c = new CourseModel($getall[$i]);
@@ -139,15 +129,23 @@
             return $innerJoinCourses;   
         }
 
+        
+            //select the las course id that was added
+        function selectLastId() {
+            $new_id = $this->db->selectlastRow($this->table_name);
+            return $new_id;
+        }
 
+
+            //check what couses to change for a student by compering the old courses in db to the new couses sent from client
         function compare_courses($id, $old_course, $new_courses) {
             $add_courses =[];
             $remove_courses =[];
         if ($old_course == $new_courses) {
                 return true;
         } else {
+
                 //check what courses to remove
-                    
             for ($i = 0; $i < count($old_course); $i++) {
                 $temp = 0;
                         for ($x = 0; $x < count($new_courses); $x++) {
@@ -159,7 +157,6 @@
                     array_push($remove_courses, $old_course[$i]['Course_id']);
                 }
             }
-
                 //check what courses to add
             for ($z = 0; $z < count($new_courses); $z++) {
                 $temp = 0;
@@ -172,66 +169,49 @@
                     array_push($add_courses, $new_courses[$z]);
                     }    
             }
-
             $this->addCuorses($add_courses, $id);
             $this->RemoveCourses($remove_courses, $id);
-
         }
        
     }
 
-      //send new_courses to DB
-     function addCuorses($add_courses, $id)
-    {
-               for ($c = 0; $c < count($add_courses); $c++) {
-                $param = [
-                    "id" => $id,
-                    "courses" => $add_courses[$c] 
-                ];
-   
-            $S_C = new S_C_Controller($param);
-            $S_C->CreateNewRow($param);
-            }
-    }
 
-
-    //delete courses from DB
-    function RemoveCourses($remove_courses, $id){
-            for ($c = 0; $c < count($remove_courses); $c++) {
-                $courses;
-                if (array_key_exists("Course_id", $remove_courses[$c])) {
-                    $courses = $remove_courses[$c]['Course_id'];  
-                } 
-                else{
-                    $courses = $remove_courses[$c];
-                }
-                
-                $param = [
-                    "id" => $id,
-                    "courses" => $courses
+        //send new_courses to DB
+        function addCuorses($add_courses, $id)
+        {
+                for ($c = 0; $c < count($add_courses); $c++) {
+                    $param = [
+                        "id" => $id,
+                        "courses" => $add_courses[$c] 
                     ];
-                
-            $S_C = new S_C_Controller($param);
-            $S_C->DeleteCourseByRowName($param);
-            }
-    }
+    
+                $S_C = new S_C_Controller($param);
+                $S_C->CreateNewRow($param);
+                }
+        }
 
+
+        //delete courses from DB
+        function RemoveCourses($remove_courses, $id){
+                for ($c = 0; $c < count($remove_courses); $c++) {
+                    $courses;
+                    if (array_key_exists("Course_id", $remove_courses[$c])) {
+                        $courses = $remove_courses[$c]['Course_id'];  
+                    } 
+                    else{
+                        $courses = $remove_courses[$c];
+                    }
+                    
+                    $param = [
+                        "id" => $id,
+                        "courses" => $courses
+                        ];
+                    
+                $S_C = new S_C_Controller($param);
+                $S_C->DeleteCourseByRowName($param);
+                }
+        }
 }
-         
         
             
         
-
-// SELECT course.name, course.image
-// FROM course
-// INNER JOIN student_course ON course.id = student_course.c_id
-// INNER JOIN student ON student.id = student_course.s_id
-
-
-// SELECT course.name, course.image
-// FROM course
-// INNER JOIN student_course ON course.id = student_course.c_id
-// INNER JOIN student ON student.id = student_course.s_id
-// WHERE student.id = 5
-
-

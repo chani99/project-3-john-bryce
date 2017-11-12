@@ -21,10 +21,11 @@
         // Create a new Students
         function Create($params) {
             $this->controller->CreateStudents($params);
-            if (array_key_exists('courses', $params)){
-            $corses_new_user = $params['courses'];
             $get_new_row =  $this->controller->selectLastId();
             $new_id = $get_new_row[0]['id'];
+
+            if (array_key_exists('courses', $params)){
+            $corses_new_user = $params['courses'];
             $courses = new CourseController($params);
             $new_courses = $courses->addCuorses($corses_new_user, $new_id);            
             }
@@ -34,6 +35,11 @@
 
         }
         
+        function selectLastId() {
+            $new_id = $this->db->selectlastRow($this->table_name);
+            return $new_id;
+        }
+
 
          // Get all Studentss or check if a id exists
         function Read($params) {
@@ -51,12 +57,16 @@
 
         // Update a Students
         function Update($params) {
-                $courses = new CourseController($params);
-                $Stu_old_courses = $courses->getCoursesInnerJoin($params);
-                $compare_courses = $courses->compare_courses( $params["id"], $Stu_old_courses, $params["courses"]);
-                $Students =$this->controller->UpdateById($params);
-            return $Students;
-            }
+            if (!array_key_exists("courses", $params)) {
+                $params['courses'] = [];
+            }          
+                 
+            $courses = new CourseController($params);
+            $Stu_old_courses = $courses->getCoursesInnerJoin($params);
+            $compare_courses = $courses->compare_courses( $params["id"], $Stu_old_courses, $params["courses"]);
+            $Students =$this->controller->UpdateById($params);
+        return $Students;
+        }
 
             
         //  Delete 1 Students   

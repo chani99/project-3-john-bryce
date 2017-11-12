@@ -13,13 +13,10 @@ var main_screen = function() {
             let column33 = new column3_director();
             column33.main_screen(function() {
                 let courseController = new CourseModuleController();
-                courseController.GetAllCourse(function() {
-                    let studentController = new StudentModelController();
-                    studentController.GetAllStudents();
+                let studentController = new StudentModelController();
 
-                });
-
-
+                courseController.GetAllCourse();
+                studentController.GetAllStudents();
             });
 
         }

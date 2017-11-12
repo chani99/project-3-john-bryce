@@ -32,10 +32,6 @@
        
         }
 
-        function selectLastId() {
-            $new_id = $this->db->selectlastRow($this->table_name);
-            return $new_id;
-        }
 
         // Updates a line in directos table
         function ReturnSelect() {
@@ -110,6 +106,10 @@
     
         }
 
+        function selectLastId() {
+            $new_id = $this->db->selectlastRow($this->table_name);
+            return $new_id;
+        }
 
 
         // Updates a line in directos table

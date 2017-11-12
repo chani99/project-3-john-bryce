@@ -20,11 +20,12 @@ var validation = function() {
     }
 
     function matchPhonePattern(input) {
-        let phoneno = /^\d{10}$/;
-        if (!phoneno.test(parseInt(input))) {
-            return "Tho phone number is invalid!";
-        } else {
+        if ((input.length === 10) || (input.length === 9)) {
             return true;
+
+        } else {
+            return "The phone number should contain 9 or 10 digits!";
+
         }
 
     }

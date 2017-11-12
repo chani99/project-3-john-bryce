@@ -9,12 +9,21 @@
             <h5 class="form-signin-heading">{{form_name}}</h5>
             <label for="inputname" class="">Course Name:</label>
             <input type="name" id="inputname" class="form-control" placeholder="Course Name" required autofocus>
-            <label for="inputdetails" class="">Description:</label>
-            <textarea id="inputdetails" cols="30" rows="10" class="form-control" placeholder="Course Description" required autofocus></textarea>
-            <div class="padding_top">
+            <span id="name_error" class="my_errors"></span>
+            <br>
 
+            <label for="inputdetails" class="">Description:</label>
+            <textarea id="inputdetails" cols="30" rows="10" maxlength="300" class="form-control" placeholder="Course Description" required autofocus></textarea>
+            <span id="description_error" class="my_errors"></span>
+            <br>
+
+            <div class="padding_top">
                 <label for="st_photo"><h5 class="padding_top">Upload Couse Icon File:</h5></label><br/>
                 <input name="userImage" type="file" id="st_photo" class="inputFile" />
+                <span id="image_error" class="my_errors"></span>
+                <br>
+
+
             </div>
 
 

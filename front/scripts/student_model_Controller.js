@@ -6,7 +6,7 @@ function Student(data) {
     if ('phone' in data && data.phone != "") this.phone = data.phone;
     if ('email' in data && data.email != "") this.email = data.email;
     if ('image' in data && data.image != "") this.image = data.image;
-    if ('courses' in data && data.courses != "") this.courses = data.courses;
+    if ('courses' in data) this.courses = data.courses;
 
 }
 
@@ -26,47 +26,42 @@ var StudentModelController = function() {
         let courses = [];
         let values = [];
 
-
         values.name = $('#inputname').val().trim();
         values.phone = $('#inputphone').val().trim();
         values.email = $('#inputemail').val().trim();
 
-        if (but_id == "new") {
-            values.image = $('#browse').prop('files')[0];
-        }
-
-        if (but_id != "new") {
-            data.id = but_id;
-        }
+        if (but_id != "new") { data.id = but_id; }
 
         $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
             courses.push($(this).attr("id"));
         });
+
         data.courses = courses;
 
-
+        //sends all input values for validation in if ok senbs them to sever...
         sendForValidation(values, function(returned) {
-            if (returned.test_name == true && returned.text_phone == true && returned.text_email == true) {
-                if ("image" in values && returned.test_image == true) {
-                    sendFileToAjax(image, function(resulet) {
+            if (returned.test_name == true && returned.test_phone == true && returned.test_email == true) {
+                values.image = $('#browse').prop('files')[0];
+                if (values.image != undefined) {
+                    sendFileToAjax(values.image, function(resulet) {
                         if (resulet) {
-                            data.image = image.name;
+                            data.image = values.image.name;
                             callback();
                         } else {
                             alert(resulet.text);
                         }
-
                     });
                 } else {
                     callback();
-
                 }
             }
-
         });
     }
 
 
+
+
+    // function sending data to validation
     function sendForValidation(values, callback) {
         let validate = new validation();
         let temp_val;
@@ -80,10 +75,12 @@ var StudentModelController = function() {
         temp_val = validate.validat_input(values.name, "name");
         if (temp_val == true) {
             $("#name_error").html("");
+            $('#inputname').removeClass("error");
             data.name = values.name;
             test_name = true;
         } else {
             $("#name_error").html(temp_val);
+            $('#inputname').addClass("error")
             test_name = false;
         }
 
@@ -93,9 +90,11 @@ var StudentModelController = function() {
             $("#phone_error").html("");
             data.phone = values.phone;
             test_phone = true;
-
+            $('#inputphone').removeClass("error");
         } else {
             $("#phone_error").html(temp_val);
+            $('#inputphone').addClass("error");
+
             test_phone = false;
         }
 
@@ -104,21 +103,29 @@ var StudentModelController = function() {
             $("#email_error").html("");
             data.email = values.email;
             test_email = true;
+            $('#inputemail').removeClass("error");
+
 
         } else {
             $("#email_error").html(temp_val);
+            $('#inputemail').addClass("error")
+
             test_email = false;
         }
 
 
-        if ("image" in values) { // true if "key" doesn't exist in object
+        if ("image" in values) {
 
             temp_val = validate.validat_input(values.image, "image");
             if (temp_val == true) {
                 $("#image_error").html("");
                 test_image = true;
+                $('#browse').removeClass("error");
+
             } else {
                 $("#image_error").html(temp_val);
+                $('#browse').addClass("error")
+
                 test_image = false;
 
             }
@@ -215,13 +222,14 @@ var StudentModelController = function() {
 
 
         deleteStudent: function(but_id) {
-            data.id = but_id;
-            let student = new Student(data);
-            sendAJAX("DELETE", ApiUrl, student, function(respnse) {
-                wasDone(respnse);
-
-
-            });
+            let safe = confirm("Are you sure you want to delete this student?");
+            if (safe == true) {
+                data.id = but_id;
+                let student = new Student(data);
+                sendAJAX("DELETE", ApiUrl, student, function(respnse) {
+                    wasDone(respnse);
+                });
+            }
 
         },
 

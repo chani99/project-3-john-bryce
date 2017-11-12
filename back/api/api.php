@@ -2,6 +2,8 @@
     require_once 'course-api.php';
     require_once 'student-api.php';
     require_once 'admin-api.php';
+    require_once '../common/validation.php';
+    
     
 
     $method = $_SERVER['REQUEST_METHOD']; 
@@ -13,27 +15,36 @@
     else{
     $params = $_REQUEST['activitiesArray'];
     }
-    
-    switch ($params['ctrl']) {
-        
+
+    //basic input validation
+    $validation = new validation;
+    $validate_result = $validation->validationDirector($params);
+    if ($validate_result == "") {
+
+        switch ($params['ctrl']) {
             case 'Course':
-            $capi = new CourseApi($params);
-            $result  = $capi->gateway($method, $params, "CourseController");
-            echo json_encode($result);
-            break;
+                $capi = new CourseApi($params);
+                $result  = $capi->gateway($method, $params, "CourseController");
+                echo json_encode($result);
+                break;
 
-            case 'Student':
-            $capi = new StudentApi($params);
-            $result = $capi->gateway($method, $params);
-            echo json_encode($result);
-            break;
+                case 'Student':
+                $capi = new StudentApi($params);
+                $result = $capi->gateway($method, $params);
+                echo json_encode($result);
+                break;
 
-            case 'Admin':
-            $capi = new AdminApi();
-            $result = $capi->gateway($method, $params);
-            echo json_encode($result);
-            break;
+                case 'Admin':
+                $capi = new AdminApi($params);
+                $result = $capi->gateway($method, $params);
+                echo json_encode($result);
+                break;
+        }
 
+    }else{
+        echo json_encode($validate_result);
+        
     }
+    
 
 ?>
