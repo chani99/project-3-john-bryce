@@ -10,13 +10,36 @@
             <label for="inputname" class="">Student Name</label>
             <input type="name" id="inputname" class="form-control" placeholder="Student Name" required autofocus>
             <label for="inputphone" class="">Phone</label>
-            <input type="phone" id="inputphone" class="form-control" placeholder="Student Phone" required autofocus>
+            <input type="number" id="inputphone" min="10" max="10" class="form-control" placeholder="Student Phone" required autofocus>
             <label for="inputemail" class="">e-mail</label>
             <input type="email" id="inputemail" class="form-control" placeholder="Student e-mail" required autofocus>
             <div class="padding_top">
 
                 <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
-                <input name="userImage" type="file" id="st_photo" class="inputFile" />
+                <!-- <input name="userImage" type="file" id="st_photo" class="inputFile" /> -->
+                <input id="browse" type="file" multiple>
+
+
+                <div class="component">
+                    <div class="overlay">
+                        <div class="overlay-inner">
+                        </div>
+                    </div>
+                    <img class="resize-image" id="blah" src="#" alt="image for resizing">
+                    <button class="btn-crop js-crop">Crop<img class="icon-crop" src="img/crop.svg"></button>
+                </div>
+
+
+                <!-- <div class="component">
+                    <div class="overlay">
+                        <div class="overlay-inner">
+                        </div>
+                    </div>
+                    <!-- <img id="blah" class="resize-image" src="#" alt="your image" />                     -->
+                <!-- <img class="resize-image" id="blah" src="#" alt="image for resizing">
+                    <button class="btn-crop js-crop">Crop<img class="icon-crop" src="img/crop.svg"></button>
+                </div> -->
+
             </div>
             <div class="padding_top">
 

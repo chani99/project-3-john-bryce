@@ -37,15 +37,24 @@ var StudentModelController = function() {
         });
         data.courses = courses;
 
-        image = $('#st_photo').prop('files')[0]; //send photo to server
+        image = $('#browse').prop('files')[0]; //send photo to server
         if (image != undefined) {
-            data.image = image.name;
-            let form_data = new FormData();
-            form_data.append('file', image);
-            sendFileToServer(form_data, 'upload');
+            sendFileToAjax(image, function(resulet) {
+                if (resulet) {
+                    data.image = image.name;
+                    callback();
+                } else {
+                    alert(resulet.text);
+                }
+
+            });
+        } else {
+            callback();
+
         }
-        callback();
+
     }
+
 
 
     function wasDone(response_text) {
@@ -60,6 +69,46 @@ var StudentModelController = function() {
 
     }
 
+    function wasCreated(response_text, id) {
+        if (response_text == true) {
+            alert("your request was done sucssesfuly.");
+            GetAllStudents();
+            getStudent(id);
+
+        }
+    }
+
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        // imagecanvas();
+
+    }
+
+
+
+    function sendFileToAjax(image, callback) {
+        let form_data = new FormData();
+        form_data.append('file', image);
+        sendFileToServer(form_data, function(respnse) {
+            callback(respnse);
+        });
+    }
+
+
+
+
+
+
+
+
 
     return {
 
@@ -67,7 +116,13 @@ var StudentModelController = function() {
             getFormValues("new", function() {
                 let student = new Student(data);
                 sendAJAX("POST", ApiUrl, student, function(respnse) {
-                    wasDone(respnse);
+                    if (respnse[0] == true) {
+                        alert("your request was done sucssesfuly.");
+                        let student_model = new StudentModelController();
+                        student_model.GetAllStudents();
+                        student_model.getStudent(respnse[1]);
+                    }
+
                 });
             });
         },
@@ -108,12 +163,22 @@ var StudentModelController = function() {
 
         },
 
+        checkfile: function(file) {
+            readURL(file);
+        },
+
 
         updateStudent: function(but_id) {
             getFormValues(but_id, function() {
                 let student = new Student(data);
                 sendAJAX("PUT", ApiUrl, student, function(respnse) {
-                    wasDone(respnse);
+                    if (respnse == true) {
+                        alert("your request was done sucssesfuly.");
+                        let student_model = new StudentModelController();
+                        student_model.GetAllStudents();
+                        student_model.getStudent(data.id);
+                    }
+
                 });
             });
         }
@@ -121,8 +186,8 @@ var StudentModelController = function() {
 
     }
 
-
 }
+
 
 
 
@@ -152,3 +217,16 @@ $(document).on('click', '#delete_student', function() {
     let student_model = new StudentModelController();
     student_model.deleteStudent($(this).data('deletestudent'));
 });
+
+
+$(document).on('change', '#browse', function(e) {
+    let student_model = new StudentModelController();
+    student_model.checkfile(this);
+
+});
+
+// $(document).on('change', '#browse', function() {
+//     let student_model = new StudentModelController();
+//     let file = $('#browse').prop('files')[0];
+//     student_model.checkfile(file);
+// });

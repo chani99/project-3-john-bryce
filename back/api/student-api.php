@@ -28,7 +28,7 @@
             $courses = new CourseController($params);
             $new_courses = $courses->addCuorses($corses_new_user, $new_id);            
             }
-            return true;
+            return [true, $new_id];
              
             
 

@@ -12,7 +12,7 @@
         });
     }
 
-    function sendFileToServer(data, calltype) {
+    function sendFileToServer(data, callback) {
         $.ajax({
             dataType: 'text', // what to expect back from the PHP script, if anything
             url: "back/api/fileAPI.php", // point to server-side PHP script 
@@ -21,6 +21,8 @@
             processData: false,
             data: data,
             type: 'POST',
-            success: function() {}
+            success: function(response_text) {
+                callback(JSON.parse(response_text));
+            }
         });
     }

@@ -23,6 +23,9 @@
   padding-left: 25px;
   margin-top: 10px;
 }
+#blah {
+  max-width: 300px;
+}
 h4 {
   text-align: left;
   font-weight: bold;
