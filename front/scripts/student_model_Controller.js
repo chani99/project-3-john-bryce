@@ -24,38 +24,108 @@ var StudentModelController = function() {
     function getFormValues(but_id, callback) {
         let image;
         let courses = [];
+        let values = [];
+
+
+        values.name = $('#inputname').val().trim();
+        values.phone = $('#inputphone').val().trim();
+        values.email = $('#inputemail').val().trim();
+
+        if (but_id == "new") {
+            values.image = $('#browse').prop('files')[0];
+        }
 
         if (but_id != "new") {
             data.id = but_id;
         }
-        data.name = $('#inputname').val();
-        data.phone = $('#inputphone').val();
-        data.email = $('#inputemail').val();
 
         $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
             courses.push($(this).attr("id"));
         });
         data.courses = courses;
 
-        image = $('#browse').prop('files')[0]; //send photo to server
-        if (image != undefined) {
-            sendFileToAjax(image, function(resulet) {
-                if (resulet) {
-                    data.image = image.name;
-                    callback();
+
+        sendForValidation(values, function(returned) {
+            if (returned.test_name == true && returned.text_phone == true && returned.text_email == true) {
+                if ("image" in values && returned.test_image == true) {
+                    sendFileToAjax(image, function(resulet) {
+                        if (resulet) {
+                            data.image = image.name;
+                            callback();
+                        } else {
+                            alert(resulet.text);
+                        }
+
+                    });
                 } else {
-                    alert(resulet.text);
+                    callback();
+
                 }
+            }
 
-            });
-        } else {
-            callback();
-
-        }
-
+        });
     }
 
 
+    function sendForValidation(values, callback) {
+        let validate = new validation();
+        let temp_val;
+        let test_name = false;
+        let test_phone = false;
+        let test_email = false;
+        let test_image = false;
+
+
+        // input validation
+        temp_val = validate.validat_input(values.name, "name");
+        if (temp_val == true) {
+            $("#name_error").html("");
+            data.name = values.name;
+            test_name = true;
+        } else {
+            $("#name_error").html(temp_val);
+            test_name = false;
+        }
+
+
+        temp_val = validate.validat_input(values.phone, "phone");
+        if (temp_val == true) {
+            $("#phone_error").html("");
+            data.phone = values.phone;
+            test_phone = true;
+
+        } else {
+            $("#phone_error").html(temp_val);
+            test_phone = false;
+        }
+
+        temp_val = validate.validat_input(values.email, "email");
+        if (temp_val == true) {
+            $("#email_error").html("");
+            data.email = values.email;
+            test_email = true;
+
+        } else {
+            $("#email_error").html(temp_val);
+            test_email = false;
+        }
+
+
+        if ("image" in values) { // true if "key" doesn't exist in object
+
+            temp_val = validate.validat_input(values.image, "image");
+            if (temp_val == true) {
+                $("#image_error").html("");
+                test_image = true;
+            } else {
+                $("#image_error").html(temp_val);
+                test_image = false;
+
+            }
+        }
+
+        callback({ test_name, test_phone, test_email, test_image });
+    }
 
     function wasDone(response_text) {
         if (response_text == true) {
@@ -89,9 +159,7 @@ var StudentModelController = function() {
             reader.readAsDataURL(input.files[0]);
         }
         // imagecanvas();
-
     }
-
 
 
     function sendFileToAjax(image, callback) {
@@ -101,12 +169,6 @@ var StudentModelController = function() {
             callback(respnse);
         });
     }
-
-
-
-
-
-
 
 
 
@@ -224,6 +286,7 @@ $(document).on('change', '#browse', function(e) {
     student_model.checkfile(this);
 
 });
+
 
 // $(document).on('change', '#browse', function() {
 //     let student_model = new StudentModelController();

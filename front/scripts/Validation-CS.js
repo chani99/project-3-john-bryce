@@ -1,7 +1,7 @@
 var validation = function() {
 
     function NotEmpty(input) {
-        if ((inputtxt == "") || (inputtxt == undefined)) {
+        if ((input == "") || (input == undefined)) {
             return "You must fill all input fields!";
         } else {
             return true;
@@ -21,7 +21,7 @@ var validation = function() {
 
     function matchPhonePattern(input) {
         let phoneno = /^\d{10}$/;
-        if (!input.value.match(phoneno)) {
+        if (!phoneno.test(parseInt(input))) {
             return "Tho phone number is invalid!";
         } else {
             return true;
@@ -31,7 +31,7 @@ var validation = function() {
 
     function matchEmailPattern(input) {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!input.value.match(mailformat)) {
+        if (!mailformat.test(input)) {
             return "Tho email is invalid!";
         } else {
             return true;
@@ -42,11 +42,13 @@ var validation = function() {
 
 
     return {
-        validat_input: function(type, input) {
+        validat_input: function(input, type) {
+            let empty;
+            let pattern;
             switch (type) {
                 case 'name':
-                    let empty = NotEmpty(input);
-                    let pattern = matchTextPattern(input);
+                    empty = NotEmpty(input);
+                    pattern = matchTextPattern(input);
                     if ((empty == true) && (pattern == true)) {
                         return true;
                     } else if (empty != true) {
@@ -57,8 +59,8 @@ var validation = function() {
                     break;
 
                 case 'phone':
-                    let empty = NotEmpty(input);
-                    let pattern = matchPhonePattern(input);
+                    empty = NotEmpty(input);
+                    pattern = matchPhonePattern(input);
                     if ((empty == true) && (pattern == true)) {
                         return true;
                     } else if (empty != true) {
@@ -69,8 +71,8 @@ var validation = function() {
                     break;
 
                 case 'email':
-                    let empty = NotEmpty(input);
-                    let pattern = matchEmailPattern(input);
+                    empty = NotEmpty(input);
+                    pattern = matchEmailPattern(input);
                     if ((empty == true) && (pattern == true)) {
                         return true;
                     } else if (empty != true) {
@@ -81,14 +83,10 @@ var validation = function() {
                     break;
 
                 case 'image':
-                    let empty = NotEmpty(input);
-                    let tolarge = checkSize(input);
-                    if ((empty == true) && (pattern == true)) {
+                    empty = NotEmpty(input);
+                    if (empty == true) {
                         return true;
-                    } else if (empty != true) {
                         return empty;
-                    } else {
-                        return pattern;
                     }
                     break;
 

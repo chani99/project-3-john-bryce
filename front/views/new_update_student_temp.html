@@ -9,15 +9,32 @@
             <h5 class="form-signin-heading">{{form_name}}</h5>
             <label for="inputname" class="">Student Name</label>
             <input type="name" id="inputname" class="form-control" placeholder="Student Name" required autofocus>
+            <span id="name_error" class="my_errors"></span>
+            <br>
+
+
             <label for="inputphone" class="">Phone</label>
             <input type="number" id="inputphone" min="10" max="10" class="form-control" placeholder="Student Phone" required autofocus>
+            <span id="phone_error" class="my_errors"></span>
+            <br>
+
+
             <label for="inputemail" class="">e-mail</label>
             <input type="email" id="inputemail" class="form-control" placeholder="Student e-mail" required autofocus>
+            <span id="email_error" class="my_errors"></span>
+            <br>
+
+
             <div class="padding_top">
 
                 <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
                 <!-- <input name="userImage" type="file" id="st_photo" class="inputFile" /> -->
                 <input id="browse" type="file" multiple>
+                <span id="image_error" class="my_errors"></span>
+                <br>
+
+
+
 
 
                 <div class="component">
