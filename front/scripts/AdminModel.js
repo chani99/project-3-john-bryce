@@ -1,4 +1,5 @@
     // Administrator module
+    "use strict";
 
 
     function Administator(data) {

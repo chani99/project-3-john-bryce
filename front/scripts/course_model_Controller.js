@@ -1,3 +1,4 @@
+"use strict";
 // course module
 function Course(data) {
     if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
@@ -26,6 +27,7 @@ var CourseModuleController = function() {
 
         values.name = $('#inputname').val().trim();
         values.description = $('#inputdetails').val().trim();
+        values.image = $('#st_photo').prop('files')[0];
 
         if (but_id != "new") {
             data.id = but_id;
@@ -33,9 +35,8 @@ var CourseModuleController = function() {
 
 
         //sends all input values for validation in if ok senbs them to sever...
-        sendForValidation(values, function(returned) {
-            if (returned.test_name == true && returned.test_description == true) {
-                values.image = $('#st_photo').prop('files')[0];
+        sendForValidation(values, but_id, function(returned) {
+            if (returned.test_name == true && returned.test_description == true && returned.test_image == true) {
                 if (values.image != undefined) { //check if a image was uploaded
                     sendFileToAjax(values.image, function(resulet) {
                         if (resulet) {
@@ -54,12 +55,12 @@ var CourseModuleController = function() {
     }
 
     // function sending data to validation
-    function sendForValidation(values, callback) {
+    function sendForValidation(values, but_id, callback) {
         let validate = new validation();
         let temp_val;
         let test_name = false;
         let test_description = false;
-        let test_image = false;
+        let test_image = true;
 
 
         // input validation
@@ -96,11 +97,11 @@ var CourseModuleController = function() {
                 test_image = true;
                 $('#st_photo').removeClass("error");
 
-            } else {
+            } else if (but_id == "new") {
                 $("#image_error").html(temp_val);
                 $('#st_photo').addClass("error")
-
                 test_image = false;
+
 
             }
         }
@@ -185,7 +186,7 @@ var CourseModuleController = function() {
             data.inner = true;
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(respnse) {
-                column3 = new column3_director();
+                let column3 = new column3_director();
                 column3.getinnerJoin(respnse);
 
             });
@@ -199,7 +200,7 @@ var CourseModuleController = function() {
                 if (respnse.constructor != Array) {
                     alert(respnse);
                 } else {
-                    column3 = new column3_director();
+                    let column3 = new column3_director();
                     column3.get_one_course(respnse);
                 }
             });

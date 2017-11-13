@@ -1,3 +1,5 @@
+"use strict";
+
 var main_screen = function() {
     // let column1ApiMethod = 'Student';
     // let ApiUrl = "back/api/api.php";

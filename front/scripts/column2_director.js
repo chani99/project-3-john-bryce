@@ -1,3 +1,5 @@
+"use strict";
+
 var column2_director = function() {
     // let column1ApiMethod = 'Student';
     // let ApiUrl = "back/api/api.php";
@@ -29,7 +31,7 @@ var column2_director = function() {
                     $('#Students').append(d);
 
 
-// add event to student details
+                    // add event to student details
                     // $(document).on('click', '#' + num, function() {
                     //     let student_model = new StudentModelController();
                     //     student_model.getStudent($(this).data('studentid'), $(this).attr('id'));

@@ -1,3 +1,5 @@
+"use strict";
+
 var column3_director = function() {
     var column3_data = {};
     var course_model = new CourseModuleController();

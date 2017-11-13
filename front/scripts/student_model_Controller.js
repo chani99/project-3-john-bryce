@@ -1,3 +1,5 @@
+"use strict";
+
 //student model
 function Student(data) {
     if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
@@ -29,6 +31,7 @@ var StudentModelController = function() {
         values.name = $('#inputname').val().trim();
         values.phone = $('#inputphone').val().trim();
         values.email = $('#inputemail').val().trim();
+        values.image = $('#browse').prop('files')[0];
 
         if (but_id != "new") { data.id = but_id; }
 
@@ -39,9 +42,8 @@ var StudentModelController = function() {
         data.courses = courses;
 
         //sends all input values for validation in if ok senbs them to sever...
-        sendForValidation(values, function(returned) {
-            if (returned.test_name == true && returned.test_phone == true && returned.test_email == true) {
-                values.image = $('#browse').prop('files')[0];
+        sendForValidation(values, but_id, function(returned) {
+            if (returned.test_name == true && returned.test_phone == true && returned.test_email == true && returned.test_image == true) {
                 if (values.image != undefined) {
                     sendFileToAjax(values.image, function(resulet) {
                         if (resulet) {
@@ -62,13 +64,13 @@ var StudentModelController = function() {
 
 
     // function sending data to validation
-    function sendForValidation(values, callback) {
+    function sendForValidation(values, but_id, callback) {
         let validate = new validation();
         let temp_val;
         let test_name = false;
         let test_phone = false;
         let test_email = false;
-        let test_image = false;
+        let test_image = true;
 
 
         // input validation
@@ -109,26 +111,23 @@ var StudentModelController = function() {
         } else {
             $("#email_error").html(temp_val);
             $('#inputemail').addClass("error")
-
             test_email = false;
         }
 
 
         if ("image" in values) {
-
             temp_val = validate.validat_input(values.image, "image");
             if (temp_val == true) {
                 $("#image_error").html("");
                 test_image = true;
                 $('#browse').removeClass("error");
 
-            } else {
+            } else if (but_id == "new") {
                 $("#image_error").html(temp_val);
                 $('#browse').addClass("error")
-
                 test_image = false;
-
             }
+
         }
 
         callback({ test_name, test_phone, test_email, test_image });
@@ -201,7 +200,7 @@ var StudentModelController = function() {
         GetAllStudents: function() {
             let student = new Student(data);
             let allStudents = sendAJAX("GET", ApiUrl, student, function(respnse) {
-                column2 = new column2_director();
+                let column2 = new column2_director();
                 column2.allstudends(respnse);
             });
         },
@@ -213,7 +212,7 @@ var StudentModelController = function() {
             let manu = 'get_one';
             let student = new Student(data);
             sendAJAX("GET", ApiUrl, student, function(respnse) {
-                column3 = new column3_director();
+                let column3 = new column3_director();
                 column3.get_one_student(respnse);
             });
 
@@ -269,7 +268,7 @@ $(document).on('click', '#singleStudent', function() {
 
 //add event to student edit
 $(document).on('click', '#editStudent', function() {
-    column3 = new column3_director();
+    let column3 = new column3_director();
     column3.Update_studentTemp("edit", $(this).data('editid'));
 });
 
