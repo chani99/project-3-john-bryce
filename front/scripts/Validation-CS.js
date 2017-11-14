@@ -92,6 +92,13 @@ var validation = function() {
                     }
                     break;
 
+                case 'password':
+                    empty = NotEmpty(input);
+                    if (empty == true) {
+                        return true;
+                        return empty;
+                    }
+                    break;
 
 
 

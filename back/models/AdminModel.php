@@ -16,7 +16,7 @@
             $this->tableRows = array("name", "role_id", "phone", "email", "password", "image");
             if (array_key_exists("id", $params)) $this->id = $params["id"];  
             if (array_key_exists("name", $params)) $this->name = $params["name"];
-            if (array_key_exists("role", $params)) $this->role_id = $params["role"];
+            if (array_key_exists("role_id", $params)) $this->role_id = $params["role_id"];
             if (array_key_exists("phone", $params)) $this->phone = $params["phone"];
             if (array_key_exists("email", $params)) $this->email = $params["email"];
             if (array_key_exists("password", $params)) $this->password = $params["password"];

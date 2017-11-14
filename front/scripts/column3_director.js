@@ -31,6 +31,28 @@ var column3_director = function() {
         });
     }
 
+    function temtAdminFunction(details, admin_id) {
+        $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
+            var c = updateTemplate;
+            c = c.replace("{{form_name}}", "Update Admin: " + details.name);
+            c = c.replace("{{new?}}", "update");
+            c = c.replace("{{A_id2}}", admin_id);
+            c = c.replace("{{deleteid}}", admin_id);
+
+            let d = document.createElement('div');
+            d.innerHTML = c;
+            $('#main_admin').html("");
+            $('#main_admin').append(d);
+            $("#inputphone").val(details.phone);
+            $("#inputemail").val(details.mail);
+            $("#inputname").val(details.name);
+            $("#inpurole").val(details.role);
+
+        });
+
+
+    }
+
 
     function NewStudenttemp() {
         $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
@@ -119,6 +141,16 @@ var column3_director = function() {
             callback();
         },
 
+        main_screen2: function(callback) {
+            $.ajax('front/views/main_screenAdmins.html').always(function(main_temp) {
+                var c = main_temp;
+                $('#main_admin').html("");
+                let d = document.createElement('div');
+                d.innerHTML = c;
+                $('#main_admin').append(d);
+            });
+            callback();
+        },
 
 
 
@@ -190,9 +222,8 @@ var column3_director = function() {
 
         },
 
-
         // founction to load the main student update/new window
-        Update_studentTemp: function(calltype, studen_id, data) {
+        Update_studentTemp: function(calltype, studen_id) { //data
 
             var details = {
                 name: $("#student_name").html(),
@@ -206,8 +237,22 @@ var column3_director = function() {
             });
 
             tempNameFunction(details, student_courses, studen_id, calltype);
-
         },
+
+
+        // founction to load the main student update/new window
+        UpdateAdmins: function(admin_id) {
+
+            var details = {
+                name: $("#admin_name" + admin_id).html().slice(0, -2),
+                phone: $("#admin_phone" + admin_id).html(),
+                mail: $("#admin_mail" + admin_id).html(),
+                role: $("#admin_role" + admin_id).html()
+            };
+
+            temtAdminFunction(details, admin_id);
+        },
+
 
 
         //  create cuorses checkbox list
@@ -245,10 +290,7 @@ var column3_director = function() {
                 $('#course-checkbox').append(checkbox);
                 $('#course-checkbox').append(label);
                 $('#course-checkbox').append(br);
-
             }
-
-
         },
 
         get_one_course: function(data) {
@@ -266,7 +308,6 @@ var column3_director = function() {
                 $('#main-scool').append(d);
 
                 student_model.GetStudentForCourse(data[0].id);
-
 
             });
 

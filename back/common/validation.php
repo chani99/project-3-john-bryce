@@ -34,11 +34,11 @@ class Validation {
                     }
                 }
                                     
-                if (array_key_exists('image', $params)){
-                    if($this->Notempty($params["image"]) != false){
-                        $errorList .= "no image was recived \n";
-                    }                  
-                }
+                // if (array_key_exists('image', $params)){
+                //     if($this->Notempty($params["image"]) != false){
+                //         $errorList .= "no image was recived \n";
+                //     }                  
+                // }
                                             
                 if (array_key_exists('phone', $params)){
                     if($this->validate_phone($params['phone']) !=false){

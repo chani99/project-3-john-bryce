@@ -7,8 +7,8 @@
         private $controller;
         
 
-        function __construct() {
-            $this->controller = new AdminController();
+        function __construct($params) {
+            $this->controller = new AdminController($params);
         }
 
 
@@ -27,7 +27,7 @@
             }
 
             else {
-                return $this->controller->getAll();
+                return $this->controller->getAllAdmins($params);
             }
         } 
 

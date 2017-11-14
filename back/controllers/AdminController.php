@@ -14,11 +14,11 @@
         private $classneame = "AdminController";
         
 
-        function __construct($param) {
+        function __construct($params) {
             $this->db = new BL();
             $this->validation = new validation;
-            if (array_key_exists("password", $params)) ($params["password"] = md5($params["password"]);
-            $this->model = new AdminModel($param);
+            if (array_key_exists("password", $params)) $params["password"] = md5($params["password"]);
+            $this->model = new AdminModel($params);
 
         }
 
@@ -63,7 +63,7 @@
         function getRoleByPassword($passwoed) {
 //password to do
                 return  $OneStudent;
-            }
+            
         }
 
 
@@ -128,7 +128,7 @@
         function UpdateById($param) {
                 if($this->model->getId() != false || $this->model->getId() != false){
                     //to do 
-                    "name", "role_id", "phone", "email", "password", "image"
+                    // "name", "role_id", "phone", "email", "password", "image"
                             if($this->model->getimage() != "" ) {
                                 $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";
                             }else{
