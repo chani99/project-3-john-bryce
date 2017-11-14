@@ -1,7 +1,7 @@
 <?php
     require_once 'abstract-api.php';
     require_once 'api.php';
-    // require_once '../controllers/AdminController.php';
+    require_once '../controllers/AdminController.php';
 
     class AdminApi extends Api{
         private $controller;
