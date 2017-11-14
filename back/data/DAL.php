@@ -96,4 +96,16 @@ function innerJoion($query) {
 
 }
 
+// SELECT course.id, course.name, course.image
+// FROM course
+// INNER JOIN student_course ON course.id = student_course.c_id
+// INNER JOIN student ON student.id = student_course.s_id
+// WHERE student.id = 5SELECT * FROM `course` WHERE 1
+
+// SELECT student.id, student.name, student.image
+// FROM student
+// INNER JOIN student_course ON student.id = student_course.s_id
+// INNER JOIN course ON course.id = student_course.c_id
+// WHERE course.id = 5
+
 

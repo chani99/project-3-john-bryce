@@ -9,6 +9,9 @@ function Student(data) {
     if ('email' in data && data.email != "") this.email = data.email;
     if ('image' in data && data.image != "") this.image = data.image;
     if ('courses' in data) this.courses = data.courses;
+    if ('inner' in data) this.inner = data.inner;
+
+
 
 }
 
@@ -219,6 +222,18 @@ var StudentModelController = function() {
 
         },
 
+        GetStudentForCourse: function(id) {
+            data.id = id;
+            data.inner = true;
+            let stedents = new Student(data);
+            sendAJAX("GET", ApiUrl, stedents, function(respnse) {
+                let column3 = new column3_director();
+                column3.getinnerJoinstudents(respnse);
+
+            });
+        },
+
+
 
         deleteStudent: function(but_id) {
             let safe = confirm("Are you sure you want to delete this student?");
@@ -293,6 +308,13 @@ $(document).on('change', '#browse', function(e) {
     student_model.checkfile(this);
 
 });
+
+// add event for + new student
+$('#add_new_student').click(function() {
+    let column3 = new column3_director();
+    column3.newStudentScreen();
+});
+
 
 
 // $(document).on('change', '#browse', function() {

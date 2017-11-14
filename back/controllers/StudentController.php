@@ -45,6 +45,30 @@
         }
         
 
+                // get the courses for a student by id
+                function getStudentsInnerJoin($param) {
+                    $innerJoinstudents = array();
+                    $selected_rows = "student.id, student.name, student.phone, student.image";
+                    $table2 = 'course';
+                    $table3 = 'student_course';
+                    $Column_equal_to = 'student.id = student_course.s_id';
+                    $Column_equal_to2 = 'course.id = student_course.c_id';
+                    $where = 'course.id = ' . $param["id"];
+                    $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
+                    for($i=0; $i<count($getall); $i++) {
+                        $c = new StudentModel($getall[$i]);
+                        array_push($innerJoinstudents, $c->jsonSerialize());
+                    }
+                    return $innerJoinstudents;   
+                }
+        
+                // SELECT student.id, student.name, student.image
+                // FROM student
+                // INNER JOIN student_course ON student.id = student_course.s_id
+                // INNER JOIN course ON course.id = student_course.c_id
+                // WHERE course.id = 5
+                
+
 
         function getById($id) {
             if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){

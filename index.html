@@ -44,12 +44,12 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">School
-                                <span class="sr-only">(current)</span>
+                                <a class="nav-link" id="nav_school">School
+                                <!-- <span class="sr-only">(current)</span> -->
                             </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Administration</a>
+                                <a class="nav-link" id="nav_Administration">Administration</a>
                             </li>
                         </ul>
                     </div>
@@ -83,7 +83,7 @@
 
 
     <!-- school empty containr to fill with a template -->
-    <section class="mainscreen gray">
+    <section id="screen1" class="mainscreen gray">
         <div class="container school-body">
             <div class="row">
                 <div class="col-md-3 order-3">
@@ -115,14 +115,22 @@
 
 
     <!-- administrator empty containr to fill with a template -->
-    <section>
+    <section id="screen2" class="mainscreen gray">
         <div class="container admin-body">
             <div class="row">
-                <div class="col-md-3 order-2">
+                <div class="col-md-4 order-4">
+                    <div class="flex-container">
+                        <h5 class="flex-item1">Administators List:</h5>
+                        <button class="flex-item2" id="add_new_administrator"><h3>+</h3></button>
+                    </div>
+                    <div id="Administratos"></div>
                 </div>
 
+            </div>
 
-                <div class="col-md-9 order-2">
+
+            <div class="col-md-8 order-2">
+                <div class="main-admin" id="main-admin">
                 </div>
             </div>
         </div>
@@ -142,16 +150,15 @@
     <!-- Bootstrap core JavaScript -->
     <script src="front/vendor/jquery/jquery.min.js"></script>
     <script src="front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <script src='front/scripts/onload.js'></script>
     <script src="front/scripts/main_director.js"></script>
     <script src="front/scripts/ajax.js"></script>
-    <!-- <script src="front/scripts/callback.js"></script> -->
     <script src='front/scripts/column1_director.js'></script>
     <script src='front/scripts/column2_director.js'></script>
     <script src='front/scripts/column3_director.js'></script>
     <script src='front/scripts/course_model_Controller.js'></script>
     <script src='front/scripts/student_model_Controller.js'></script>
+    <script src='front/scripts/admin_model_Controller.js'></script>
     <script src="front/scripts/Validation-CS.js"></script>
     <!-- <script src="front/scripts/component.js"></script> -->
 

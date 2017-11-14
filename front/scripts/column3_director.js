@@ -3,6 +3,7 @@
 var column3_director = function() {
     var column3_data = {};
     var course_model = new CourseModuleController();
+    var student_model = new StudentModelController();
     let column3;
 
 
@@ -90,8 +91,13 @@ var column3_director = function() {
             d.innerHTML = c;
             $('#main-scool').html("");
             $('#main-scool').append(d);
+
+            if (details.studentsSum > 0) { $('#deleteCourse').hide(); }
             $("#inputdetails").val(details.description);
             $("#inputname").val(details.name);
+            $("#totalstudents").html("Total students registered in " + details.name + " course is: " + details.studentsSum);
+
+
 
         });
     }
@@ -158,6 +164,30 @@ var column3_director = function() {
                 }
 
             });
+        },
+
+        getinnerJoinstudents: function(data) {
+
+            $.ajax('front/views/student_temp_for_list.html').always(function(courseTemplate) {
+                $('#studentlistforCourse').html("");
+
+
+                for (let i = 0; i < data.length; i++) {
+                    var c = courseTemplate;
+                    c = c.replace("{{singleStudent}}", "StudentinCourse" + i);
+                    c = c.replace("{{studentid}}", data[i].Student_id);
+                    c = c.replace("{{name}}", data[i].Student_name);
+                    c = c.replace("{{phone}}", data[i].Student_phone);
+                    c = c.replace("{{imgsrc}}", "back/images/" + data[i].Student_image);
+                    c = c.replace("{{sum}}", data.length);
+
+
+                    let d = document.createElement('div');
+                    d.innerHTML = c;
+                    $('#studentlistforCourse').append(d);
+                }
+            });
+
         },
 
 
@@ -235,15 +265,24 @@ var column3_director = function() {
                 d.innerHTML = c;
                 $('#main-scool').append(d);
 
+                student_model.GetStudentForCourse(data[0].id);
+
+
             });
 
         },
 
 
         UpdateCourses: function(course_id) {
+
+            $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
+                courses.push($(this).attr("id"));
+            });
+
             var details = {
                 name: $("#course_name").html(),
-                description: $("#course_details").html()
+                description: $("#course_details").html(),
+                studentsSum: $('[id^=StudentinCourse]').length
             };
 
             CouseUpdateTemp(details, course_id);

@@ -244,3 +244,9 @@ $(document).on('click', '#editCourse', function() {
     let column3_model = new column3_director();
     column3_model.UpdateCourses($(this).data("editid"));
 });
+
+// add event for + new course
+$('#add_new_course').click(function() {
+    let column3 = new column3_director();
+    column3.newCourseScreen();
+});
