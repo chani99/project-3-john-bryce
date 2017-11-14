@@ -31,17 +31,6 @@ $(document).ready(function() {
         });
     }
 
-    // add event for + new student
-    $('#add_new_student').click(function() {
-        let column3 = new column3_director();
-        column3.newStudentScreen();
-    });
-
-    // add event for + new course
-    $('#add_new_course').click(function() {
-        let column3 = new column3_director();
-        column3.newCourseScreen();
-    });
 
 
 });

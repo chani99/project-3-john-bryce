@@ -23,14 +23,18 @@ var main_screen = function() {
             });
 
         },
-        loadadminscreen: function() {
+
+        loadAdminscreen: function() {
 
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
                 let AdminController = new AdminModelController();
                 AdminController.GetAllAdmins();
-                $('#screen2').hide();
+                $('#screen1').hide();
+                $('#screen1').show();
+
+
             });
 
         }
@@ -48,4 +52,9 @@ var main_screen = function() {
 $('#nav_school').click(function() {
     let loadmain = new main_screen();
     loadmain.loadmaindcreen();
+});
+
+$('#nav_Administration').click(function() {
+    let loadmain = new main_screen();
+    loadmain.loadAdminscreen();
 });
