@@ -29,7 +29,7 @@ var main_screen = function() {
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
-                let AdminController = new AdminModelController();
+                let AdminController = new AdminModuleController();
                 AdminController.GetAllAdmins();
                 $('#screen1').hide();
                 $('#screen1').show();
@@ -54,7 +54,9 @@ $('#nav_school').click(function() {
     loadmain.loadmaindcreen();
 });
 
+
+// add event for nav bar school
 $('#nav_Administration').click(function() {
     let loadmain = new main_screen();
-    loadmain.loadAdminscreen();
+    loadmain.loadadminscreen();
 });
