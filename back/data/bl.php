@@ -30,7 +30,12 @@ private $DB;
     $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE id='$id'");
     return $res;
 }
+// SELECT * FROM `administratior` WHERE name = 'Hadar' AND password = '81dc9bdb52d04dc20036dbd8313ed055'
 
+function getUser($table_name,  $name, $password) {
+    $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE name ='$name'AND password ='$password'");
+    return $res;
+}
 
  // updates data in a table 
  function update_table($table_name, $id, $updateValues) {

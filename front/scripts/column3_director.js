@@ -46,7 +46,18 @@ var column3_director = function() {
             $("#inputphone").val(details.phone);
             $("#inputemail").val(details.mail);
             $("#inputname").val(details.name);
-            $("#inpurole").val(details.role);
+            switch (details.role) {
+                case "owner":
+                    $("select option[value=5]").attr("selected", "selected");
+                    break;
+                case "manager":
+                    $("select option[value=6]").attr("selected", "selected");
+                    break;
+                case "sales":
+                    $("select option[value=7]").attr("selected", "selected");
+                    break;
+            }
+
 
         });
 
@@ -71,6 +82,26 @@ var column3_director = function() {
             column3 = new column3_director();
             column3.AddCheckbox();
 
+
+        });
+
+    }
+
+
+    function NewAdmintemp() {
+        $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
+
+            var c = updateTemplate;
+            c = c.replace("{{form_name}}", "NEW ADMINISTRATOR");
+            c = c.replace("{{new?}}", "new");
+            c = c.replace("{{A_id2}}", "new");
+            c = c.replace("{{deleteid}}", '');
+
+            let d = document.createElement('div');
+            d.innerHTML = c;
+            $('#main_admin').html("");
+            $('#main_admin').append(d);
+            $('#delete_admin').hide();
 
         });
 
@@ -247,7 +278,7 @@ var column3_director = function() {
                 name: $("#admin_name" + admin_id).html().slice(0, -2),
                 phone: $("#admin_phone" + admin_id).html(),
                 mail: $("#admin_mail" + admin_id).html(),
-                role: $("#admin_role" + admin_id).html()
+                role: $("#admin_role" + admin_id).html().trim()
             };
 
             temtAdminFunction(details, admin_id);
@@ -331,24 +362,15 @@ var column3_director = function() {
 
 
         newCourseScreen: function() {
-            NewCoursetemp(function() {
-                $(document).on('click', '#savecoursenew', function() {
-                    let course_model = new CourseModuleController();
-                    course_model.createCourse($(this).attr("id"));
-                });
-            });
+            NewCoursetemp();
         },
 
-
         newStudentScreen: function() {
-            NewStudenttemp(function() {
-                $(document).on('click', '#saveStudnew', function() {
-                    let student_model = new StudentModelController();
-                    student_model.createStudent($(this).attr("id"));
-                });
-            });
+            NewStudenttemp();
 
-
+        },
+        newAdminScreen: function() {
+            NewAdmintemp();
         }
 
 

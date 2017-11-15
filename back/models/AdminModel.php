@@ -10,6 +10,8 @@
         private $role_id;
         private $password;
         private $image;
+        private $role;
+        
 
         function __construct($params) {
             $this->tableName ='course';
@@ -20,6 +22,8 @@
             if (array_key_exists("phone", $params)) $this->phone = $params["phone"];
             if (array_key_exists("email", $params)) $this->email = $params["email"];
             if (array_key_exists("password", $params)) $this->password = $params["password"];
+            if (array_key_exists("password", $params)) $this->password = $params["password"];
+            if (array_key_exists("role", $params)) $this->role = $params["role"];
             if (array_key_exists("image", $params)) $this->image = $params["image"];
 
          }
@@ -44,7 +48,7 @@
         public function getpassword(){
             return $this->password;
         }
-        public function getrole(){
+        public function getrole_id(){
             return $this->role_id;
         }
         public function getimage(){
@@ -60,8 +64,9 @@
                 "Admin_name" => $this->name,
                 "Admin_phone" => $this->phone,
                 "Admin_email" => $this->email,
-                "Admin_role" => $this->role_id,
+                "Admin_roleid" => $this->role_id,
                 "Admin_password" => $this->password,
+                "Admin_role" => $this->role,
                 "Admin_image" => $this->image
                 
             ];

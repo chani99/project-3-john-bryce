@@ -1,35 +1,34 @@
 "use strict";
 
 $(document).ready(function() {
-    $("#loginform").hide();
+
+    $.ajax('front/views/login_form_temp.html').always(function(loginTemplate) {
+        $('#screen2').hide();
+        $('#screen1').hide();
+        $('#navlist').hide();
+        var c = loginTemplate;
+        let d = document.createElement('div');
+        d.innerHTML = c;
+        $('#loginform').append(d);
+    });
+
+
+    // let loadmain = new main_screen();
+    // loadmain.loadmaindcreen();
 
 
 
-    let loadmain = new main_screen();
-    loadmain.loadmaindcreen();
+
+    // $("#loginform").hide();
 
 
 
 
 
 
-    // Temporary to treat later
-    let user = { name: "chani", role: "owner", image: "chani.jpg" };
-    login(user);
 
 
-    // move to navbar controler
-    function login(user) {
-        $.ajax('front/views/login_temp.html').always(function(logoutemp) {
-            var c = logoutemp;
-            c = c.replace("{{name}}", user.name);
-            c = c.replace("{{role}}", user.role);
-            c = c.replace("{{imgsrc}}", "back/images/" + user.image);
-            let d = document.createElement('div');
-            d.innerHTML = c;
-            $('#login').append(d);
-        });
-    }
+
 
 
 

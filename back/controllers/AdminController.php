@@ -8,7 +8,7 @@
 
     class AdminController extends Controller {
         private $db;
-        private $model;
+        // private $model;
         private $validation;        
         private $table_name = "administratior";
         private $classneame = "AdminController";
@@ -16,8 +16,8 @@
 
         function __construct($params) {
             $this->db = new BL();
-            $this->validation = new validation;
-            if (array_key_exists("password", $params)) $params["password"] = md5($params["password"]);
+            // $this->validation = new validation;
+            // if (array_key_exists("password", $params)) $params["password"] = md5($params["password"]);
             $this->model = new AdminModel($params);
 
         }
@@ -45,48 +45,46 @@
         
 
                 // get the courses for a student by id
-                function getRoleInnerJoin($param) {
-                            // to do
-                    return $innerJoinRole;   
-                }
+                // function getRoleInnerJoin($param) {
+                //             // to do
+                //     return $innerJoinRole;   
+                // }
         
                 
 
-        function getById($id) {
-            if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $OneAdmin =  $this->db->getLineById($this->table_name, $this->model->getId());
-                return  $OneStudent;
-            }
-        }
+        // function getById($id) {
+        //     if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
+        //         $OneAdmin =  $this->db->getLineById($this->table_name, $this->model->getId());
+        //         return  $OneStudent;
+        //     }
+        // }
 
 
-        function getRoleByPassword($passwoed) {
-//password to do
-                return  $OneStudent;
+//         function getRoleByPassword($passwoed) {
+// //password to do
+//                 return  $OneStudent;
             
-        }
+//         }
 
 
-        // Selects all from Courses table and returns a object array
-        function getAllAdmins(){
-            $getall = $this->db->SelectAllFromTable($this->table_name, $this->classneame);
+
+
+        // // Selects all from Courses table and returns a object array
+        function getAllAdmins() {
             $allAdmins = array();            
+            
+            $selected_tables = "administratior.id, administratior.name, administratior.phone, administratior.email, administratior.role_id, administratior.image, role.role";
+            $table2 = 'role';
+            $Column_equal_to = 'administratior.role_id = role.id';
+
+            $getall = $this->db->innerJoin($selected_tables, $this->table_name, $table2, $Column_equal_to);
             for($i=0; $i<count($getall); $i++) {
                 $c = new AdminModel($getall[$i]);
                 array_push($allAdmins, $c->jsonSerialize());
             }
             return $allAdmins;   
         }
-
-
-
-        // SELECT course.name, course.image
-        // FROM course
-        // INNER JOIN student_course ON course.id = student_course.c_id
-        // INNER JOIN student ON student.id = student_course.s_id
         
-
-        // Selects all from directors table and returns a object array
 
 
         
@@ -127,12 +125,10 @@
         // Updates a line in directos table
         function UpdateById($param) {
                 if($this->model->getId() != false || $this->model->getId() != false){
-                    //to do 
-                    // "name", "role_id", "phone", "email", "password", "image"
                             if($this->model->getimage() != "" ) {
-                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";
+                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
                             }else{
-                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "'";    
+                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', password = '" .$this->model->getpassword(). "', email = '" .$this->model->getemail(). "'";    
                             }
                     $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
                     return $this->checkIsWasGood($update);

@@ -41,7 +41,7 @@
             
         //  Delete 1 Admins   
          function Delete($params) {
-            $Admins = $this->controller->DeleteById($params);
+            $Admins = $this->controller->DeleteAdminById($params);
             return $Admins;
             
         }

@@ -6,7 +6,7 @@ function Admin(data) {
     if ('name' in data && data.name != "") this.name = data.name;
     if ('image' in data && data.image != undefined) this.image = data.image;
     if ('phone' in data && data.phone != "") this.phone = data.phone;
-    if ('role' in data && data.role != "") this.role = data.role;
+    if ('role' in data && data.role != "") this.role_id = data.role;
     if ('email' in data && data.email != "") this.email = data.email;
     if ('password' in data && data.password != "") this.password = data.password;
     if ('inner' in data && data.inner != "") this.inner = data.inner;
@@ -168,16 +168,14 @@ var AdminModuleController = function() {
     }
 
 
-    function wasDone(response_text) {
+    function wasDone(response_text, type) {
         if (response_text == true) {
-            alert("your request was done sucssesfuly.");
-            let loadmain = new main_screen;
-            loadmain.loadAdminscreen();
-
+            alert("this admin was " + type + " sucssesfuly.");
+            let mainscreen = new main_screen();
+            mainscreen.loadAdminscreen();
         } else {
-            alert(response_text);
+            alert(respnse);
         }
-
     }
 
 
@@ -187,9 +185,7 @@ var AdminModuleController = function() {
             getFormValues(but_id, function() {
                 let admin = new Admin(data);
                 sendAJAX("POST", AdminApiUrl, admin, function(respnse) {
-                    alert("this administrator was created sucssesfuly.");
-                    let mainscreen = new main_screen();
-                    mainscreen.loadAdminscreen();
+                    wasDone(respnse, 'created');
                 });
             });
 
@@ -199,13 +195,7 @@ var AdminModuleController = function() {
             getFormValues(but_id, function() {
                 let admin = new Admin(data);
                 sendAJAX("PUT", AdminApiUrl, admin, function(respnse) {
-                    if (respnse == true) {
-                        alert("this admin was updated sucssesfuly.");
-                        let mainscreen = new main_screen();
-                        mainscreen.loadAdminscreen();
-                    } else {
-                        alert(respnse);
-                    }
+                    wasDone(respnse, 'updated');
 
                 });
             });
@@ -218,7 +208,7 @@ var AdminModuleController = function() {
                 data.id = but_id;
                 let admin = new Admin(data);
                 sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
-                    wasDone(respnse);
+                    wasDone(respnse, 'deleted');
                 });
             }
         },
@@ -276,9 +266,9 @@ $(document).on('click', '#saveAdmin2', function() {
 
 
 //  add event to delete admin
-$(document).on('click', '#deleteAdmin', function() {
+$(document).on('click', '#delete_admin', function() {
     let admin_model = new AdminModuleController();
-    admin_model.deleteAdmin($(this).data("adminid"));
+    admin_model.deleteAdmin($(this).data("deleteadmin"));
 });
 
 
@@ -288,8 +278,8 @@ $(document).on('click', '#editAdmin', function() {
     column3_model.UpdateAdmins($(this).data("editid"));
 });
 
-// add event for + new course
-$('#add_new_admin').click(function() {
+// add event for + new admin
+$('#add_new_administrator').click(function() {
     let column3 = new column3_director();
     column3.newAdminScreen();
 });

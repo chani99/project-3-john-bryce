@@ -1,5 +1,16 @@
     "use static";
 
+    function sendLoginAjax(user, callback) {
+        $.ajax({
+            type: 'GET',
+            url: "back/api/loginAPI.php",
+            data: { activitiesArray: user },
+            success: function(response_text) {
+                callback(JSON.parse(response_text));
+            }
+        });
+    }
+
     function sendAJAX(method, url, data, callback) {
         $.ajax({
             type: method,

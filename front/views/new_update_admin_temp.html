@@ -1,11 +1,12 @@
 <section>
-    <div class="container">
-        <button class=" btn btn-danger btn-xs" id="delete_admin" data-deleteAdmin="{{deleteid}}">Delete Admin</button>
-    </div>
+
 
     <!-- <div class="container"> -->
     <div class=" hoverable">
-        <div class="form-signin">
+        <div class="form-group">
+            <div class="container">
+                <button class=" btn btn-danger btn-xs" id="delete_admin" data-deleteadmin="{{deleteid}}">Delete Admin</button>
+            </div>
             <h5 class="form-signin-heading">{{form_name}}</h5>
 
             <label for="inputname" class="">Administrator Name</label>
@@ -14,8 +15,16 @@
             <br>
 
             <label for="inpurole" class="">Administrator role</label>
-            <input type="name" id="inpurole" class="form-control" placeholder="Administrator role" required autofocus>
+            <select name="role" id="inpurole" class="form-control"> 
+                <option disabled selected value> -- select an option -- </option>
+                <option value="5" >Owner</option>
+                <option value="6" >Maneger</option>
+                <option value="7">Sales</option>
+              </select>
             <span id="role_error" class="my_errors"></span>
+
+
+            <!-- <input type="text"  class="form-control" placeholder="Administrator role" required autofocus> -->
             <br>
 
             <label for="inputpassword" class="">Administrator Passwoed</label>
@@ -40,7 +49,7 @@
 
                 <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
                 <!-- <input name="userImage" type="file" id="st_photo" class="inputFile" /> -->
-                <input id="browse" type="file" multiple>
+                <input id="browse" type="file" class="form-control-file" multiple>
                 <span id="image_error" class="my_errors"></span>
                 <br>
 
