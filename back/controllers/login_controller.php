@@ -3,16 +3,20 @@
 require_once '../models/User.php';
 require_once '../data/bl.php';
 require_once '../common/validation.php';
+require_once '../common/PasswordHandler.php';
+
 
 
 class LoginController {
 
     private $controller;
+    private $db;
     
 
-    // function __construct($params) {
-    //     $this->controller = new AdminController($params);
-    // }
+    function __construct() {
+        $this->db = new BL();
+        
+    }
 
 
     public function checkuser($name, $password) {
@@ -34,7 +38,7 @@ class LoginController {
     
     function getUserByNameAndPassword($name, $password) {
             $OneAdmin =  $this->db->getUser('administratior', $name, $password);
-            return  $OneStudent;
+            return  $OneAdmin;
         }
     
 }

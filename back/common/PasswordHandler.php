@@ -1,5 +1,5 @@
 <?php
-    namespace Common;
+    // namespace Common;
 
     class PasswordHandler {
         private $salt;
@@ -9,6 +9,7 @@
             $this->salt = "myApp##";
         }
         public function getHash($plainPassword) {
-            return MD5($this->salt.$plainPassword);
+            $newPW = MD5($this->salt . $plainPassword);
+            return $newPW;
         }
     }

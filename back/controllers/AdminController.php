@@ -3,6 +3,7 @@
     require_once '../models/AdminModel.php';
     require_once '../data/bl.php';
     require_once '../common/validation.php';
+    require_once '../common/PasswordHandler.php';
     
     
 
@@ -16,9 +17,11 @@
 
         function __construct($params) {
             $this->db = new BL();
-            // $this->validation = new validation;
-            // if (array_key_exists("password", $params)) $params["password"] = md5($params["password"]);
-            $this->model = new AdminModel($params);
+            $this->validation = new validation;
+            if (array_key_exists("password", $params)){
+                $pw = new PasswordHandler();
+                $params["password"] = $pw->getHash($params["password"]);
+                $this->model = new AdminModel($params);
 
         }
 

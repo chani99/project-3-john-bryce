@@ -12,14 +12,14 @@
         $name = $loginParams['user'];
         $pass = $loginParams['password'];
         $login = new LoginController();
-        $CheckUser = $login->checkuser($name, $password);
+        $CheckUser = $login->checkuser($name, $pass);
         if($CheckUser == false) {
             echo "user name or password are not correct.";
             $_SESSION['loggedin'] = false;
             
         }else{
             $_SESSION['loggedin'] = true;
-            echo $login->doLogin('kobe', '123');
+            echo $CheckUser;
 
         }
         

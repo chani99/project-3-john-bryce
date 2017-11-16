@@ -12,10 +12,10 @@
  
         function __construct($dataArray) 
         {
-            $this->userId = $dataArray['id'];
-            $this->userName = $dataArray['name'];
-            $this->userPassword = $dataArray['password'];
-            $this->permission = $dataArray['role_id'];
+            $this->userId = $dataArray[0]['id'];
+            $this->userName = $dataArray[0]['name'];
+            $this->userPassword = $dataArray[0]['password'];
+            $this->permission = $dataArray[0]['role_id'];
         }
 
         public function getUsername() {
