@@ -42,7 +42,7 @@
 
 
          // Get all Studentss or check if a id exists
-        function Read($params) {
+        function Read($params, $mypermission) {
 
             if (array_key_exists("id", $params)) {
 

@@ -1,9 +1,9 @@
 <?php
      require_once '../controllers/login_controller.php';
+     require_once '../common/sessionstart.php';
      
-     session_start();
-
-    $loginParams = $_REQUEST['activitiesArray'];
+    
+    $loginParams = $_REQUEST['Loginarray'];
 
 
     if (!isset($loginParams['user']) || !isset($loginParams['password'])) {
@@ -19,7 +19,8 @@
             
         }else{
             $_SESSION['loggedin'] = true;
-            echo $CheckUser;
+            $_SESSION['role'] = $CheckUser->getpermission();
+            echo json_encode($CheckUser);
 
         }
         

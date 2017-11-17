@@ -8,8 +8,8 @@ var main_screen = function() {
     function login(user) {
         $.ajax('front/views/login_temp.html').always(function(logoutemp) {
             var c = logoutemp;
-            c = c.replace("{{name}}", user.name);
-            c = c.replace("{{role}}", user.role);
+            c = c.replace("{{name}}", user.userName);
+            c = c.replace("{{role}}", user.permission);
             c = c.replace("{{imgsrc}}", "back/images/" + user.image);
             let d = document.createElement('div');
             d.innerHTML = c;
@@ -18,12 +18,8 @@ var main_screen = function() {
     }
 
     function permission(response) {
-        switch (response.role) {
-            case '6':
-                $('#nav_Administration').hide();
-                break;
-
-
+        if (response.permission == 'sales') {
+            $('#nav_Administration').hide();
         }
     }
 
@@ -35,26 +31,32 @@ var main_screen = function() {
             };
             sendLoginAjax(user, function(response) {
                 if (response.status == true) {
+                    $('#loginform').hide();
                     login(response);
                     permission(response);
+                    $('#screen1').show();
+                    $('#navlist').show();
+
+                    let main = new main_screen();
+                    main.loadmaindcreen(response.permission);
+
                 } else {
-                    $('#login_error').html(response.messege);
+                    $('#login_error').html();
                 }
 
             });
         },
 
-        loadmaindcreen: function() {
+        loadmaindcreen: function(respons) {
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
-                let courseController = new CourseModuleController();
-                let studentController = new StudentModelController();
-
-                courseController.GetAllCourse();
-                studentController.GetAllStudents();
                 $('#screen2').hide();
                 $('#screen1').show();
+                let courseController = new CourseModuleController();
+                let studentController = new StudentModelController();
+                courseController.GetAllCourse();
+                studentController.GetAllStudents();
 
             });
 

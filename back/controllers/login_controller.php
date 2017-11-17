@@ -25,10 +25,8 @@ class LoginController {
         $User = $this->getUserByNameAndPassword($name, $HashPassword);
         if (count($User) == 1){
             $usr = new User($User);
-        $_SESSION['user'] = $usr;
-        $_SESSION['user']->getUsername();
 
-    return json_encode($usr, JSON_PRETTY_PRINT);     
+    return $usr;     
         } else {
             return false;
         }

@@ -30,7 +30,7 @@
         
         
                  // Get all results or check if a id exists
-                function Read($params) {
+                function Read($params, $mypermission) {
                                 if (array_key_exists("id", $params)) {
 
                                         if (array_key_exists("inner", $params)) {

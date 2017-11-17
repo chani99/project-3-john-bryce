@@ -4,7 +4,7 @@
         $.ajax({
             type: 'GET',
             url: "back/api/loginAPI.php",
-            data: { activitiesArray: user },
+            data: { Loginarray: user },
             success: function(response_text) {
                 callback(JSON.parse(response_text));
             }

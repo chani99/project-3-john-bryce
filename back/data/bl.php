@@ -80,6 +80,12 @@ function innerJoin($selected_tables, $table1, $table2, $Column_equal_to) {
 
 }
 
+function innerJoinExcept($selected_tables, $table1, $table2, $Column_equal_to, $condition) {
+    $innerJion = $this->DB->innerJoion("SELECT ". $selected_tables." FROM ". $table1 ." INNER JOIN " .$table2." ON ". $Column_equal_to ." WHERE ". $condition);
+    return $innerJion;
+
+}
+
 // inner join 3 tables
 function innerJoin3table($selected_rows, $table1, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where) {
     $innerJion3 = $this->DB->innerJoion("SELECT ". $selected_rows." FROM ". $table1 ." INNER JOIN " .$table3." ON ". $Column_equal_to ." INNER JOIN " .$table2." ON ". $Column_equal_to2. " WHERE ". $where);

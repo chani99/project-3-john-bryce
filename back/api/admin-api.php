@@ -19,7 +19,7 @@
         
 
          // Get all Adminss or check if a id exists
-        function Read($params) {
+        function Read($params, $mypermission) {
 
             if (array_key_exists("id", $params)) {
                 $Admins = $c->getById($params);
@@ -27,7 +27,19 @@
             }
 
             else {
-                return $this->controller->getAllAdmins($params);
+                switch ($mypermission){
+                case 'owner':
+                    return $this->controller->getAllAdmins($params);
+                break;
+                
+                case 'manager':
+                    return $this->controller->getAdminsExceptOwner($params);
+                break;
+                
+                case 'sales':
+                return 'No permission!';
+                break;
+                }
             }
         } 
 

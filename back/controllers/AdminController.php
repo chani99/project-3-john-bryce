@@ -22,8 +22,10 @@
                 $pw = new PasswordHandler();
                 $params["password"] = $pw->getHash($params["password"]);
                 $this->model = new AdminModel($params);
+            }
 
         }
+
 
         // Creates a new line in a table
         function CreateAdmins($param) {
@@ -34,40 +36,6 @@
        
         }
 
-
-        // Updates a line in directos table
-        // function ReturnSelect() {
-        //     $List =  $this->db->SelectAllFromTable($this->table_name, $this->classneame);
-        //     $CourseSelect="<option value='Select a Course'>Select a Course</option>";
-        //         for ($i = 0; $i < count($List); $i++) {
-        //         $CourseSelect .= "<option value=" . $List[$i]["id"] . ">" . $List[$i]["name"] . "</option>";
-        //         }
-        
-        //     return $CourseSelect; 
-        // }
-        
-
-                // get the courses for a student by id
-                // function getRoleInnerJoin($param) {
-                //             // to do
-                //     return $innerJoinRole;   
-                // }
-        
-                
-
-        // function getById($id) {
-        //     if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-        //         $OneAdmin =  $this->db->getLineById($this->table_name, $this->model->getId());
-        //         return  $OneStudent;
-        //     }
-        // }
-
-
-//         function getRoleByPassword($passwoed) {
-// //password to do
-//                 return  $OneStudent;
-            
-//         }
 
 
 
@@ -89,7 +57,22 @@
         }
         
 
+        function getAdminsExceptOwner() {
+            $allAdmins = array();            
+            
+            $selected_tables = "administratior.id, administratior.name, administratior.phone, administratior.email, administratior.role_id, administratior.image, role.role";
+            $table2 = 'role';
+            $Column_equal_to = 'administratior.role_id = role.id';
+            $condition = ' administratior.role_id != 5';
 
+            $getall = $this->db->innerJoinExcept($selected_tables, $this->table_name, $table2, $Column_equal_to, $condition);
+            for($i=0; $i<count($getall); $i++) {
+                $c = new AdminModel($getall[$i]);
+                array_push($allAdmins, $c->jsonSerialize());
+            }
+            return $allAdmins;   
+        }
+        
         
 
 
@@ -127,12 +110,28 @@
 
         // Updates a line in directos table
         function UpdateById($param) {
-                if($this->model->getId() != false || $this->model->getId() != false){
-                            if($this->model->getimage() != "" ) {
-                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
-                            }else{
-                                $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', password = '" .$this->model->getpassword(). "', email = '" .$this->model->getemail(). "'";    
-                            }
+        if($this->model->getId() != false || $this->model->getId() != false){
+
+                    $updateValues ="";
+                  if($this->model->getname() != "" ){$updateValues .= "name = '" .$this->model->getName();}                  
+                    if($this->model->getphone() != "" ){$updateValues .= "', phone = '" .$this->model->getphone();}
+                    if($this->model->getemail() != ""){$updateValues .=  "', email = '" .$this->model->getemail();}
+                    if($this->model->getimage() != ""){$updateValues .= "', image = '". $this->model->getimage();}
+                    if($this->model->getpassword() != ""){$updateValues .= "', password = '". $this->model->getpassword();}
+                    if($this->model->getrole_id() != ""){$updateValues .= "', role_id = '". $this->model->getrole_id();}
+                    $updateValues .="'";
+                    // switch ($permission) {
+                    //     case 'owner':
+                            // if($this->model->getimage() != "" ) {
+                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
+                                
+                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
+                            // }else{
+                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', password = '" .$this->model->getpassword(). "', email = '" .$this->model->getemail(). "'";    
+                            // }
+                        //     break;
+                        //     case 'manager'
+                        // }
                     $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
                     return $this->checkIsWasGood($update);
                 }else{

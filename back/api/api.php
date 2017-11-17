@@ -2,6 +2,7 @@
     require_once 'course-api.php';
     require_once 'student-api.php';
     require_once 'admin-api.php';
+    require_once '../common/sessionstart.php';
     require_once '../common/validation.php';
     
     
@@ -15,6 +16,11 @@
     else{
     $params = $_REQUEST['activitiesArray'];
     }
+
+    // check if logged in
+    if ( $_SESSION['loggedin'] == true) {
+        $mypermission = $_SESSION['role'];
+        
 
     //basic input validation
     $validation = new validation;
@@ -36,15 +42,17 @@
 
                 case 'Admin':
                 $capi = new AdminApi($params);
-                $result = $capi->gateway($method, $params);
+                $result = $capi->gateway($method, $params, $mypermission);
                 echo json_encode($result);
                 break;
         }
 
     }else{
         echo json_encode($validate_result);
-        
     }
+} else {
+    echo "please login";
+}
     
 
 ?>
