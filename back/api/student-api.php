@@ -63,7 +63,7 @@
 
 
         // Update a Students
-        function Update($params) {
+        function Update($params, $mypermission) {
             if (!array_key_exists("courses", $params)) {
                 $params['courses'] = [];
             }          
@@ -77,7 +77,7 @@
 
             
         //  Delete 1 Students   
-         function Delete($params) {
+         function Delete($param, $mypermission) {
             $courses = new CourseController($params);
             $Stu_old_courses = $courses->getCoursesInnerJoin($params);
             $deleteCourses = $courses->RemoveCourses($Stu_old_courses, $params["id"]);

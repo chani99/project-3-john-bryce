@@ -36,7 +36,7 @@
 
                 case 'Student':
                 $capi = new StudentApi($params);
-                $result = $capi->gateway($method, $params);
+                $result = $capi->gateway($method, $params, $mypermission);
                 echo json_encode($result);
                 break;
 

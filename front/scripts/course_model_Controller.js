@@ -171,13 +171,13 @@ var CourseModuleController = function() {
         },
 
 
-        GetAllCourse: function() {
+        GetAllCourse: function(permission) {
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
                 let column1 = new column1_director();
-                column1.allcourses(returned_data);
-
+                column1.allcourses(returned_data, permission);
             });
+
         },
 
 
@@ -193,7 +193,7 @@ var CourseModuleController = function() {
         },
 
 
-        getOneCourse: function(id) {
+        getOneCourse: function(id, permission) {
             data.id = id;
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(respnse) {
@@ -201,7 +201,7 @@ var CourseModuleController = function() {
                     alert(respnse);
                 } else {
                     let column3 = new column3_director();
-                    column3.get_one_course(respnse);
+                    column3.get_one_course(respnse, permission);
                 }
             });
         }
@@ -215,7 +215,7 @@ var CourseModuleController = function() {
 // add event to get course details
 $(document).on('click', '#singleCourse', function() {
     let course_model = new CourseModuleController();
-    course_model.getOneCourse($(this).data('courseid'));
+    course_model.getOneCourse($(this).data('courseid'), $(this).data('permission'));
 });
 
 

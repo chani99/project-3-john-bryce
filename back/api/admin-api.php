@@ -29,11 +29,12 @@
             else {
                 switch ($mypermission){
                 case 'owner':
-                    return $this->controller->getAllAdmins($params);
+                    return [$this->controller->getAdminsExceptOwner($params), $mypermission];
+                     
                 break;
                 
                 case 'manager':
-                    return $this->controller->getAdminsExceptOwner($params);
+                    return [$this->controller->getAdminsExceptOwner($params), $mypermission];
                 break;
                 
                 case 'sales':
@@ -45,15 +46,15 @@
 
 
         // Update a Admins
-        function Update($params) {
-            $Admins =$this->controller->UpdateById($params);
+        function Update($params, $mypermission) {
+            $Admins =$this->controller->UpdateById($params, $mypermission);
             return $Admins;
             }
 
             
         //  Delete 1 Admins   
-         function Delete($params) {
-            $Admins = $this->controller->DeleteAdminById($params);
+         function Delete($param, $mypermission) {
+            $Admins = $this->controller->DeleteAdminById($param, $mypermission);
             return $Admins;
             
         }

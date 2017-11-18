@@ -36,6 +36,9 @@ var main_screen = function() {
                     permission(response);
                     $('#screen1').show();
                     $('#navlist').show();
+                    if (response.permission == 'sales') {
+                        $('#nav_Administration, #add_new_course').hide();
+                    }
 
                     let main = new main_screen();
                     main.loadmaindcreen(response.permission);
@@ -47,16 +50,17 @@ var main_screen = function() {
             });
         },
 
-        loadmaindcreen: function(respons) {
+        loadmaindcreen: function(permission) {
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
                 $('#screen2').hide();
                 $('#screen1').show();
                 let courseController = new CourseModuleController();
+                courseController.GetAllCourse(permission);
                 let studentController = new StudentModelController();
-                courseController.GetAllCourse();
                 studentController.GetAllStudents();
+
 
             });
 

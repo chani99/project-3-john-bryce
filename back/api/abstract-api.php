@@ -2,8 +2,8 @@
     abstract class Api {
         abstract function Create($params);
         abstract function Read($params, $mypermission);
-        abstract function Update($params);
-        abstract function Delete($params);
+        abstract function Update($params, $mypermission);
+        abstract function Delete($params, $mypermission);
 
 
 
@@ -16,9 +16,9 @@
                         case "GET":
                             return  $this->Read($params, $mypermission);
                         case "PUT":
-                            return $this->Update($params);
+                            return $this->Update($params, $mypermission);
                         case "DELETE":
-                            return $this->Delete($params);
+                            return $this->Delete($params, $mypermission);
                     }
         
         }

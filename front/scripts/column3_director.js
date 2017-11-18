@@ -31,7 +31,7 @@ var column3_director = function() {
         });
     }
 
-    function temtAdminFunction(details, admin_id) {
+    function temtAdminFunction(details, admin_id, permission) {
         $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update Admin: " + details.name);
@@ -56,6 +56,11 @@ var column3_director = function() {
                 case "sales":
                     $("select option[value=7]").attr("selected", "selected");
                     break;
+            }
+
+            if (permission == "manager") {
+                $("#inpurole").attr("disabled", "true");
+                $('#delete_admin').hide();
             }
 
 
@@ -272,7 +277,7 @@ var column3_director = function() {
 
 
         // founction to load the main student update/new window
-        UpdateAdmins: function(admin_id) {
+        UpdateAdmins: function(admin_id, permission) {
 
             var details = {
                 name: $("#admin_name" + admin_id).html().slice(0, -2),
@@ -281,7 +286,7 @@ var column3_director = function() {
                 role: $("#admin_role" + admin_id).html().trim()
             };
 
-            temtAdminFunction(details, admin_id);
+            temtAdminFunction(details, admin_id, permission);
         },
 
 
@@ -324,7 +329,7 @@ var column3_director = function() {
             }
         },
 
-        get_one_course: function(data) {
+        get_one_course: function(data, permission) {
 
             $.ajax('front/views/course_details_temp.html').always(function(course_temp) {
                 $('#main-scool').html("");
@@ -337,6 +342,9 @@ var column3_director = function() {
                 let d = document.createElement('div');
                 d.innerHTML = c;
                 $('#main-scool').append(d);
+                if (permission == "sales") {
+                    $("#editCourse").hide();
+                }
 
                 student_model.GetStudentForCourse(data[0].id);
 

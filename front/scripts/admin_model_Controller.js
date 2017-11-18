@@ -247,7 +247,7 @@ var AdminModuleController = function() {
 // add event to get admin update window
 $(document).on('click', '#singleAdmin', function() {
     let column3_model = new column3_director();
-    column3_model.UpdateAdmins($(this).data("adminid"));
+    column3_model.UpdateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
 
 

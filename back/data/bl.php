@@ -27,7 +27,7 @@ private $DB;
 
     // 
  function getLineById($table_name, $id) {
-    $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE id='$id'");
+    $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE id=$id");
     return $res;
 }
 // SELECT * FROM `administratior` WHERE name = 'Hadar' AND password = '81dc9bdb52d04dc20036dbd8313ed055'

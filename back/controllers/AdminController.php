@@ -9,7 +9,7 @@
 
     class AdminController extends Controller {
         private $db;
-        // private $model;
+        private $model;
         private $validation;        
         private $table_name = "administratior";
         private $classneame = "AdminController";
@@ -21,9 +21,9 @@
             if (array_key_exists("password", $params)){
                 $pw = new PasswordHandler();
                 $params["password"] = $pw->getHash($params["password"]);
-                $this->model = new AdminModel($params);
             }
-
+            $this->model = new AdminModel($params);
+            
         }
 
 
@@ -77,10 +77,10 @@
 
 
         // Checks if a id exists
-         function getAdminById($param){
+         function getAdminById(){
                 if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $check =  $this->db->Check_if_id_exists($this->table_name, $c->getId());
-                return $this->checkIsWasGood($check);
+                $admin =  $this->db->getLineById($this->table_name, $this->model->getId());
+                return $admin;
                 }else{
                     return false;
                 }
@@ -91,8 +91,17 @@
 
 
         // Deletes a line from Courses table
-        function DeleteAdminById($param) {
-                if($this->model->getId() != false){
+        function DeleteAdminById($param, $mypermission) {
+                if($this->model->getId() != false && $mypermission != 'sales'){
+                    if($mypermission == 'manager'){
+                        $oldrole = $this->getAdminById();
+                        if ($oldrole[0]['role_id'] != 7) {
+                            return 'No permission';
+                        } else {
+                            $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
+                            return $this->checkIsWasGood($deleted);
+                        }
+                    }
                 $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
                 }else{
@@ -102,6 +111,8 @@
     
         }
 
+
+
         function selectLastId() {
             $new_id = $this->db->selectlastRow($this->table_name);
             return $new_id;
@@ -109,39 +120,47 @@
 
 
         // Updates a line in directos table
-        function UpdateById($param) {
-        if($this->model->getId() != false || $this->model->getId() != false){
-
-                    $updateValues ="";
-                  if($this->model->getname() != "" ){$updateValues .= "name = '" .$this->model->getName();}                  
-                    if($this->model->getphone() != "" ){$updateValues .= "', phone = '" .$this->model->getphone();}
-                    if($this->model->getemail() != ""){$updateValues .=  "', email = '" .$this->model->getemail();}
-                    if($this->model->getimage() != ""){$updateValues .= "', image = '". $this->model->getimage();}
-                    if($this->model->getpassword() != ""){$updateValues .= "', password = '". $this->model->getpassword();}
-                    if($this->model->getrole_id() != ""){$updateValues .= "', role_id = '". $this->model->getrole_id();}
-                    $updateValues .="'";
-                    // switch ($permission) {
-                    //     case 'owner':
-                            // if($this->model->getimage() != "" ) {
-                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
-                                
-                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', password = '" .$this->model->getpassword(). "', image = '". $this->model->getimage()."'";
-                            // }else{
-                            //     $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', password = '" .$this->model->getpassword(). "', email = '" .$this->model->getemail(). "'";    
-                            // }
-                        //     break;
-                        //     case 'manager'
-                        // }
-                    $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
-                    return $this->checkIsWasGood($update);
-                }else{
-                    return false;
+        function UpdateById($param, $mypermission){ 
+            if($this->model->getId() != false || $this->model->getId() != false){
+                if($mypermission != 'sales'){
+                        if($mypermission == 'manager'){
+                                $oldrole = $this->getAdminById();
+                                if ($oldrole[0]['role_id'] == 5) {
+                                    return 'No permission';
+                                } else {
+                                     return $this->sendUpdate($mypermission);
+                                }
+                        } else {
+                         return $this->sendUpdate($mypermission);
+                        }
+                } else {
+                return 'No permission';
                 }
+                
+            } else {
+                return 'Missing Values';
+            }
+
+        
         }
 
         
+        function sendUpdate($mypermission){
+            $updateValues ="";
+            if($this->model->getname() != "" ){$updateValues .= ", name = '" .$this->model->getName();}                  
+            if($this->model->getphone() != "" ){$updateValues .= "', phone = '" .$this->model->getphone();}
+            if($this->model->getemail() != ""){$updateValues .=  "', email = '" .$this->model->getemail();}
+            if($this->model->getimage() != ""){$updateValues .= "', image = '". $this->model->getimage();}
+            if($this->model->getpassword() != ""){$updateValues .= "', password = '". $this->model->getpassword();}
+            if($mypermission == 'owner'){
+                if($this->model->getrole_id() != ""){$updateValues .= "', role_id = '". $this->model->getrole_id();}
+            }
+            $updateValues .="'";
+            $updateValues = substr($updateValues, 2);
+            $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
 
-
+            return $this->checkIsWasGood($update);
+        }
 
 
 

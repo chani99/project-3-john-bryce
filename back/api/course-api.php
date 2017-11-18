@@ -48,7 +48,7 @@
         
         
                 // Update a result
-                function Update($params) {
+                function Update($params, $mypermission){
                             $result =$this->controller->UpdateById($params);
                             return $result;
             
@@ -56,7 +56,7 @@
         
                     
                 //  Delete 1 result   
-                 function Delete($params) {
+                 function Delete($param, $mypermission) {
                             $result = $this->controller->DeleteCourseById($params);
                             return $result;
                 }
