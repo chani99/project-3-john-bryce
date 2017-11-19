@@ -77,7 +77,7 @@
 
             
         //  Delete 1 Students   
-         function Delete($param, $mypermission) {
+         function Delete($params, $mypermission) {
             $courses = new CourseController($params);
             $Stu_old_courses = $courses->getCoursesInnerJoin($params);
             $deleteCourses = $courses->RemoveCourses($Stu_old_courses, $params["id"]);

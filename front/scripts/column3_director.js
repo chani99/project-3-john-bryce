@@ -107,9 +107,9 @@ var column3_director = function() {
             $('#main_admin').append(d);
             $('#delete_admin').hide();
 
-            if (permission == "manager") {
-                $("select option[value=5]").attr("disabled", "true");
-            }
+            // if (permission == "manager") {
+            $("select option[value=5]").attr("disabled", "true");
+            // }
 
 
         });

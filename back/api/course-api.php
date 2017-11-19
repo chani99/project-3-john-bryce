@@ -65,7 +65,7 @@
         
                     
                 //  Delete 1 result   
-                 function Delete($param, $mypermission) {
+                 function Delete($params, $mypermission) {
                             $result = $this->controller->DeleteCourseById($params);
                             return $result;
                 }

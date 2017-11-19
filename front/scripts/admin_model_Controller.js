@@ -174,7 +174,7 @@ var AdminModuleController = function() {
             let mainscreen = new main_screen();
             mainscreen.loadAdminscreen();
         } else {
-            alert(respnse);
+            alert(response_text);
         }
     }
 

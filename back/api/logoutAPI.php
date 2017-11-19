@@ -18,6 +18,6 @@ if (ini_get("session.use_cookies")) {
 
 // Finally, destroy the session.
 session_destroy();
-echo "you were loged out";
+echo json_encode("you were loged out");
 
 

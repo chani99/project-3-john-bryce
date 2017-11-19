@@ -23,15 +23,12 @@
         });
     }
 
-    function sendlogoutAJAX(method, url) {
+    function sendlogoutAJAX(method, url, callback) {
         $.ajax({
             type: method,
             url: url,
-            success: function(response_text) {
-                let main = new main_screen();
-                main.login_screen();
-                alert(JSON.parse(response_text));
-
+            success: function() {
+                callback();
             }
 
         });

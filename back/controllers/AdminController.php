@@ -29,10 +29,20 @@
 
         // Creates a new line in a table
         function CreateAdmins($param) {
-            $rows = $this->model->getRows();
-            $sql_data = $this->CreateRow($rows, $this->model);
-            $update = $this->db->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
-            return $this->checkIsWasGood($update);
+            if($this->model->getrole_id() != 5) {
+                    $checkIfexists = $this->getAdminByNameAndPhone();
+                    if (count($checkIfexists) > 0){
+                        return 'This user already exists on the system';
+                    } else {
+                        
+                    $rows = $this->model->getRows();
+                    $sql_data = $this->CreateRow($rows, $this->model);
+                    $update = $this->db->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
+                    return $this->checkIsWasGood($update);
+                    }
+            } else {
+                return "Unable to add owner";
+            }
        
         }
 
@@ -74,6 +84,12 @@
         }
         
         
+        // Checks if a already have this name and phone
+        function getAdminByNameAndPhone(){
+            $admin =  $this->db->getUserbyNameandPhone($this->table_name, $this->model->getName(), $this->model->getphone());
+            return $admin;
+        }
+
 
 
         // Checks if a id exists

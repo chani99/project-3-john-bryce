@@ -29,7 +29,7 @@
             else {
                 switch ($mypermission){
                 case 'owner':
-                    return [$this->controller->getAdminsExceptOwner($params), $mypermission];
+                    return [$this->controller->getAllAdmins($params), $mypermission];
                      
                 break;
                 

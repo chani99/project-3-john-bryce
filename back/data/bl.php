@@ -30,6 +30,8 @@ private $DB;
     $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE id=$id");
     return $res;
 }
+
+
 // SELECT * FROM `administratior` WHERE name = 'Hadar' AND password = '81dc9bdb52d04dc20036dbd8313ed055'
 
 function getUser($table_name,  $name, $password) {
@@ -37,6 +39,10 @@ function getUser($table_name,  $name, $password) {
     return $res;
 }
 
+function getUserbyNameandPhone($table_name,  $name, $phnoe) {
+    $res =  $this->DB->getLineById("SELECT * FROM ".$table_name." WHERE name ='$name'AND phone ='$phnoe'");
+    return $res;
+}
  // updates data in a table 
  function update_table($table_name, $id, $updateValues) {
         $update = $this->DB->updateSQL("UPDATE ".$table_name." SET ".$updateValues." WHERE id='$id'");

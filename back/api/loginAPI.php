@@ -14,7 +14,7 @@
         $login = new LoginController();
         $CheckUser = $login->checkuser($name, $pass);
         if($CheckUser == false) {
-            echo "user name or password are not correct.";
+            echo json_encode("Username or password is incorrect.");
             $_SESSION['loggedin'] = false;
             
         }else{

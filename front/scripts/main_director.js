@@ -46,11 +46,11 @@ var main_screen = function() {
             };
             sendLoginAjax(user, function(response) {
                 if (response.status == true) {
+                    $('#login_error').html("");
                     $('#loginform').hide();
                     login(response);
                     permission(response);
-                    $('#screen1').show();
-                    $('#navlist').show();
+                    $('#screen1, #navlist').show();
                     if (response.permission == 'sales') {
                         $('#nav_Administration, #add_new_course').hide();
                     }
@@ -59,14 +59,18 @@ var main_screen = function() {
                     main.loadmaindcreen(response.permission);
 
                 } else {
-                    $('#login_error').html();
+                    $('#login_error').html(response);
                 }
 
             });
         },
 
         logout: function() {
-            sendlogoutAJAX('logout', "back/api/logoutAPI.php");
+            sendlogoutAJAX('logout', "back/api/logoutAPI.php", function() {
+                $('#screen2, #screen1, #navlist').hide();
+                $('#loginform').show();
+                $('#login').html("");
+            });
         },
 
         loadmaindcreen: function(permission) {
