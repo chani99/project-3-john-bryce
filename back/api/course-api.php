@@ -13,11 +13,16 @@
 
 
                 // Create a new result
-                function Create($params) {
+                function Create($params, $mypermission) {
+                    if($mypermission != 'sales'){                        
                     $insert = $this->controller->CreateNewRow($params);
                     $get_new_row =  $this->controller->selectLastId();
                     $new_id = $get_new_row[0]['id'];
                     return [$insert, $new_id];
+                     } else {
+                        return 'No permission';                        
+                        
+                    }
         
                 }
                 
@@ -49,8 +54,12 @@
         
                 // Update a result
                 function Update($params, $mypermission){
+                    if($mypermission != 'sales'){
                             $result =$this->controller->UpdateById($params);
                             return $result;
+                    } else{
+                        return 'No permission';                        
+                    }
             
                 }
         

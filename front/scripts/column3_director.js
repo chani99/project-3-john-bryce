@@ -63,7 +63,6 @@ var column3_director = function() {
                 $('#delete_admin').hide();
             }
 
-
         });
 
 
@@ -93,7 +92,7 @@ var column3_director = function() {
     }
 
 
-    function NewAdmintemp() {
+    function NewAdmintemp(permission) {
         $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
 
             var c = updateTemplate;
@@ -107,6 +106,11 @@ var column3_director = function() {
             $('#main_admin').html("");
             $('#main_admin').append(d);
             $('#delete_admin').hide();
+
+            if (permission == "manager") {
+                $("select option[value=5]").attr("disabled", "true");
+            }
+
 
         });
 
@@ -377,8 +381,8 @@ var column3_director = function() {
             NewStudenttemp();
 
         },
-        newAdminScreen: function() {
-            NewAdmintemp();
+        newAdminScreen: function(permission) {
+            NewAdmintemp(permission);
         }
 
 

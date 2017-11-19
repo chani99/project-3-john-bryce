@@ -24,6 +24,21 @@ var main_screen = function() {
     }
 
     return {
+
+        login_screen: function() {
+
+            $.ajax('front/views/login_form_temp.html').always(function(loginTemplate) {
+                $('#screen2').hide();
+                $('#screen1').hide();
+                $('#navlist').hide();
+                var c = loginTemplate;
+                let d = document.createElement('div');
+                d.innerHTML = c;
+                $('#loginform').append(d);
+            });
+
+        },
+
         handleLogin: function() {
             let user = {
                 "user": $("#loginame").val(),
@@ -50,10 +65,15 @@ var main_screen = function() {
             });
         },
 
+        logout: function() {
+            sendlogoutAJAX('logout', "back/api/logoutAPI.php");
+        },
+
         loadmaindcreen: function(permission) {
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
+                $("#add_new_administrator").data("permission", permission);
                 $('#screen2').hide();
                 $('#screen1').show();
                 let courseController = new CourseModuleController();
@@ -67,7 +87,6 @@ var main_screen = function() {
         },
 
         loadAdminscreen: function() {
-
             //get cuorse list & student list
             let column33 = new column3_director();
             $('#screen1').hide();
@@ -76,11 +95,7 @@ var main_screen = function() {
             column33.main_screen2(function() {
                 let AdminController = new AdminModuleController();
                 AdminController.GetAllAdmins();
-
-
-
             });
-
         }
 
 
@@ -111,8 +126,8 @@ $(document).on('click', '#submitlogin', function() {
     login.handleLogin();
 });
 
-
-// Temporary to treat later
-
-
-// move to navbar controler
+// add event for logout
+$(document).on('click', '#logout', function() {
+    let loadmain = new main_screen();
+    loadmain.logout();
+});

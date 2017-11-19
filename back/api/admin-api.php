@@ -13,7 +13,7 @@
 
 
         // Create a new Admins
-        function Create($params) {
+        function Create($params, $mypermission) {
             return $this->controller->CreateAdmins($params);
         }
         

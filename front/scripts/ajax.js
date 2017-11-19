@@ -23,6 +23,21 @@
         });
     }
 
+    function sendlogoutAJAX(method, url) {
+        $.ajax({
+            type: method,
+            url: url,
+            success: function(response_text) {
+                let main = new main_screen();
+                main.login_screen();
+                alert(JSON.parse(response_text));
+
+            }
+
+        });
+    }
+
+
     function sendFileToServer(data, callback) {
         $.ajax({
             dataType: 'text', // what to expect back from the PHP script, if anything

@@ -19,7 +19,7 @@
 
 
         // Create a new Students
-        function Create($params) {
+        function Create($params, $mypermission) {
             $this->controller->CreateStudents($params);
             $get_new_row =  $this->controller->selectLastId();
             $new_id = $get_new_row[0]['id'];

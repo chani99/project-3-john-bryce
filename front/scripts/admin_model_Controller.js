@@ -281,5 +281,5 @@ $(document).on('click', '#editAdmin', function() {
 // add event for + new admin
 $('#add_new_administrator').click(function() {
     let column3 = new column3_director();
-    column3.newAdminScreen();
+    column3.newAdminScreen($(this).data("permission"));
 });
