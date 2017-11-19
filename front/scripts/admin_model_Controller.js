@@ -152,7 +152,7 @@ var AdminModuleController = function() {
             test_password = false;
         }
 
-        callback({ test_name, test_role, test_phone, test_email, test_image, test_password });
+        callback({ test_name: test_name, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
     }
 
 

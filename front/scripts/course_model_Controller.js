@@ -106,7 +106,7 @@ var CourseModuleController = function() {
             }
         }
 
-        callback({ test_name, test_description, test_image });
+        callback({ test_name: test_name, test_description: test_description, test_image: test_image });
     }
 
     function sendFileToAjax(image, callback) {

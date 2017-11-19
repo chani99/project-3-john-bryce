@@ -133,7 +133,7 @@ var StudentModelController = function() {
 
         }
 
-        callback({ test_name, test_phone, test_email, test_image });
+        callback({ test_name: test_name, test_phone: test_phone, test_email: test_email, test_image: test_email });
     }
 
     function wasDone(response_text) {
