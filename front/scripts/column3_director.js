@@ -296,7 +296,10 @@ var column3_director = function() {
 
 
         //  create cuorses checkbox list
-        AddCheckbox: function(student_courses = false) {
+        AddCheckbox: function(student_courses) {
+			if (!student_courses)
+				student_courses = false;
+			
             var CoursesArray = []; //gets all courses list from DOM
             $(".allCourses span h6").each(function(i, sp) {
                 CoursesArray.push($(sp).attr("id"));
