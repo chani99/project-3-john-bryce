@@ -21,7 +21,7 @@ var column2_director = function() {
                     c = c.replace("{{studentid}}", data[i].Student_id);
                     c = c.replace("{{name}}", data[i].Student_name);
                     c = c.replace("{{phone}}", data[i].Student_phone);
-                    c = c.replace("{{imgsrc}}", "back/images/" + data[i].Student_image);
+                    c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Student_image);
 
                     let d = document.createElement('div');
                     d.innerHTML = c;

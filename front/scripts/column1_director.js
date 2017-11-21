@@ -19,7 +19,7 @@ var column1_director = function() {
                     c = c.replace("{{singleCourse}}", 'singleCourse');
                     c = c.replace("{{name}}", data[i].Course_name);
                     c = c.replace("{{descrip}}", data[i].Course_name);
-                    c = c.replace("{{imgsrc}}", "back/images/" + data[i].Course_image);
+                    c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Course_image);
                     c = c.replace("{{course_id}}", data[i].Course_name);
                     c = c.replace("{{permission}}", permission);
 
@@ -42,7 +42,7 @@ var column1_director = function() {
                     c = c.replace("{{singleAdmin}}", 'singleAdmin');
                     c = c.replace("{{name}}", data[0][i].Admin_name);
                     c = c.replace("{{role}}", data[0][i].Admin_role);
-                    c = c.replace("{{imgsrc}}", "back/images/" + data[0][i].Admin_image);
+                    c = c.replace("{{imgsrc}}", "back/uploads/" + data[0][i].Admin_image);
                     c = c.replace("{{email}}", data[0][i].Admin_email);
                     c = c.replace("{{phone}}", data[0][i].Admin_phone);
                     c = c.replace("{{adnum}}", data[0][i].Admin_id);

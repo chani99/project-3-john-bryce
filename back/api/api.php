@@ -30,7 +30,7 @@
         switch ($params['ctrl']) {
             case 'Course':
                 $capi = new CourseApi($params);
-                $result  = $capi->gateway($method, $params, "CourseController");
+                $result  = $capi->gateway($method, $params, $mypermission); //
                 echo json_encode($result);
                 break;
 
