@@ -311,6 +311,7 @@ $(document).on('change', '#browse', function(e) {
 
 // add event for + new student
 $('#add_new_student').click(function() {
+    document.location.href = "http://localhost/chani/school/project-3-john-bryce/new-student/";
     let column3 = new column3_director();
     column3.newStudentScreen();
 });

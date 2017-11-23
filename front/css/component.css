@@ -110,6 +110,11 @@
     margin-top: -2px;
 }
 
+.modal-body {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
 .btn-crop {
     position: absolute;
     vertical-align: bottom;
