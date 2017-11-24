@@ -157,6 +157,7 @@
                     array_push($remove_courses, $old_course[$i]['Course_id']);
                 }
             }
+            
                 //check what courses to add
             for ($z = 0; $z < count($new_courses); $z++) {
                 $temp = 0;
@@ -195,13 +196,7 @@
         function RemoveCourses($remove_courses, $id){
                 for ($c = 0; $c < count($remove_courses); $c++) {
                     $courses;
-                    if (array_key_exists("Course_id", $remove_courses[$c])) {
-                        $courses = $remove_courses[$c]['Course_id'];  
-                    } 
-                    else{
-                        $courses = $remove_courses[$c];
-                    }
-                    
+                    $courses = $remove_courses[$c];
                     $param = [
                         "id" => $id,
                         "courses" => $courses

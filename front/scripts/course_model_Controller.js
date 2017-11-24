@@ -53,6 +53,17 @@ var CourseModuleController = function() {
 
         });
     }
+    //change the url of the image and show it on screen
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     // function sending data to validation
     function sendForValidation(values, but_id, callback) {
@@ -193,6 +204,11 @@ var CourseModuleController = function() {
         },
 
 
+        checkfile: function(file) {
+            readURL(file);
+        },
+
+
         getOneCourse: function(id, permission) {
             data.id = id;
             let course = new Course(data);
@@ -249,4 +265,10 @@ $(document).on('click', '#editCourse', function() {
 $('#add_new_course').click(function() {
     let column3 = new column3_director();
     column3.newCourseScreen();
+});
+
+$(document).on('change', '#st_photo', function(e) {
+    let student_model = new StudentModelController();
+    student_model.checkfile(this);
+
 });

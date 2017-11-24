@@ -18,7 +18,7 @@ var column1_director = function() {
                     c = c.replace("{{courseid}}", data[i].Course_id);
                     c = c.replace("{{singleCourse}}", 'singleCourse');
                     c = c.replace("{{name}}", data[i].Course_name);
-                    c = c.replace("{{descrip}}", data[i].Course_name);
+                    c = c.replace("{{descrip}}", "");
                     c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Course_image);
                     c = c.replace("{{course_id}}", data[i].Course_name);
                     c = c.replace("{{permission}}", permission);
@@ -33,7 +33,7 @@ var column1_director = function() {
 
         allAdmins: function(data) {
             $('#Administratos').html("");
-            $('#Asum').html(data.length);
+            $('#Asum').html(data[0].length);
             $.ajax('front/views/admin_temp.html').always(function(courseTemplate) {
                 for (let i = 0; i < data[0].length; i++) {
                     var c = courseTemplate;

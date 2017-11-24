@@ -27,18 +27,36 @@ var AdminModuleController = function() {
     function getFormValues(but_id, callback) {
         let image;
         let values = [];
+        let GetLohalStotage = localStorage.getItem("permission");
+        let my_role = JSON.parse(GetLohalStotage);
+
 
         values.name = $('#inputname').val().trim();
         values.phone = $('#inputphone').val().trim();
         values.email = $('#inputemail').val().trim();
         values.role = $('#inpurole').val().trim();
-        values.image = $('#browse').prop('files')[0];
-        values.password = $('#inputpassword').val().trim();
+        values.image = $('#browse_a').prop('files')[0];
 
+
+
+
+        //checks if admin is alowd to handle the passwod
+        if (but_id == "new") {
+            values.password = $('#inputpassword').val().trim();
+        }
 
         if (but_id != "new") {
             data.id = but_id;
+
+            if (my_role == "owner" && $('#inputpassword').val().trim() != "") {
+                values.password = $('#inputpassword').val().trim();
+
+            } else if (my_role == "manager" && values.role == '7' && $('#inputpassword').val().trim() != "") {
+                values.password = $('#inputpassword').val().trim();
+            }
+
         }
+
 
 
         //sends all input values for validation in if ok senbs them to sever...
@@ -70,7 +88,7 @@ var AdminModuleController = function() {
         let test_phone = false;
         let test_role = false;
         let test_image = true;
-        let test_password = false;
+        let test_password = true;
 
 
         // input validation
@@ -140,16 +158,18 @@ var AdminModuleController = function() {
             }
         }
 
-        temp_val = validate.validat_input(values.password, "password");
-        if (temp_val == true) {
-            $("#password_error").html("");
-            data.password = values.password;
-            test_password = true;
-            $('#inputpassword').removeClass("error");
-        } else {
-            $("#password_error").html(temp_val);
-            $('#inputpassword').addClass("error");
-            test_password = false;
+        if ("password" in values) {
+            temp_val = validate.validat_input(values.password, "password");
+            if (temp_val == true) {
+                $("#password_error").html("");
+                data.password = values.password;
+                test_password = true;
+                $('#inputpassword').removeClass("error");
+            } else {
+                $("#password_error").html(temp_val);
+                $('#inputpassword').addClass("error");
+                test_password = false;
+            }
         }
 
         callback({ test_name: test_name, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
@@ -175,6 +195,18 @@ var AdminModuleController = function() {
             mainscreen.loadAdminscreen();
         } else {
             alert(response_text);
+        }
+    }
+
+    //change the url of the image and show it on screen
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
@@ -223,6 +255,9 @@ var AdminModuleController = function() {
             });
         },
 
+        checkfile: function(file) {
+            readURL(file);
+        },
 
 
         getOneAdmin: function(id) {
@@ -282,4 +317,11 @@ $(document).on('click', '#editAdmin', function() {
 $('#add_new_administrator').click(function() {
     let column3 = new column3_director();
     column3.newAdminScreen($(this).data("permission"));
+});
+
+// add event for show image
+$(document).on('change', '#browse_a', function(e) {
+    let student_model = new StudentModelController();
+    student_model.checkfile(this);
+
 });

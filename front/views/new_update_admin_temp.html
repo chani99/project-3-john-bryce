@@ -23,14 +23,13 @@
               </select>
             <span id="role_error" class="my_errors"></span>
 
-
-            <!-- <input type="text"  class="form-control" placeholder="Administrator role" required autofocus> -->
             <br>
-
-            <label for="inputpassword" class="">Administrator Passwoed</label>
-            <input type="password" id="inputpassword" pattern=".{6,10}" class="form-control" placeholder="Password" required autofocus>
-            <span id="password_error" class="my_errors"></span>
-            <br>
+            <div id="passwordhide">
+                <label for="inputpassword" class="">Administrator Passwoed</label>
+                <input type="password" id="inputpassword" pattern=".{6,10}" class="form-control" placeholder="Password" required autofocus>
+                <span id="password_error" class="my_errors"></span>
+                <br>
+            </div>
 
             <label for="inputphone" class="">Administrator Phone</label>
             <input type="number" id="inputphone" min="10" max="10" class="form-control" placeholder="Administrator Phone" required autofocus>
@@ -48,8 +47,7 @@
             <div class="padding_top">
 
                 <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
-                <!-- <input name="userImage" type="file" id="st_photo" class="inputFile" /> -->
-                <input id="browse" type="file" class="form-control-file" multiple>
+                <input id="browse_a" type="file" class="form-control-file" multiple>
                 <span id="image_error" class="my_errors"></span>
                 <br>
 
@@ -58,8 +56,7 @@
                         <div class="overlay-inner">
                         </div>
                     </div>
-                    <img class="resize-image" id="blah" src="#" alt="image for resizing">
-                    <button class="btn-crop js-crop">Crop<img class="icon-crop" src="img/crop.svg"></button>
+                    <img class="resize-image" id="blah" src="#" alt="Your image">
                 </div>
 
 

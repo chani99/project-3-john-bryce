@@ -54,6 +54,9 @@ var main_screen = function() {
                     if (response.permission == 'sales') {
                         $('#nav_Administration, #add_new_course').hide();
                     }
+                    var permission_for_storage = JSON.stringify(response.permission);
+                    localStorage.setItem("permission", permission_for_storage);
+
 
                     let main = new main_screen();
                     main.loadmaindcreen(response.permission);
