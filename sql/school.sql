@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2017 at 02:48 PM
+-- Generation Time: Nov 26, 2017 at 12:33 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -43,11 +43,11 @@ CREATE TABLE `administratior` (
 --
 
 INSERT INTO `administratior` (`id`, `name`, `role_id`, `phone`, `email`, `password`, `image`) VALUES
-(1, 'Chani', 5, '0548450396', 'chani@gmail.com', '9f8680503b91fb5761db44dc59e427fe', '4592907.jpg'),
-(2, 'Hadar', 6, '0548452232', 'HADARrr@gmail.com', '9182aec90726a67591800cbe93dd7625', 'tumblr_mcgomeYDxU1rjyxofo1_500.jpg'),
-(5, 'Noa', 7, '025802232', 'noa@noacutie.com', '9f8680503b91fb5761db44dc59e427fe', 'lg_542165.jpg'),
-(8, 'Aoo', 6, '025857251', 'fdsfdfsd@gmail.com', '9f8680503b91fb5761db44dc59e427fe', 'מדבקות לשוקולד נסיון-01.jpg'),
-(13, 'Shlomi', 6, '0548450396', 'ffsdsfd@gmail.com', '9f8680503b91fb5761db44dc59e427fe', 'ayala.jpg');
+(1, 'Chani', 5, '0548450396', 'chani@gmail.com', '9f8680503b91fb5761db44dc59e427fe', '1511640409.jpg'),
+(2, 'Hadar', 6, '0548452232', 'HADARrr@gmail.com', '9f8680503b91fb5761db44dc59e427fe', '1511638838.jpg'),
+(5, 'Noa', 7, '025802232', 'noa@noacutie.com', '9f8680503b91fb5761db44dc59e427fe', '1511638853.jpg'),
+(13, 'Shlomi', 6, '0548450396', 'ffsdsfd@gmail.com', '9f8680503b91fb5761db44dc59e427fe', '1511638878.jpg'),
+(14, 'Shevi', 6, '0548450396', 'Shevi@gmail.com', '9f8680503b91fb5761db44dc59e427fe', '1511641039.jpg');
 
 -- --------------------------------------------------------
 
@@ -67,11 +67,11 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `description`, `image`) VALUES
-(4, 'illusetrator', 'illustrator is the culmination of the Graphic Ds into a single projectfor.\nvery good fsfdsfdsfd', 'ilustrator.jpg'),
-(5, 'Photoshop cs6  ', 'This course is the culmination of the Graphic Ds into a single projectfor.\nplease work', 'photoshop.jpg'),
-(6, 'Javascript 22', 'Learn the same technologies that enable Netflix and Airbnb to create powerful interactive web apps in the 8-week Build Front-End Apps program.', 'javascript.jpg'),
-(8, 'HTML5', 'html2', 'html5.png'),
-(11, 'Apple', 'Apple pen', 'knowledge_graph_logo.png');
+(4, 'illusetrator', 'illustrator is the culmination of the Graphic Ds into a single projectfor.', '1511640680.jpg'),
+(5, 'Photoshop cs6', 'This course is the culmination of the Graphic Ds into a single projectfor.\nplease work', '1511640693.jpg'),
+(6, 'Javascript', 'Learn the same technologies that enable Netflix and Airbnb to create powerful interactive web apps in the 8-week Build Front-End Apps program.', '1511637449.png'),
+(8, 'HTML5', 'html2', '1511636437.png'),
+(11, 'Apple', 'Apple pen222', '1511636465.png');
 
 -- --------------------------------------------------------
 
@@ -112,13 +112,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `phone`, `email`, `image`) VALUES
-(3, 'Shevi Avrahami', '0548456656', 'shevi@gmail.com', 'shevi.jpg'),
-(5, 'Noa', '0548452232', 'noa@gmail.com', '1225143f28df59a88275ed75b15a0f13 (1).jpg'),
-(8, 'Beni', '0586565654', 'beni@gmail.com', 'beni.jpg'),
-(29, 'chani', '0454545425', 'FDfddf@gmail.com', 'shevi.jpg'),
-(31, 'Ayala', '0548452232', 'ayala@gmail.com', 'ayala.jpg'),
-(33, 'hadar', '0548452232', 'hadar@gmail.com', 'AdobeStock_93686143_WM.jpeg'),
-(34, 'Mazal', '0544473371', 'mazal@gmail.com', 'floral-yasmine02.jpg');
+(3, 'Shevi Avrahami', '0548456656', 'shevi@gmail.com', '1511637308.jpg'),
+(5, 'Noa', '0548452232', 'noa@gmail.com', '1511637318.jpg'),
+(8, 'Beni', '0586565654', 'beni@gmail.com', '1511637328.jpg'),
+(31, 'Ayala', '0548452232', 'ayala@gmail.com', '1511637340.jpg'),
+(33, 'hadar', '0548452232', 'hadar@gmail.com', '1511636555.jpg'),
+(34, 'Mazal', '0544473371', 'mazal@gmail.com', '1511637382.jpg');
 
 -- --------------------------------------------------------
 
@@ -136,18 +135,16 @@ CREATE TABLE `student_course` (
 --
 
 INSERT INTO `student_course` (`s_id`, `c_id`) VALUES
-(3, 4),
 (3, 5),
 (3, 6),
-(5, 4),
 (5, 5),
-(5, 6),
-(8, 6),
-(8, 8),
-(29, 4),
-(31, 4),
-(31, 5),
-(33, 8),
+(5, 8),
+(5, 11),
+(8, 4),
+(8, 5),
+(31, 8),
+(31, 11),
+(34, 4),
 (34, 5);
 
 --
@@ -198,7 +195,7 @@ ALTER TABLE `student_course`
 -- AUTO_INCREMENT for table `administratior`
 --
 ALTER TABLE `administratior`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `course`
 --
@@ -213,7 +210,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- Constraints for dumped tables
 --
