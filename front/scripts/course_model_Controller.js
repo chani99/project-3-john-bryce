@@ -35,15 +35,19 @@ var CourseModuleController = function() {
 
 
         //sends all input values for validation in if ok senbs them to sever...
-        sendForValidation(values, but_id, function(returned) {
+        let sendForCheck = new sendValidation();
+        sendForCheck.sendForValidation(values, but_id, "courses", function(returned) {
             if (returned.test_name == true && returned.test_description == true && returned.test_image == true) {
+                data.name = values.name;
+                data.description = values.description;
+
                 if (values.image != undefined) { //check if a image was uploaded
                     sendFileToAjax(values.image, function(resulet) {
-                        if (resulet) {
-                            data.image = values.image.name;
+                        if (resulet[0]) {
+                            data.image = resulet[1];
                             callback();
                         } else {
-                            alert(resulet.text);
+                            alert(resulet);
                         }
                     });
                 } else {
@@ -65,60 +69,6 @@ var CourseModuleController = function() {
         }
     }
 
-    // function sending data to validation
-    function sendForValidation(values, but_id, callback) {
-        let validate = new validation();
-        let temp_val;
-        let test_name = false;
-        let test_description = false;
-        let test_image = true;
-
-
-        // input validation
-        temp_val = validate.validat_input(values.name, "name");
-        if (temp_val == true) {
-            $("#name_error").html("");
-            $('#inputname').removeClass("error");
-            data.name = values.name;
-            test_name = true;
-        } else {
-            $("#name_error").html(temp_val);
-            $('#inputname').addClass("error")
-            test_name = false;
-        }
-
-
-        temp_val = validate.validat_input(values.description, "name");
-        if (temp_val == true) {
-            $("#description_error").html("");
-            data.description = values.description;
-            test_description = true;
-            $('#inputdetails').removeClass("error");
-        } else {
-            $("#description_error").html(temp_val);
-            $('#inputdetails').addClass("error");
-            test_description = false;
-        }
-
-
-        if ("image" in values) {
-            temp_val = validate.validat_input(values.image, "image");
-            if (temp_val == true) {
-                $("#image_error").html("");
-                test_image = true;
-                $('#st_photo').removeClass("error");
-
-            } else if (but_id == "new") {
-                $("#image_error").html(temp_val);
-                $('#st_photo').addClass("error")
-                test_image = false;
-
-
-            }
-        }
-
-        callback({ test_name: test_name, test_description: test_description, test_image: test_image });
-    }
 
     function sendFileToAjax(image, callback) {
         let form_data = new FormData();
@@ -140,6 +90,7 @@ var CourseModuleController = function() {
         }
 
     }
+
 
 
     return {

@@ -106,8 +106,15 @@
 
 
 
+
+
         // Deletes a line from Courses table
         function DeleteAdminById($param, $mypermission) {
+            $oldrole = $this->getAdminById();            
+            if ($oldrole[0]['role_id'] == 5) {
+                return "can't delete the owner";
+            }else{
+
                 if($this->model->getId() != false && $mypermission != 'sales'){
                     if($mypermission == 'manager'){
                         $oldrole = $this->getAdminById();
@@ -123,6 +130,7 @@
                 }else{
                     return false;
                 }
+            }
 
     
         }
@@ -137,20 +145,19 @@
 
         // Updates a line in directos table
         function UpdateById($param, $mypermission){ 
-            if($this->model->getId() != false || $this->model->getId() != false){
+            if($this->model->getId() != false){
                 if($mypermission != 'sales'){
                     if($mypermission == 'manager'){
                         $oldrole = $this->getAdminById();
                         if ($oldrole[0]['role_id'] == 5) {
                             return 'No permission';
                         } else { 
-
                             if($this->model->getpassword() != ""){
-
-                                    if ($oldrole[0]['role_id'] == 7) {
-                                        return $this->sendUpdate($mypermission);
+                                    if ($this->model->getpassword() !="" && $oldrole[0]['role_id'] != 7) {
+                                        return 'No permission to update password';    
+                                        
                                     } else {
-                                        return 'No permission to update password';                                                
+                                        return $this->sendUpdate($mypermission);    
                                     }
 
                             } else {

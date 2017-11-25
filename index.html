@@ -38,11 +38,16 @@
                 </button>
                         <div class="collapse navbar-collapse" id="navbarResponsive">
                             <ul class="navbar-nav ml-auto">
+                                <!-- <li class="nav-item active"> -->
                                 <li class="nav-item active">
-                                    <a href="#/home" class="nav-link" id="nav_school">School</a>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#/administration" id="nav_Administration">Administration</a>
-                                    </li>
+                                    <a href="#/" class="nav-link"></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/school" class="nav-link" id="nav_school">School</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/administration" class="nav-link" id="nav_Administration">Administration</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -74,7 +79,7 @@
                 <div class="col-md-3 order-3">
                     <div class="flex-container">
                         <h5 class="flex-item1">Courses List:</h5>
-                        <button class="flex-item2" id="add_new_course"><h3>+</h3></button>
+                        <a href="#/new_course"><button class="flex-item2" id="add_new_course"><h3>+</h3></button></a>
                     </div>
                     <div id="course" class="allCourses"></div>
                 </div>
@@ -83,7 +88,7 @@
                 <div class="col-md-3 order-3 ">
                     <div class="flex-container">
                         <h5 class="flex-item1">Student List:</h5>
-                        <button class="flex-item2" id="add_new_student"><h3>+</h3></button>
+                        <a href="#/new_student"><button class="flex-item2" id="add_new_student"><h3>+</h3></button></a>
                     </div>
                     <div id="Students"></div>
                 </div>
@@ -106,7 +111,7 @@
                 <div class="col-md-4 order-4">
                     <div class="flex-container">
                         <h5 class="flex-item1">Administators List:</h5>
-                        <button class="flex-item2" id="add_new_administrator"><h3>+</h3></button>
+                        <a href="#/new_admin"><button class="flex-item2" id="add_new_administrator"><h3>+</h3></button></a>
                     </div>
                     <div id="Administratos"></div>
                 </div>
@@ -120,6 +125,7 @@
         </div>
     </section>
 
+    <div id="view"></div>
 
 
     <!-- Footer -->
@@ -133,6 +139,7 @@
 
     <script src="front/vendor/jquery/jquery.min.js"></script>
     <script src="front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src='front/scripts/route.js'></script>
     <script src='front/scripts/onload.js'></script>
     <script src="front/scripts/ajax.js"></script>
     <script src='front/scripts/column1_director.js'></script>

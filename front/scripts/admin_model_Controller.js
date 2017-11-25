@@ -60,15 +60,24 @@ var AdminModuleController = function() {
 
 
         //sends all input values for validation in if ok senbs them to sever...
-        sendForValidation(values, but_id, function(returned) {
+        let sendForCheck = new sendValidation();
+        sendForCheck.sendForValidation(values, but_id, "admin", function(returned) {
             if (returned.test_name == true && returned.test_phone == true && returned.test_email == true && returned.test_role == true && returned.test_image == true && returned.test_password == true) {
+                data.role = values.role;
+                data.name = values.name;
+                data.phone = values.phone;
+                data.email = values.email;
+                if (values.password != undefined) {
+                    data.password = values.password;
+                }
+
                 if (values.image != undefined) { //check if a image was uploaded
                     sendFileToAjax(values.image, function(resulet) {
-                        if (resulet) {
-                            data.image = values.image.name;
+                        if (resulet[0]) {
+                            data.image = resulet[1];
                             callback();
                         } else {
-                            alert(resulet.text);
+                            alert(resulet);
                         }
                     });
                 } else {
@@ -78,105 +87,6 @@ var AdminModuleController = function() {
 
         });
     }
-
-    // function sending data to validation
-    function sendForValidation(values, but_id, callback) {
-        let validate = new validation();
-        let temp_val;
-        let test_name = false;
-        let test_email = false;
-        let test_phone = false;
-        let test_role = false;
-        let test_image = true;
-        let test_password = true;
-
-
-        // input validation
-        temp_val = validate.validat_input(values.name, "name");
-        if (temp_val == true) {
-            $("#name_error").html("");
-            $('#inputname').removeClass("error");
-            data.name = values.name;
-            test_name = true;
-        } else {
-            $("#name_error").html(temp_val);
-            $('#inputname').addClass("error")
-            test_name = false;
-        }
-
-        temp_val = validate.validat_input(values.role, "name");
-        if (temp_val == true) {
-            $("#role_error").html("");
-            $('#inputrole').removeClass("error");
-            data.role = values.role;
-            test_role = true;
-        } else {
-            $("#role_error").html(temp_val);
-            $('#inputrole').addClass("error")
-            test_role = false;
-        }
-
-
-        temp_val = validate.validat_input(values.phone, "phone");
-        if (temp_val == true) {
-            $("#phone_error").html("");
-            data.phone = values.phone;
-            test_phone = true;
-            $('#inputphone').removeClass("error");
-        } else {
-            $("#phone_error").html(temp_val);
-            $('#inputphone').addClass("error");
-            test_phone = false;
-        }
-
-
-        temp_val = validate.validat_input(values.email, "email");
-        if (temp_val == true) {
-            $("#email_error").html("");
-            data.email = values.email;
-            test_email = true;
-            $('#inputemail').removeClass("error");
-        } else {
-            $("#email_error").html(temp_val);
-            $('#inputemail').addClass("error");
-            test_email = false;
-        }
-
-
-        if ("image" in values) {
-            temp_val = validate.validat_input(values.image, "image");
-            if (temp_val == true) {
-                $("#image_error").html("");
-                test_image = true;
-                $('#st_photo').removeClass("error");
-
-            } else if (but_id == "new") {
-                $("#image_error").html(temp_val);
-                $('#st_photo').addClass("error")
-                test_image = false;
-
-            }
-        }
-
-        if ("password" in values) {
-            temp_val = validate.validat_input(values.password, "password");
-            if (temp_val == true) {
-                $("#password_error").html("");
-                data.password = values.password;
-                test_password = true;
-                $('#inputpassword').removeClass("error");
-            } else {
-                $("#password_error").html(temp_val);
-                $('#inputpassword').addClass("error");
-                test_password = false;
-            }
-        }
-
-        callback({ test_name: test_name, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
-    }
-
-
-
 
 
     function sendFileToAjax(image, callback) {
