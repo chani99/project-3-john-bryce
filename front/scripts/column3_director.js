@@ -384,5 +384,9 @@ var column3_director = function() {
             NewAdmintemp(permission);
         }
 
+        // cropimage: function() {
+
+        // }
+
     }
 }

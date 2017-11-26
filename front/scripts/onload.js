@@ -5,10 +5,6 @@ $(document).ready(function() {
     login.login_screen();
 
 
-    route('/', 'home', function() {});
-    route('/school', 'nav_school', function() {});
-    route('/administrator', 'nav_Administration', function() {});
-    route('*', 'error404', function() {});
 
 
 });

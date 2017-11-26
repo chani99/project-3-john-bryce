@@ -169,6 +169,7 @@ var CourseModuleController = function() {
                 } else {
                     let column3 = new column3_director();
                     column3.get_one_course(respnse, permission);
+
                 }
             });
         }

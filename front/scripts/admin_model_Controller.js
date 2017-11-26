@@ -72,7 +72,30 @@ var AdminModuleController = function() {
                 }
 
                 if (values.image != undefined) { //check if a image was uploaded
-                    sendFileToAjax(values.image, function(resulet) {
+                    let image_name = $('#blah').data("name");
+                    let orginal_image_top = $('#blah').position().top;
+                    let orginal_image_left = $('#blah').position().left;
+                    let new_image_top = $('#crop_tool').position().top;
+                    let new_image_left = $('#crop_tool').position().left;
+                    let new_image_width = parseInt($('#crop_tool').width());
+                    let new_image_heigth = parseInt($('#crop_tool').height());
+
+
+                    orginal_image_top.toFixed();
+                    orginal_image_left.toFixed();
+                    new_image_top.toFixed();
+                    new_image_left.toFixed();
+
+
+                    let crop_sizes = {
+                        start_x: new_image_left,
+                        start_y: new_image_top,
+                        width: new_image_width,
+                        heigth: new_image_heigth,
+                        name: image_name
+                    }
+
+                    sendFileToCrop(crop_sizes, function(resulet) {
                         if (resulet[0]) {
                             data.image = resulet[1];
                             callback();
@@ -115,6 +138,7 @@ var AdminModuleController = function() {
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#blah').attr('src', e.target.result);
+
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -231,7 +255,31 @@ $('#add_new_administrator').click(function() {
 
 // add event for show image
 $(document).on('change', '#browse_a', function(e) {
-    let student_model = new StudentModelController();
-    student_model.checkfile(this);
+    let image = $('#browse_a').prop('files')[0];
+    let form_data = new FormData();
+    form_data.append('file', image);
+    sendFileToServer(form_data, function(resulet) {
+        if (resulet[0]) {
+            $('#blah').attr('src', "back/uploads/" + resulet[1]);
+            $('#blah').data('name', resulet[1]);
+
+            let image_top = $('#blah').position().top;
+            let image_left = $('#blah').position().left;
+            $("#crop_tool").css("top", image_top).css("left", image_left);
+            $("#crop_tool").resizable({ containmet: "parent" });
+            $("#crop_tool").draggable({ containmet: "parent" });
+        }
+    });
+
 
 });
+
+
+
+
+
+
+// data.image = resulet[1];
+//         callback();
+// let student_model = new StudentModelController();
+// student_model.checkfile(this);

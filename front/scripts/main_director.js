@@ -5,6 +5,8 @@ var main_screen = function() {
     // let ApiUrl = "back/api/api.php";
     // var column1_data = {};
 
+
+
     function login(user) {
         $.ajax('front/views/login_temp.html').always(function(logoutemp) {
             var c = logoutemp;
@@ -87,6 +89,8 @@ var main_screen = function() {
                 courseController.GetAllCourse(permission);
                 let studentController = new StudentModelController();
                 studentController.GetAllStudents();
+
+
 
 
             });
