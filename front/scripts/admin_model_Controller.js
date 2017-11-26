@@ -77,19 +77,24 @@ var AdminModuleController = function() {
                     let orginal_image_left = $('#blah').position().left;
                     let new_image_top = $('#crop_tool').position().top;
                     let new_image_left = $('#crop_tool').position().left;
-                    let new_image_width = parseInt($('#crop_tool').width());
-                    let new_image_heigth = parseInt($('#crop_tool').height());
-
 
                     orginal_image_top.toFixed();
                     orginal_image_left.toFixed();
                     new_image_top.toFixed();
                     new_image_left.toFixed();
 
+                    let crop_start_x = new_image_left - orginal_image_left;
+                    let crop_start_y = new_image_top - orginal_image_top;
+
+                    let new_image_width = parseInt($('#crop_tool').width());
+                    let new_image_heigth = parseInt($('#crop_tool').height());
+
+                    new_image_width.toFixed();
+                    new_image_heigth.toFixed();
 
                     let crop_sizes = {
-                        start_x: new_image_left,
-                        start_y: new_image_top,
+                        start_x: crop_start_x,
+                        start_y: crop_start_y,
                         width: new_image_width,
                         heigth: new_image_heigth,
                         name: image_name

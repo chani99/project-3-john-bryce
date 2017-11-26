@@ -38,22 +38,21 @@ label {
   margin-top: 10px;
 }
 #blah {
-  max-width: 250px;
-  max-height: 180px;
+  width: 100%;
   position: absolute;
   margin-bottom: 20px;
 }
 .crop {
-  width: 250px;
-  height: 150px;
+  width: 500px;
+  height: 400px;
   background-color: grey;
   margin-bottom: 20px;
 }
 #crop_tool {
   background: rgba(255, 255, 255, 0.5);
   border: 1px dashed #fff;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 190px;
   position: absolute;
 }
 h4 {
