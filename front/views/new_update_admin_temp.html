@@ -46,13 +46,13 @@
 
             <div class="padding_top">
 
-                <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
+                <label for="st_photo"><h5 class="padding_top">Upload and crop you Image:</h5></label><br/>
                 <input id="browse_a" type="file" class="form-control-file" multiple>
                 <span id="image_error" class="my_errors"></span>
                 <br>
 
                 <div class="component crop">
-                    <img id="blah" data-name="" src="#" alt="Your image">
+                    <img id="blah" data-name="" src="#" onload="this.width/=3;" alt="Your image">
                     <div id="crop_tool"></div>
                 </div>
 

@@ -34,7 +34,7 @@ var StudentModelController = function() {
         values.name = $('#inputname').val().trim();
         values.phone = $('#inputphone').val().trim();
         values.email = $('#inputemail').val().trim();
-        values.image = $('#browse').prop('files')[0];
+        values.image = $('#browse_s').prop('files')[0];
 
         if (but_id != "new") { data.id = but_id; }
 
@@ -52,18 +52,37 @@ var StudentModelController = function() {
                 data.phone = values.phone;
                 data.email = values.email;
 
+                //check if a image was uploaded and if was get the croped image
+                // and send it for croping at server 
                 if (values.image != undefined) {
-                    sendFileToAjax(values.image, function(resulet) {
-                        if (resulet[0]) {
-                            data.image = resulet[1];
-                            callback();
-                        } else {
-                            alert(resulet);
-                        }
+                    let column3 = new column3_director();
+                    column3.getImageCropSize(function(crop_sizes) {
+                        sendFileToCrop(crop_sizes, function(resulet) {
+                            if (resulet[0]) {
+                                data.image = resulet[1];
+                                callback();
+                            } else {
+                                alert(resulet);
+                            }
+                        });
                     });
+
                 } else {
+                    //if no image was loaded then send upated/new data to server
                     callback();
                 }
+                // if (values.image != undefined) {
+                //     sendFileToAjax(values.image, function(resulet) {
+                //         if (resulet[0]) {
+                //             data.image = resulet[1];
+                //             callback();
+                //         } else {
+                //             alert(resulet);
+                //         }
+                //     });
+                // } else {
+                //     callback();
+                // }
             }
         });
     }
@@ -248,9 +267,10 @@ $('#add_new_student').click(function() {
 });
 
 
+// add event to show image
+$(document).on('change', '#browse_s', function(e) {
+    let image = $('#browse_s').prop('files')[0];
+    let column3 = new column3_director();
+    column3.uploadFile(image);
 
-// $(document).on('change', '#browse', function() {
-//     let student_model = new StudentModelController();
-//     let file = $('#browse').prop('files')[0];
-//     student_model.checkfile(file);
-// });
+});

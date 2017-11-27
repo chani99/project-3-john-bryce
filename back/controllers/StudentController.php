@@ -62,13 +62,7 @@
                     return $innerJoinstudents;   
                 }
         
-                // SELECT student.id, student.name, student.image
-                // FROM student
-                // INNER JOIN student_course ON student.id = student_course.s_id
-                // INNER JOIN course ON course.id = student_course.c_id
-                // WHERE course.id = 5
-                
-
+    
 
         function getById($id) {
             if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
@@ -90,15 +84,6 @@
             return $allStudents;   
         }
 
-
-
-        // SELECT course.name, course.image
-        // FROM course
-        // INNER JOIN student_course ON course.id = student_course.c_id
-        // INNER JOIN student ON student.id = student_course.s_id
-        
-
-        // Selects all from directors table and returns a object array
 
 
         

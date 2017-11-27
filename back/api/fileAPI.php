@@ -6,7 +6,7 @@ $fileError = $_FILES['file']['error'];
     }
     else {
 //check file size and if ok save file in uploads and return new file name
-        if($_FILES['file']['size'] <= 2000000) { 
+        if($_FILES['file']['size'] <= 1000000) { 
         $temp = explode(".", $_FILES["file"]["name"]);
         $newfilename = round(microtime(true)) . '.' . end($temp);
         move_uploaded_file($_FILES["file"]["tmp_name"], "../uploads/" . $newfilename);

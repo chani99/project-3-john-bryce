@@ -27,22 +27,27 @@
 
             <div class="padding_top">
 
-                <label for="st_photo"><h5 class="padding_top">Upload Image File:</h5></label><br/>
-                <input id="browse" type="file" multiple>
+                <label for="st_photo"><h5 class="padding_top">Upload and crop you Image:</h5></label><br/>
+                <input id="browse_s" type="file" multiple>
                 <span id="image_error" class="my_errors"></span>
                 <br>
 
+                <div class="component crop2">
+                    <img id="blah" data-name="" src="#" onload="this.width/=3;" alt="Your image">
+                    <div id="crop_tool"></div>
+                </div>
 
 
 
 
+                <!-- 
                 <div class="component">
                     <div class="overlay">
                         <div class="overlay-inner">
                         </div>
                     </div>
                     <img class="resize-image" id="blah" src="#" alt="your image">
-                </div>
+                </div> -->
 
 
 

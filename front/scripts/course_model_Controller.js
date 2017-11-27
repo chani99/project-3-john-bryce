@@ -63,7 +63,7 @@ var CourseModuleController = function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
+                $('#courseImage').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -220,7 +220,7 @@ $('#add_new_course').click(function() {
 });
 
 $(document).on('change', '#st_photo', function(e) {
-    let student_model = new StudentModelController();
-    student_model.checkfile(this);
+    let course_model = new CourseModuleController();
+    course_model.checkfile(this);
 
 });

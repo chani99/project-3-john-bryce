@@ -87,8 +87,8 @@ var validation = function() {
                 case 'image':
                     empty = NotEmpty(input);
                     if (empty == true) {
-                        if (input.size > 2000000) {
-                            return "file can't be larger then 2MB";
+                        if (input.size > 1000000) {
+                            return "file can't be larger then 1MB";
                         } else {
                             return true;
                         }

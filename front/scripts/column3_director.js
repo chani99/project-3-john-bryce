@@ -382,11 +382,68 @@ var column3_director = function() {
 
         newAdminScreen: function(permission) {
             NewAdmintemp(permission);
+        },
+
+        // sends file to server befor croping
+        uploadFile: function(image) {
+            let sendForCheck = new validation();
+            sendForCheck.validat_input(image, "image");
+            if (sendForCheck) {
+                let form_data = new FormData();
+                form_data.append('file', image);
+                sendFileToServer(form_data, function(resulet) {
+                    if (resulet[0] == true) {
+                        $('#blah').attr('src', "back/uploads/" + resulet[1]);
+                        $('#blah').data('name', resulet[1]);
+                        let image_top = $('#blah').position().top;
+                        let image_left = $('#blah').position().left;
+                        $("#crop_tool").css("top", image_top).css("left", image_left);
+                        $("#crop_tool").resizable({ containmet: "parent" });
+                        $("#crop_tool").draggable({ containmet: "parent" });
+                    } else {
+                        alert(resulet);
+                    }
+
+                });
+            } else {
+                alert(sendForCheck);
+            }
+
+        },
+
+        getImageCropSize: function(callback) {
+            let image_name = $('#blah').data("name");
+            let orginal_image_top = $('#blah').position().top;
+            let orginal_image_left = $('#blah').position().left;
+            let new_image_top = $('#crop_tool').position().top;
+            let new_image_left = $('#crop_tool').position().left;
+
+            orginal_image_top.toFixed();
+            orginal_image_left.toFixed();
+            new_image_top.toFixed();
+            new_image_left.toFixed();
+
+            let crop_start_x = new_image_left - orginal_image_left;
+            let crop_start_y = new_image_top - orginal_image_top;
+
+            let new_image_width = parseInt($('#crop_tool').width());
+            let new_image_heigth = parseInt($('#crop_tool').height());
+
+            new_image_width.toFixed();
+            new_image_heigth.toFixed();
+
+            let crop_sizes = {
+                start_x: crop_start_x * 3,
+                start_y: crop_start_y * 3,
+                width: new_image_width * 3,
+                heigth: new_image_heigth * 3,
+                name: image_name
+            }
+            callback(crop_sizes);
         }
 
-        // cropimage: function() {
 
-        // }
+
 
     }
 }

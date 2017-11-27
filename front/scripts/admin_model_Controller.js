@@ -71,44 +71,23 @@ var AdminModuleController = function() {
                     data.password = values.password;
                 }
 
-                if (values.image != undefined) { //check if a image was uploaded
-                    let image_name = $('#blah').data("name");
-                    let orginal_image_top = $('#blah').position().top;
-                    let orginal_image_left = $('#blah').position().left;
-                    let new_image_top = $('#crop_tool').position().top;
-                    let new_image_left = $('#crop_tool').position().left;
-
-                    orginal_image_top.toFixed();
-                    orginal_image_left.toFixed();
-                    new_image_top.toFixed();
-                    new_image_left.toFixed();
-
-                    let crop_start_x = new_image_left - orginal_image_left;
-                    let crop_start_y = new_image_top - orginal_image_top;
-
-                    let new_image_width = parseInt($('#crop_tool').width());
-                    let new_image_heigth = parseInt($('#crop_tool').height());
-
-                    new_image_width.toFixed();
-                    new_image_heigth.toFixed();
-
-                    let crop_sizes = {
-                        start_x: crop_start_x,
-                        start_y: crop_start_y,
-                        width: new_image_width,
-                        heigth: new_image_heigth,
-                        name: image_name
-                    }
-
-                    sendFileToCrop(crop_sizes, function(resulet) {
-                        if (resulet[0]) {
-                            data.image = resulet[1];
-                            callback();
-                        } else {
-                            alert(resulet);
-                        }
+                //check if a image was uploaded and if was get the croped image
+                // and send it for croping at server 
+                if (values.image != undefined) {
+                    let column3 = new column3_director();
+                    column3.getImageCropSize(function(crop_sizes) {
+                        sendFileToCrop(crop_sizes, function(resulet) {
+                            if (resulet[0]) {
+                                data.image = resulet[1];
+                                callback();
+                            } else {
+                                alert(resulet);
+                            }
+                        });
                     });
+
                 } else {
+                    //if no image was loaded then send upated/new data to server
                     callback();
                 }
             }
@@ -261,30 +240,7 @@ $('#add_new_administrator').click(function() {
 // add event for show image
 $(document).on('change', '#browse_a', function(e) {
     let image = $('#browse_a').prop('files')[0];
-    let form_data = new FormData();
-    form_data.append('file', image);
-    sendFileToServer(form_data, function(resulet) {
-        if (resulet[0]) {
-            $('#blah').attr('src', "back/uploads/" + resulet[1]);
-            $('#blah').data('name', resulet[1]);
-
-            let image_top = $('#blah').position().top;
-            let image_left = $('#blah').position().left;
-            $("#crop_tool").css("top", image_top).css("left", image_left);
-            $("#crop_tool").resizable({ containmet: "parent" });
-            $("#crop_tool").draggable({ containmet: "parent" });
-        }
-    });
-
+    let column3 = new column3_director();
+    column3.uploadFile(image);
 
 });
-
-
-
-
-
-
-// data.image = resulet[1];
-//         callback();
-// let student_model = new StudentModelController();
-// student_model.checkfile(this);
