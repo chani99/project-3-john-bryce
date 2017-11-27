@@ -1,12 +1,12 @@
 "use strict";
 // course module
 function Course(data) {
-    if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ('id' in data && data.id != "") this.id = data.id;
-    if ('name' in data && data.name != "") this.name = data.name;
-    if ('description' in data && data.description != "") this.description = data.description;
-    if ('image' in data && data.image != "") this.image = data.image;
-    if ('inner' in data && data.inner != "") this.inner = data.inner;
+    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id != "") this.id = data.id;
+    if ("name" in data && data.name != "") this.name = data.name;
+    if ("description" in data && data.description != "") this.description = data.description;
+    if ("image" in data && data.image != "") this.image = data.image;
+    if ("inner" in data && data.inner != "") this.inner = data.inner;
 
 }
 
@@ -14,7 +14,7 @@ function Course(data) {
 
 // course director
 var CourseModuleController = function() {
-    let CourseApiMethod = 'Course';
+    let CourseApiMethod = "Course";
     let CourseApiUrl = "back/api/api.php";
     var data = {
         ctrl: CourseApiMethod
@@ -25,9 +25,9 @@ var CourseModuleController = function() {
         let image;
         let values = [];
 
-        values.name = $('#inputname').val().trim();
-        values.description = $('#inputdetails').val().trim();
-        values.image = $('#st_photo').prop('files')[0];
+        values.name = $("#inputname").val().trim();
+        values.description = $("#inputdetails").val().trim();
+        values.image = $("#st_photo").prop("files")[0];
 
         if (but_id != "new") {
             data.id = but_id;
@@ -63,7 +63,7 @@ var CourseModuleController = function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#courseImage').attr('src', e.target.result);
+                $("#courseImage").attr("src", e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -72,7 +72,7 @@ var CourseModuleController = function() {
 
     function sendFileToAjax(image, callback) {
         let form_data = new FormData();
-        form_data.append('file', image);
+        form_data.append("file", image);
         sendFileToServer(form_data, function(respnse) {
             callback(respnse);
         });
@@ -181,16 +181,16 @@ var CourseModuleController = function() {
 
 
 // add event to get course details
-$(document).on('click', '#singleCourse', function() {
+$(document).on("click", "#singleCourse", function() {
     let course_model = new CourseModuleController();
-    course_model.getOneCourse($(this).data('courseid'), $(this).data('permission'));
+    course_model.getOneCourse($(this).data("courseid"), $(this).data("permission"));
 });
 
 
 // add event to save/edit course
-$(document).on('click', '#saveCourse', function() {
+$(document).on("click", "#saveCourse", function() {
     let calltype = $(this).data("curseid");
-    if (calltype == 'new') {
+    if (calltype == "new") {
         let course_model = new CourseModuleController();
         course_model.createCourse(calltype);
     } else {
@@ -201,25 +201,25 @@ $(document).on('click', '#saveCourse', function() {
 
 
 //  add event to delete course
-$(document).on('click', '#deleteCourse', function() {
+$(document).on("click", "#deleteCourse", function() {
     let course_model = new CourseModuleController();
     course_model.deleteCourse($(this).data("curseid"));
 });
 
 
 //  add event to course details
-$(document).on('click', '#editCourse', function() {
+$(document).on("click", "#editCourse", function() {
     let column3_model = new column3_director();
     column3_model.UpdateCourses($(this).data("editid"));
 });
 
 // add event for + new course
-$('#add_new_course').click(function() {
+$("#add_new_course").click(function() {
     let column3 = new column3_director();
     column3.newCourseScreen();
 });
 
-$(document).on('change', '#st_photo', function(e) {
+$(document).on("change", "#st_photo", function(e) {
     let course_model = new CourseModuleController();
     course_model.checkfile(this);
 

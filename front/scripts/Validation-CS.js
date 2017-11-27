@@ -10,7 +10,7 @@ var validation = function() {
     }
 
     function matchTextPattern(input) {
-        var pattern = /[0-9a-zA-Zא-ת\s!?=+-.,']+$/m;
+        var pattern = /[0-9a-zA-Zא-ת\s!?=+-.,"]+$/m;
         if (!pattern.test(input)) {
             return "The field contains invalid characters, only letters or numbers must be entered!";
 
@@ -48,7 +48,7 @@ var validation = function() {
             let empty;
             let pattern;
             switch (type) {
-                case 'name':
+                case "name":
                     empty = NotEmpty(input);
                     pattern = matchTextPattern(input);
                     if ((empty == true) && (pattern == true)) {
@@ -60,7 +60,7 @@ var validation = function() {
                     }
                     break;
 
-                case 'phone':
+                case "phone":
                     empty = NotEmpty(input);
                     pattern = matchPhonePattern(input);
                     if ((empty == true) && (pattern == true)) {
@@ -72,7 +72,7 @@ var validation = function() {
                     }
                     break;
 
-                case 'email':
+                case "email":
                     empty = NotEmpty(input);
                     pattern = matchEmailPattern(input);
                     if ((empty == true) && (pattern == true)) {
@@ -84,11 +84,12 @@ var validation = function() {
                     }
                     break;
 
-                case 'image':
+                case "image":
                     empty = NotEmpty(input);
                     if (empty == true) {
                         if (input.size > 1000000) {
-                            return "file can't be larger then 1MB";
+                            return "file can"
+                            t be larger then 1 MB ";
                         } else {
                             return true;
                         }
@@ -100,7 +101,7 @@ var validation = function() {
 
                     break;
 
-                case 'password':
+                case "password":
                     empty = NotEmpty(input);
                     if (empty == true) {
                         return true;
@@ -144,11 +145,11 @@ var sendValidation = function() {
             temp_val = validate.validat_input(values.name, "name");
             if (temp_val == true) {
                 $("#name_error").html("");
-                $('#inputname').removeClass("error");
+                $("#inputname").removeClass("error");
                 test_name = true;
             } else {
                 $("#name_error").html(temp_val);
-                $('#inputname').addClass("error")
+                $("#inputname").addClass("error")
                 test_name = false;
             }
 
@@ -157,10 +158,10 @@ var sendValidation = function() {
             if (temp_val == true) {
                 $("#description_error").html("");
                 test_description = true;
-                $('#inputdetails').removeClass("error");
+                $("#inputdetails").removeClass("error");
             } else {
                 $("#description_error").html(temp_val);
-                $('#inputdetails').addClass("error");
+                $("#inputdetails").addClass("error");
                 test_description = false;
             }
 
@@ -168,11 +169,11 @@ var sendValidation = function() {
                 temp_val = validate.validat_input(values.role, "name");
                 if (temp_val == true) {
                     $("#role_error").html("");
-                    $('#inputrole').removeClass("error");
+                    $("#inputrole").removeClass("error");
                     test_role = true;
                 } else {
                     $("#role_error").html(temp_val);
-                    $('#inputrole').addClass("error")
+                    $("#inputrole").addClass("error")
                     test_role = false;
                 }
             }
@@ -182,10 +183,10 @@ var sendValidation = function() {
                 if (temp_val == true) {
                     $("#phone_error").html("");
                     test_phone = true;
-                    $('#inputphone').removeClass("error");
+                    $("#inputphone").removeClass("error");
                 } else {
                     $("#phone_error").html(temp_val);
-                    $('#inputphone').addClass("error");
+                    $("#inputphone").addClass("error");
                     test_phone = false;
                 }
 
@@ -197,10 +198,10 @@ var sendValidation = function() {
                 if (temp_val == true) {
                     $("#email_error").html("");
                     test_email = true;
-                    $('#inputemail').removeClass("error");
+                    $("#inputemail").removeClass("error");
                 } else {
                     $("#email_error").html(temp_val);
-                    $('#inputemail').addClass("error");
+                    $("#inputemail").addClass("error");
                     test_email = false;
                 }
 
@@ -211,10 +212,10 @@ var sendValidation = function() {
                 if ((temp_val == true) || (temp_val == "You must fill all input fields!" && but_id != "new")) {
                     $("#image_error").html("");
                     test_image = true;
-                    $('#st_photo').removeClass("error");
+                    $("#st_photo").removeClass("error");
                 } else {
                     $("#image_error").html(temp_val);
-                    $('#st_photo').addClass("error")
+                    $("#st_photo").addClass("error")
                     test_image = false;
                 }
 
@@ -226,10 +227,10 @@ var sendValidation = function() {
                 if (temp_val == true) {
                     $("#password_error").html("");
                     test_password = true;
-                    $('#inputpassword').removeClass("error");
+                    $("#inputpassword").removeClass("error");
                 } else {
                     $("#password_error").html(temp_val);
-                    $('#inputpassword').addClass("error");
+                    $("#inputpassword").addClass("error");
                     test_password = false;
                 }
             }

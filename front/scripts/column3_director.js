@@ -9,17 +9,17 @@ var column3_director = function() {
 
     //loads update student form screen
     function tempNameFunction(details, student_courses, studen_id, calltype) {
-        $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
+        $.ajax("front/views/new_update_student_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update student: " + details.name);
             c = c.replace("{{new?}}", "update");
             c = c.replace("{{saveid}}", studen_id);
             c = c.replace("{{deleteid}}", studen_id);
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main-scool').html("");
-            $('#main-scool').append(d);
+            $("#main-scool").html("");
+            $("#main-scool").append(d);
             $("#inputphone").val(details.phone);
             $("#inputemail").val(details.mail);
             $("#inputname").val(details.name);
@@ -33,17 +33,17 @@ var column3_director = function() {
 
     //loads update admin form screen
     function temtAdminFunction(details, admin_id, permission) {
-        $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
+        $.ajax("front/views/new_update_admin_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update Admin: " + details.name);
             c = c.replace("{{new?}}", "update");
             c = c.replace("{{A_id2}}", admin_id);
             c = c.replace("{{deleteid}}", admin_id);
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main_admin').html("");
-            $('#main_admin').append(d);
+            $("#main_admin").html("");
+            $("#main_admin").append(d);
             $("#inputphone").val(details.phone);
             $("#inputemail").val(details.mail);
             $("#inputname").val(details.name);
@@ -56,7 +56,7 @@ var column3_director = function() {
                 case "manager":
                     $("select option[value=6]").attr("selected", "selected");
                     if (permission == "manager") {
-                        $('#passwordhide').hide();
+                        $("#passwordhide").hide();
                     }
                     break;
 
@@ -67,7 +67,7 @@ var column3_director = function() {
 
             if (permission == "manager") {
                 $("#inpurole").attr("disabled", "true");
-                $('#delete_admin').hide();
+                $("#delete_admin").hide();
             }
 
         });
@@ -77,19 +77,19 @@ var column3_director = function() {
 
     //loads new student form screen
     function NewStudenttemp() {
-        $.ajax('front/views/new_update_student_temp.html').always(function(updateTemplate) {
+        $.ajax("front/views/new_update_student_temp.html").always(function(updateTemplate) {
 
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "NEW STUDENT");
             c = c.replace("{{new?}}", "new");
-            c = c.replace("{{saveid}}", 'new');
-            c = c.replace("{{deleteid}}", '');
+            c = c.replace("{{saveid}}", "new");
+            c = c.replace("{{deleteid}}", "");
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main-scool').html("");
-            $('#main-scool').append(d);
-            $('#delete_student').hide();
+            $("#main-scool").html("");
+            $("#main-scool").append(d);
+            $("#delete_student").hide();
             column3 = new column3_director();
             column3.AddCheckbox();
 
@@ -100,19 +100,19 @@ var column3_director = function() {
 
     //loads new admin form screen
     function NewAdmintemp(permission) {
-        $.ajax('front/views/new_update_admin_temp.html').always(function(updateTemplate) {
+        $.ajax("front/views/new_update_admin_temp.html").always(function(updateTemplate) {
 
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "NEW ADMINISTRATOR");
             c = c.replace("{{new?}}", "new");
             c = c.replace("{{A_id2}}", "new");
-            c = c.replace("{{deleteid}}", '');
+            c = c.replace("{{deleteid}}", "");
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main_admin').html("");
-            $('#main_admin').append(d);
-            $('#delete_admin').hide();
+            $("#main_admin").html("");
+            $("#main_admin").append(d);
+            $("#delete_admin").hide();
             $("select option[value=5]").attr("disabled", "true");
 
         });
@@ -121,19 +121,19 @@ var column3_director = function() {
 
     //loads new course form screen
     function NewCoursetemp() {
-        $.ajax('front/views/new_update_course_temp.html').always(function(NewCourseTemplate) {
+        $.ajax("front/views/new_update_course_temp.html").always(function(NewCourseTemplate) {
 
             var c = NewCourseTemplate;
             c = c.replace("{{form_name}}", "NEW COURSE");
             c = c.replace("{{C_id}}", "new");
-            c = c.replace("{{C_id2}}", 'new');
-            c = c.replace("{{num}}", '');
+            c = c.replace("{{C_id2}}", "new");
+            c = c.replace("{{num}}", "");
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main-scool').html("");
-            $('#main-scool').append(d);
-            $('#deleteCourse').hide();
+            $("#main-scool").html("");
+            $("#main-scool").append(d);
+            $("#deleteCourse").hide();
 
 
         });
@@ -146,19 +146,19 @@ var column3_director = function() {
 
     //loads update course form screen
     function CouseUpdateTemp(details, course_id) {
-        $.ajax('front/views/new_update_course_temp.html').always(function(updateTemplate) {
+        $.ajax("front/views/new_update_course_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update Course: " + details.name);
             c = c.replace("{{new?}}", "update");
             c = c.replace("{{C_id}}", course_id);
             c = c.replace("{{C_id2}}", course_id);
 
-            let d = document.createElement('div');
+            let d = document.createElement("div");
             d.innerHTML = c;
-            $('#main-scool').html("");
-            $('#main-scool').append(d);
+            $("#main-scool").html("");
+            $("#main-scool").append(d);
 
-            if (details.studentsSum > 0) { $('#deleteCourse').hide(); }
+            if (details.studentsSum > 0) { $("#deleteCourse").hide(); }
             $("#inputdetails").val(details.description);
             $("#inputname").val(details.name);
             $("#totalstudents").html("Total students registered in " + details.name + " course is: " + details.studentsSum);
@@ -173,24 +173,24 @@ var column3_director = function() {
 
         //loads main screen
         main_screen: function(callback) {
-            $.ajax('front/views/main_screen.html').always(function(main_temp) {
+            $.ajax("front/views/main_screen.html").always(function(main_temp) {
                 var c = main_temp;
-                $('#main-scool').html("");
-                let d = document.createElement('div');
+                $("#main-scool").html("");
+                let d = document.createElement("div");
                 d.innerHTML = c;
-                $('#main-scool').append(d);
+                $("#main-scool").append(d);
             });
             callback();
         },
 
         //loads main admin screen
         main_screen2: function(callback) {
-            $.ajax('front/views/main_screenAdmins.html').always(function(main_temp) {
+            $.ajax("front/views/main_screenAdmins.html").always(function(main_temp) {
                 var c = main_temp;
-                $('#main_admin').html("");
-                let d = document.createElement('div');
+                $("#main_admin").html("");
+                let d = document.createElement("div");
                 d.innerHTML = c;
-                $('#main_admin').append(d);
+                $("#main_admin").append(d);
             });
             callback();
         },
@@ -198,8 +198,8 @@ var column3_director = function() {
 
 
         get_one_student: function(data) {
-            $.ajax('front/views/student_details_temp.html').always(function(student_temp) {
-                $('#main-scool').html("");
+            $.ajax("front/views/student_details_temp.html").always(function(student_temp) {
+                $("#main-scool").html("");
 
                 var c = student_temp;
                 c = c.replace("{{num}}", data[0].id);
@@ -209,9 +209,9 @@ var column3_director = function() {
                 c = c.replace("{{email}}", data[0].email);
                 c = c.replace("{{imgsrc}}", "back/uploads/" + data[0].image);
 
-                let d = document.createElement('div');
+                let d = document.createElement("div");
                 d.innerHTML = c;
-                $('#main-scool').append(d);
+                $("#main-scool").append(d);
 
                 course_model.GetCourseForStudent(data[0].id);
 
@@ -221,18 +221,18 @@ var column3_director = function() {
 
         //returns the couses that a student choosen is registerd to
         getinnerJoin: function(data) {
-            $.ajax('front/views/course_temp.html').always(function(courseTemplate) {
-                $('#main-scool .courselist').html("");
+            $.ajax("front/views/course_temp.html").always(function(courseTemplate) {
+                $("#main-scool .courselist").html("");
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
                     c = c.replace("{{name}}", data[i].Course_name);
-                    c = c.replace("{{singleCourse}}", 'singlecourseIJ');
+                    c = c.replace("{{singleCourse}}", "singlecourseIJ");
                     c = c.replace("{{course_id}}", data[i].Course_id);
                     c = c.replace("{{descrip}}", "");
                     c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Course_image);
-                    let d = document.createElement('div');
+                    let d = document.createElement("div");
                     d.innerHTML = c;
-                    $('#main-scool .courselist').append(d);
+                    $("#main-scool .courselist").append(d);
                 }
 
             });
@@ -240,8 +240,8 @@ var column3_director = function() {
 
         //returns the students are registerd to a choosen course
         getinnerJoinstudents: function(data) {
-            $.ajax('front/views/student_temp_for_list.html').always(function(courseTemplate) {
-                $('#studentlistforCourse').html("");
+            $.ajax("front/views/student_temp_for_list.html").always(function(courseTemplate) {
+                $("#studentlistforCourse").html("");
 
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
@@ -252,9 +252,9 @@ var column3_director = function() {
                     c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Student_image);
                     c = c.replace("{{sum}}", data.length);
 
-                    let d = document.createElement('div');
+                    let d = document.createElement("div");
                     d.innerHTML = c;
-                    $('#studentlistforCourse').append(d);
+                    $("#studentlistforCourse").append(d);
                 }
             });
 
@@ -309,7 +309,7 @@ var column3_director = function() {
             });
 
             for (var i = 0; i < CoursesArray.length; i++) {
-                var checkbox = document.createElement('input');
+                var checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.name = "courses";
                 checkbox.value = CoursesArray[i];
@@ -323,14 +323,14 @@ var column3_director = function() {
                     }
                 }
 
-                var label = document.createElement('label')
+                var label = document.createElement("label")
                 label.htmlFor = i + 1;
                 label.appendChild(document.createTextNode(CoursesArray[i] + " course"));
                 let br = document.createElement("br");
 
-                $('#course-checkbox').append(checkbox);
-                $('#course-checkbox').append(label);
-                $('#course-checkbox').append(br);
+                $("#course-checkbox").append(checkbox);
+                $("#course-checkbox").append(label);
+                $("#course-checkbox").append(br);
             }
         },
 
@@ -338,16 +338,16 @@ var column3_director = function() {
         //shoes course detaills
         get_one_course: function(data, permission) {
 
-            $.ajax('front/views/course_details_temp.html').always(function(course_temp) {
-                $('#main-scool').html("");
+            $.ajax("front/views/course_details_temp.html").always(function(course_temp) {
+                $("#main-scool").html("");
                 var c = course_temp;
                 c = c.replace("{{editid}}", data[0].id);
                 c = c.replace("{{name}}", data[0].name);
                 c = c.replace("{{details}}", data[0].description);
                 c = c.replace("{{imgsrc}}", "back/uploads/" + data[0].image);
-                let d = document.createElement('div');
+                let d = document.createElement("div");
                 d.innerHTML = c;
-                $('#main-scool').append(d);
+                $("#main-scool").append(d);
                 if (permission == "sales") {
                     $("#editCourse").hide();
                 }
@@ -358,13 +358,13 @@ var column3_director = function() {
 
 
         UpdateCourses: function(course_id) {
-            $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
+            $("input:checkbox[name='courses ']:checked").each(function() { //get courses checked
                 courses.push($(this).attr("id"));
             });
             var details = {
                 name: $("#course_name").html(),
                 description: $("#course_details").html(),
-                studentsSum: $('[id^=StudentinCourse]').length
+                studentsSum: $("[id^=StudentinCourse]").length
             };
 
             CouseUpdateTemp(details, course_id);
@@ -390,13 +390,13 @@ var column3_director = function() {
             sendForCheck.validat_input(image, "image");
             if (sendForCheck) {
                 let form_data = new FormData();
-                form_data.append('file', image);
+                form_data.append("file", image);
                 sendFileToServer(form_data, function(resulet) {
                     if (resulet[0] == true) {
-                        $('#blah').attr('src', "back/uploads/" + resulet[1]);
-                        $('#blah').data('name', resulet[1]);
-                        let image_top = $('#blah').position().top;
-                        let image_left = $('#blah').position().left;
+                        $("#blah").attr("src", "back/uploads/" + resulet[1]);
+                        $("#blah").data("name", resulet[1]);
+                        let image_top = $("#blah").position().top;
+                        let image_left = $("#blah").position().left;
                         $("#crop_tool").css("top", image_top).css("left", image_left);
                         $("#crop_tool").resizable({ containmet: "parent" });
                         $("#crop_tool").draggable({ containmet: "parent" });
@@ -412,11 +412,11 @@ var column3_director = function() {
         },
 
         getImageCropSize: function(callback) {
-            let image_name = $('#blah').data("name");
-            let orginal_image_top = $('#blah').position().top;
-            let orginal_image_left = $('#blah').position().left;
-            let new_image_top = $('#crop_tool').position().top;
-            let new_image_left = $('#crop_tool').position().left;
+            let image_name = $("#blah").data("name");
+            let orginal_image_top = $("#blah").position().top;
+            let orginal_image_left = $("#blah").position().left;
+            let new_image_top = $("#crop_tool").position().top;
+            let new_image_left = $("#crop_tool").position().left;
 
             orginal_image_top.toFixed();
             orginal_image_left.toFixed();
@@ -426,8 +426,8 @@ var column3_director = function() {
             let crop_start_x = new_image_left - orginal_image_left;
             let crop_start_y = new_image_top - orginal_image_top;
 
-            let new_image_width = parseInt($('#crop_tool').width());
-            let new_image_heigth = parseInt($('#crop_tool').height());
+            let new_image_width = parseInt($("#crop_tool").width());
+            let new_image_heigth = parseInt($("#crop_tool").height());
 
             new_image_width.toFixed();
             new_image_heigth.toFixed();

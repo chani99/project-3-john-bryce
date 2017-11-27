@@ -1,7 +1,7 @@
 "use strict";
 
 var column2_director = function() {
-    // let column1ApiMethod = 'Student';
+    // let column1ApiMethod = "Student";
     // let ApiUrl = "back/api/api.php";
     var column2_data = {};
 
@@ -10,11 +10,11 @@ var column2_director = function() {
     return {
         allstudends: function(data) {
 
-            $('#Students').html("");
+            $("#Students").html("");
 
-            $('#Ssum').html(data.length);
+            $("#Ssum").html(data.length);
 
-            $.ajax('front/views/student_temp.html').always(function(courseTemplate) {
+            $.ajax("front/views/student_temp.html").always(function(courseTemplate) {
                 for (let i = 0; i < data.length; i++) {
                     var c = courseTemplate;
                     c = c.replace("{{singleStudent}}", "singleStudent");
@@ -23,9 +23,9 @@ var column2_director = function() {
                     c = c.replace("{{phone}}", data[i].Student_phone);
                     c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Student_image);
 
-                    let d = document.createElement('div');
+                    let d = document.createElement("div");
                     d.innerHTML = c;
-                    $('#Students').append(d);
+                    $("#Students").append(d);
 
 
 

@@ -2,14 +2,14 @@
 
 //student model
 function Student(data) {
-    if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ('id' in data && data.id != "") this.id = data.id;
-    if ('name' in data && data.name != "") this.name = data.name;
-    if ('phone' in data && data.phone != "") this.phone = data.phone;
-    if ('email' in data && data.email != "") this.email = data.email;
-    if ('image' in data && data.image != "") this.image = data.image;
-    if ('courses' in data) this.courses = data.courses;
-    if ('inner' in data) this.inner = data.inner;
+    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id != "") this.id = data.id;
+    if ("name" in data && data.name != "") this.name = data.name;
+    if ("phone" in data && data.phone != "") this.phone = data.phone;
+    if ("email" in data && data.email != "") this.email = data.email;
+    if ("image" in data && data.image != "") this.image = data.image;
+    if ("courses" in data) this.courses = data.courses;
+    if ("inner" in data) this.inner = data.inner;
 
 
 
@@ -18,7 +18,7 @@ function Student(data) {
 
 //student director
 var StudentModelController = function() {
-    let StudebtApiMethod = 'Student';
+    let StudebtApiMethod = "Student";
     let ApiUrl = "back/api/api.php";
     var data = {
         ctrl: StudebtApiMethod
@@ -31,10 +31,10 @@ var StudentModelController = function() {
         let courses = [];
         let values = [];
 
-        values.name = $('#inputname').val().trim();
-        values.phone = $('#inputphone').val().trim();
-        values.email = $('#inputemail').val().trim();
-        values.image = $('#browse_s').prop('files')[0];
+        values.name = $("#inputname").val().trim();
+        values.phone = $("#inputphone").val().trim();
+        values.email = $("#inputemail").val().trim();
+        values.image = $("#browse_s").prop("files")[0];
 
         if (but_id != "new") { data.id = but_id; }
 
@@ -71,18 +71,7 @@ var StudentModelController = function() {
                     //if no image was loaded then send upated/new data to server
                     callback();
                 }
-                // if (values.image != undefined) {
-                //     sendFileToAjax(values.image, function(resulet) {
-                //         if (resulet[0]) {
-                //             data.image = resulet[1];
-                //             callback();
-                //         } else {
-                //             alert(resulet);
-                //         }
-                //     });
-                // } else {
-                //     callback();
-                // }
+
             }
         });
     }
@@ -115,7 +104,7 @@ var StudentModelController = function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
+                $("#blah").attr("src", e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -124,7 +113,7 @@ var StudentModelController = function() {
 
     function sendFileToAjax(image, callback) {
         let form_data = new FormData();
-        form_data.append('file', image);
+        form_data.append("file", image);
         sendFileToServer(form_data, function(respnse) {
             callback(respnse);
         });
@@ -163,7 +152,7 @@ var StudentModelController = function() {
 
         getStudent: function(id, but_id) {
             data.id = id;
-            let manu = 'get_one';
+            let manu = "get_one";
             let student = new Student(data);
             sendAJAX("GET", ApiUrl, student, function(respnse) {
                 let column3 = new column3_director();
@@ -227,49 +216,49 @@ var StudentModelController = function() {
 
 
 // add event to student details
-$(document).on('click', '#singleStudent', function() {
+$(document).on("click", "#singleStudent", function() {
     let student_model = new StudentModelController();
-    student_model.getStudent($(this).data('studentid'));
+    student_model.getStudent($(this).data("studentid"));
 });
 
 //add event to student edit
-$(document).on('click', '#editStudent', function() {
+$(document).on("click", "#editStudent", function() {
     let column3 = new column3_director();
-    column3.Update_studentTemp("edit", $(this).data('editid'));
+    column3.Update_studentTemp("edit", $(this).data("editid"));
 });
 
 //add event to save or update student 
-$(document).on('click', '#saveStud', function() {
+$(document).on("click", "#saveStud", function() {
     let student_model = new StudentModelController();
-    let student_id = $(this).data('savestudent');
-    if (student_id == 'new') {
+    let student_id = $(this).data("savestudent");
+    if (student_id == "new") {
         student_model.createStudent();
     } else { student_model.updateStudent(student_id); }
 });
 
 //add event to student delete
-$(document).on('click', '#delete_student', function() {
+$(document).on("click", "#delete_student", function() {
     let student_model = new StudentModelController();
-    student_model.deleteStudent($(this).data('deletestudent'));
+    student_model.deleteStudent($(this).data("deletestudent"));
 });
 
 
-$(document).on('change', '#browse', function(e) {
+$(document).on("change", "#browse", function(e) {
     let student_model = new StudentModelController();
     student_model.checkfile(this);
 
 });
 
 // add event for + new student
-$('#add_new_student').click(function() {
+$("#add_new_student").click(function() {
     let column3 = new column3_director();
     column3.newStudentScreen();
 });
 
 
 // add event to show image
-$(document).on('change', '#browse_s', function(e) {
-    let image = $('#browse_s').prop('files')[0];
+$(document).on("change", "#browse_s", function(e) {
+    let image = $("#browse_s").prop("files")[0];
     let column3 = new column3_director();
     column3.uploadFile(image);
 

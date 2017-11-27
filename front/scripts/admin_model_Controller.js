@@ -1,15 +1,15 @@
 "use strict";
 // admin module
 function Admin(data) {
-    if ('ctrl' in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ('id' in data && data.id != "") this.id = data.id;
-    if ('name' in data && data.name != "") this.name = data.name;
-    if ('image' in data && data.image != undefined) this.image = data.image;
-    if ('phone' in data && data.phone != "") this.phone = data.phone;
-    if ('role' in data && data.role != "") this.role_id = data.role;
-    if ('email' in data && data.email != "") this.email = data.email;
-    if ('password' in data && data.password != "") this.password = data.password;
-    if ('inner' in data && data.inner != "") this.inner = data.inner;
+    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id != "") this.id = data.id;
+    if ("name" in data && data.name != "") this.name = data.name;
+    if ("image" in data && data.image != undefined) this.image = data.image;
+    if ("phone" in data && data.phone != "") this.phone = data.phone;
+    if ("role" in data && data.role != "") this.role_id = data.role;
+    if ("email" in data && data.email != "") this.email = data.email;
+    if ("password" in data && data.password != "") this.password = data.password;
+    if ("inner" in data && data.inner != "") this.inner = data.inner;
 
 }
 
@@ -17,7 +17,7 @@ function Admin(data) {
 
 // admin director
 var AdminModuleController = function() {
-    let AdminApiMethod = 'Admin';
+    let AdminApiMethod = "Admin";
     let AdminApiUrl = "back/api/api.php";
     var data = {
         ctrl: AdminApiMethod
@@ -31,28 +31,28 @@ var AdminModuleController = function() {
         let my_role = JSON.parse(GetLohalStotage);
 
 
-        values.name = $('#inputname').val().trim();
-        values.phone = $('#inputphone').val().trim();
-        values.email = $('#inputemail').val().trim();
-        values.role = $('#inpurole').val().trim();
-        values.image = $('#browse_a').prop('files')[0];
+        values.name = $("#inputname").val().trim();
+        values.phone = $("#inputphone").val().trim();
+        values.email = $("#inputemail").val().trim();
+        values.role = $("#inpurole").val().trim();
+        values.image = $("#browse_a").prop("files")[0];
 
 
 
 
         //checks if admin is alowd to handle the passwod
         if (but_id == "new") {
-            values.password = $('#inputpassword').val().trim();
+            values.password = $("#inputpassword").val().trim();
         }
 
         if (but_id != "new") {
             data.id = but_id;
 
-            if (my_role == "owner" && $('#inputpassword').val().trim() != "") {
-                values.password = $('#inputpassword').val().trim();
+            if (my_role == "owner" && $("#inputpassword").val().trim() != "") {
+                values.password = $("#inputpassword").val().trim();
 
-            } else if (my_role == "manager" && values.role == '7' && $('#inputpassword').val().trim() != "") {
-                values.password = $('#inputpassword').val().trim();
+            } else if (my_role == "manager" && values.role == "7" && $("#inputpassword").val().trim() != "") {
+                values.password = $("#inputpassword").val().trim();
             }
 
         }
@@ -98,7 +98,7 @@ var AdminModuleController = function() {
 
     function sendFileToAjax(image, callback) {
         let form_data = new FormData();
-        form_data.append('file', image);
+        form_data.append("file", image);
         sendFileToServer(form_data, function(respnse) {
             callback(respnse);
         });
@@ -121,7 +121,7 @@ var AdminModuleController = function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
+                $("#blah").attr("src", e.target.result);
 
             }
             reader.readAsDataURL(input.files[0]);
@@ -135,7 +135,7 @@ var AdminModuleController = function() {
             getFormValues(but_id, function() {
                 let admin = new Admin(data);
                 sendAJAX("POST", AdminApiUrl, admin, function(respnse) {
-                    wasDone(respnse, 'created');
+                    wasDone(respnse, "created");
                 });
             });
 
@@ -145,7 +145,7 @@ var AdminModuleController = function() {
             getFormValues(but_id, function() {
                 let admin = new Admin(data);
                 sendAJAX("PUT", AdminApiUrl, admin, function(respnse) {
-                    wasDone(respnse, 'updated');
+                    wasDone(respnse, "updated");
 
                 });
             });
@@ -158,7 +158,7 @@ var AdminModuleController = function() {
                 data.id = but_id;
                 let admin = new Admin(data);
                 sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
-                    wasDone(respnse, 'deleted');
+                    wasDone(respnse, "deleted");
                 });
             }
         },
@@ -198,17 +198,17 @@ var AdminModuleController = function() {
 
 
 // add event to get admin update window
-$(document).on('click', '#singleAdmin', function() {
+$(document).on("click", "#singleAdmin", function() {
     let column3_model = new column3_director();
     column3_model.UpdateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
 
 
 // add event to save/edit admin
-$(document).on('click', '#saveAdmin2', function() {
+$(document).on("click", "#saveAdmin2", function() {
     let calltype = $(this).data("adid");
     console.log(calltype);
-    if (calltype == 'new') {
+    if (calltype == "new") {
         let admin_model = new AdminModuleController();
         admin_model.createAdmin(calltype);
     } else {
@@ -219,27 +219,27 @@ $(document).on('click', '#saveAdmin2', function() {
 
 
 //  add event to delete admin
-$(document).on('click', '#delete_admin', function() {
+$(document).on("click", "#delete_admin", function() {
     let admin_model = new AdminModuleController();
     admin_model.deleteAdmin($(this).data("deleteadmin"));
 });
 
 
 //  add event to course details
-$(document).on('click', '#editAdmin', function() {
+$(document).on("click", "#editAdmin", function() {
     let column3_model = new column3_director();
     column3_model.UpdateAdmins($(this).data("editid"));
 });
 
 // add event for + new admin
-$('#add_new_administrator').click(function() {
+$("#add_new_administrator").click(function() {
     let column3 = new column3_director();
     column3.newAdminScreen($(this).data("permission"));
 });
 
 // add event for show image
-$(document).on('change', '#browse_a', function(e) {
-    let image = $('#browse_a').prop('files')[0];
+$(document).on("change", "#browse_a", function(e) {
+    let image = $("#browse_a").prop("files")[0];
     let column3 = new column3_director();
     column3.uploadFile(image);
 
