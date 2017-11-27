@@ -60,9 +60,9 @@ var AdminModuleController = function() {
 
 
         //sends all input values for validation in if ok senbs them to sever...
-        let sendForCheck = new sendValidation();
+        let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "admin", function(returned) {
-            if (returned.test_name == true && returned.test_phone == true && returned.test_email == true && returned.test_role == true && returned.test_image == true && returned.test_password == true) {
+            if (returned.testName == true && returned.test_phone == true && returned.test_email == true && returned.test_role == true && returned.test_image == true && returned.test_password == true) {
                 data.role = values.role;
                 data.name = values.name;
                 data.phone = values.phone;

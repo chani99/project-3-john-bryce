@@ -45,9 +45,9 @@ var StudentModelController = function() {
         data.courses = courses;
 
         //sends all input values for validation in if ok senbs them to sever...
-        let sendForCheck = new sendValidation();
+        let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "student", function(returned) {
-            if (returned.test_name == true && returned.test_phone == true && returned.test_email == true && returned.test_image == true) {
+            if (returned.testName == true && returned.test_phone == true && returned.test_email == true && returned.test_image == true) {
                 data.name = values.name;
                 data.phone = values.phone;
                 data.email = values.email;
@@ -89,14 +89,14 @@ var StudentModelController = function() {
 
     }
 
-    function wasCreated(response_text, id) {
-        if (response_text == true) {
-            alert("your request was done sucssesfuly.");
-            GetAllStudents();
-            getStudent(id);
+    // function wasCreated(response_text, id) {
+    //     if (response_text == true) {
+    //         alert("your request was done sucssesfuly.");
+    //         GetAllStudents();
+    //         getStudent(id);
 
-        }
-    }
+    //     }
+    // }
 
 
     function readURL(input) {
@@ -129,9 +129,9 @@ var StudentModelController = function() {
                 sendAJAX("POST", ApiUrl, student, function(respnse) {
                     if (respnse[0] == true) {
                         alert("your request was done sucssesfuly.");
-                        let student_model = new StudentModelController();
-                        student_model.GetAllStudents();
-                        student_model.getStudent(respnse[1]);
+                        let studentModel = new StudentModelController();
+                        studentModel.GetAllStudents();
+                        studentModel.getStudent(respnse[1]);
                     }
 
                 });
@@ -198,9 +198,9 @@ var StudentModelController = function() {
                 sendAJAX("PUT", ApiUrl, student, function(respnse) {
                     if (respnse == true) {
                         alert("your request was done sucssesfuly.");
-                        let student_model = new StudentModelController();
-                        student_model.GetAllStudents();
-                        student_model.getStudent(data.id);
+                        let studentModel = new StudentModelController();
+                        studentModel.GetAllStudents();
+                        studentModel.getStudent(data.id);
                     }
 
                 });
@@ -217,8 +217,8 @@ var StudentModelController = function() {
 
 // add event to student details
 $(document).on("click", "#singleStudent", function() {
-    let student_model = new StudentModelController();
-    student_model.getStudent($(this).data("studentid"));
+    let studentModel = new StudentModelController();
+    studentModel.getStudent($(this).data("studentid"));
 });
 
 //add event to student edit
@@ -229,23 +229,23 @@ $(document).on("click", "#editStudent", function() {
 
 //add event to save or update student 
 $(document).on("click", "#saveStud", function() {
-    let student_model = new StudentModelController();
+    let studentModel = new StudentModelController();
     let student_id = $(this).data("savestudent");
     if (student_id == "new") {
-        student_model.createStudent();
-    } else { student_model.updateStudent(student_id); }
+        studentModel.createStudent();
+    } else { studentModel.updateStudent(student_id); }
 });
 
 //add event to student delete
 $(document).on("click", "#delete_student", function() {
-    let student_model = new StudentModelController();
-    student_model.deleteStudent($(this).data("deletestudent"));
+    let studentModel = new StudentModelController();
+    studentModel.deleteStudent($(this).data("deletestudent"));
 });
 
 
 $(document).on("change", "#browse", function(e) {
-    let student_model = new StudentModelController();
-    student_model.checkfile(this);
+    let studentModel = new StudentModelController();
+    studentModel.checkfile(this);
 
 });
 

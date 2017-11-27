@@ -26,7 +26,7 @@ var column3_director = function() {
 
             //add checkbox
             column3 = new column3_director();
-            column3.AddCheckbox(student_courses);
+            column3.addCheckbox(student_courses);
 
         });
     }
@@ -91,7 +91,7 @@ var column3_director = function() {
             $("#main-scool").append(d);
             $("#delete_student").hide();
             column3 = new column3_director();
-            column3.AddCheckbox();
+            column3.addCheckbox();
 
 
         });
@@ -294,7 +294,7 @@ var column3_director = function() {
 
 
         //  create cuorses checkbox list
-        AddCheckbox: function(student_courses) {
+        addCheckbox: function(student_courses) {
             if (!student_courses)
                 student_courses = false;
 

@@ -88,8 +88,7 @@ var validation = function() {
                     empty = NotEmpty(input);
                     if (empty == true) {
                         if (input.size > 1000000) {
-                            return "file can"
-                            t be larger then 1 MB ";
+                            return "file can't be larger then 1 MB";
                         } else {
                             return true;
                         }
@@ -124,14 +123,14 @@ var validation = function() {
 
 // function sending data to validation
 
-var sendValidation = function() {
+var SendValidation = function() {
 
     return {
         sendForValidation: function(values, but_id, caller, callback) {
 
             let validate = new validation();
             let temp_val;
-            let test_name = false;
+            let testName = false;
             let test_description = false;
             let test_image = true;
             let test_email = false;
@@ -146,11 +145,11 @@ var sendValidation = function() {
             if (temp_val == true) {
                 $("#name_error").html("");
                 $("#inputname").removeClass("error");
-                test_name = true;
+                testName = true;
             } else {
                 $("#name_error").html(temp_val);
                 $("#inputname").addClass("error")
-                test_name = false;
+                testName = false;
             }
 
 
@@ -237,13 +236,13 @@ var sendValidation = function() {
 
             switch (caller) {
                 case "courses":
-                    callback({ test_name: test_name, test_description: test_description, test_image: test_image });
+                    callback({ testName: testName, test_description: test_description, test_image: test_image });
                     break;
                 case "admin":
-                    callback({ test_name: test_name, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
+                    callback({ testName: testName, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
                     break;
                 case "student":
-                    callback({ test_name: test_name, test_phone: test_phone, test_email: test_email, test_image: test_email });
+                    callback({ testName: testName, test_phone: test_phone, test_email: test_email, test_image: test_email });
                     break;
             }
 
