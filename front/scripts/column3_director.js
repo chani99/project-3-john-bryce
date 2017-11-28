@@ -8,7 +8,7 @@ var column3_director = function() {
 
 
     //loads update student form screen
-    function tempNameFunction(details, student_courses, studen_id, calltype) {
+    function tempNameFunction(details, studentCourses, studen_id, calltype) {
         $.ajax("front/views/new_update_student_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update student: " + details.name);
@@ -26,7 +26,7 @@ var column3_director = function() {
 
             //add checkbox
             column3 = new column3_director();
-            column3.addCheckbox(student_courses);
+            column3.addCheckbox(studentCourses);
 
         });
     }
@@ -269,12 +269,12 @@ var column3_director = function() {
                 mail: $("#student_email").html(),
             };
 
-            let student_courses = []; //gets the student courses list DOM
+            let studentCourses = []; //gets the student courses list DOM
             $(".courselist span h6").each(function(i, sp) {
-                student_courses.push($(sp).attr("id"));
+                studentCourses.push($(sp).attr("id"));
             });
 
-            tempNameFunction(details, student_courses, studen_id, calltype);
+            tempNameFunction(details, studentCourses, studen_id, calltype);
         },
 
 
@@ -294,9 +294,9 @@ var column3_director = function() {
 
 
         //  create cuorses checkbox list
-        addCheckbox: function(student_courses) {
-            if (!student_courses)
-                student_courses = false;
+        addCheckbox: function(studentCourses) {
+            if (!studentCourses)
+                studentCourses = false;
 
             var CoursesArray = []; //gets all courses list from DOM
             $(".allCourses span h6").each(function(i, sp) {
@@ -315,9 +315,9 @@ var column3_director = function() {
                 checkbox.value = CoursesArray[i];
                 checkbox.id = Coursesid[i];
 
-                if (student_courses != false) {
-                    for (var x = 0; x < student_courses.length; x++) {
-                        if (Coursesid[i] == student_courses[x]) {
+                if (studentCourses != false) {
+                    for (var x = 0; x < studentCourses.length; x++) {
+                        if (Coursesid[i] == studentCourses[x]) {
                             checkbox.checked = true;
                         }
                     }
@@ -338,9 +338,9 @@ var column3_director = function() {
         //shoes course detaills
         get_one_course: function(data, permission) {
 
-            $.ajax("front/views/course_details_temp.html").always(function(course_temp) {
+            $.ajax("front/views/course_details_temp.html").always(function(courseTemp) {
                 $("#main-scool").html("");
-                var c = course_temp;
+                var c = courseTemp;
                 c = c.replace("{{editid}}", data[0].id);
                 c = c.replace("{{name}}", data[0].name);
                 c = c.replace("{{details}}", data[0].description);
@@ -387,17 +387,17 @@ var column3_director = function() {
         // sends file to server befor croping
         uploadFile: function(image) {
             let sendForCheck = new validation();
-            sendForCheck.validat_input(image, "image");
+            sendForCheck.validateInput(image, "image");
             if (sendForCheck) {
-                let form_data = new FormData();
-                form_data.append("file", image);
-                sendFileToServer(form_data, function(resulet) {
+                let formData = new FormData();
+                formData.append("file", image);
+                sendFileToServer(formData, function(resulet) {
                     if (resulet[0] == true) {
                         $("#blah").attr("src", "back/uploads/" + resulet[1]);
                         $("#blah").data("name", resulet[1]);
-                        let image_top = $("#blah").position().top;
-                        let image_left = $("#blah").position().left;
-                        $("#crop_tool").css("top", image_top).css("left", image_left);
+                        let imageTop = $("#blah").position().top;
+                        let imageLeft = $("#blah").position().left;
+                        $("#crop_tool").css("top", imageTop).css("left", imageLeft);
                         $("#crop_tool").resizable({ containmet: "parent" });
                         $("#crop_tool").draggable({ containmet: "parent" });
                     } else {
@@ -413,33 +413,33 @@ var column3_director = function() {
 
         getImageCropSize: function(callback) {
             let image_name = $("#blah").data("name");
-            let orginal_image_top = $("#blah").position().top;
-            let orginal_image_left = $("#blah").position().left;
-            let new_image_top = $("#crop_tool").position().top;
-            let new_image_left = $("#crop_tool").position().left;
+            let orgImageTop = $("#blah").position().top;
+            let orgImageLeft = $("#blah").position().left;
+            let newImageTop = $("#crop_tool").position().top;
+            let newImageLeft = $("#crop_tool").position().left;
 
-            orginal_image_top.toFixed();
-            orginal_image_left.toFixed();
-            new_image_top.toFixed();
-            new_image_left.toFixed();
+            orgImageTop.toFixed();
+            orgImageLeft.toFixed();
+            newImageTop.toFixed();
+            newImageLeft.toFixed();
 
-            let crop_start_x = new_image_left - orginal_image_left;
-            let crop_start_y = new_image_top - orginal_image_top;
+            let cropStartY = newImageLeft - orgImageLeft;
+            let cropStartX = newImageTop - orgImageTop;
 
-            let new_image_width = parseInt($("#crop_tool").width());
-            let new_image_heigth = parseInt($("#crop_tool").height());
+            let newImageWidth = parseInt($("#crop_tool").width());
+            let newImageHeight = parseInt($("#crop_tool").height());
 
-            new_image_width.toFixed();
-            new_image_heigth.toFixed();
+            newImageWidth.toFixed();
+            newImageHeight.toFixed();
 
-            let crop_sizes = {
-                start_x: crop_start_x * 3,
-                start_y: crop_start_y * 3,
-                width: new_image_width * 3,
-                heigth: new_image_heigth * 3,
+            let cropSizes = {
+                start_x: cropStartY * 3,
+                start_y: cropStartX * 3,
+                width: newImageWidth * 3,
+                heigth: newImageHeight * 3,
                 name: image_name
             }
-            callback(crop_sizes);
+            callback(cropSizes);
         }
 
 

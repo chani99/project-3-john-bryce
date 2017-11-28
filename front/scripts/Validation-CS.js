@@ -44,7 +44,7 @@ var validation = function() {
 
 
     return {
-        validat_input: function(input, type) {
+        validateInput: function(input, type) {
             let empty;
             let pattern;
             switch (type) {
@@ -129,124 +129,126 @@ var SendValidation = function() {
         sendForValidation: function(values, but_id, caller, callback) {
 
             let validate = new validation();
-            let temp_val;
+            let testVal;
             let testName = false;
-            let test_description = false;
-            let test_image = true;
-            let test_email = false;
-            let test_phone = false;
-            let test_role = false;
-            let test_password = true;
+            let testDescription = false;
+            let testImage = true;
+            let testEmail = false;
+            let testPhone = false;
+            let testRole = false;
+            let testPassword = true;
 
 
 
             // input validation
-            temp_val = validate.validat_input(values.name, "name");
-            if (temp_val == true) {
+            testVal = validate.validateInput(values.name, "name");
+            if (testVal == true) {
                 $("#name_error").html("");
                 $("#inputname").removeClass("error");
                 testName = true;
             } else {
-                $("#name_error").html(temp_val);
+                $("#name_error").html(testVal);
                 $("#inputname").addClass("error")
                 testName = false;
             }
 
 
-            temp_val = validate.validat_input(values.description, "name");
-            if (temp_val == true) {
+            testVal = validate.validateInput(values.description, "name");
+            if (testVal == true) {
                 $("#description_error").html("");
-                test_description = true;
+                testDescription = true;
                 $("#inputdetails").removeClass("error");
             } else {
-                $("#description_error").html(temp_val);
+                $("#description_error").html(testVal);
                 $("#inputdetails").addClass("error");
-                test_description = false;
+                testDescription = false;
             }
 
             if ("role" in values) {
-                temp_val = validate.validat_input(values.role, "name");
-                if (temp_val == true) {
+                testVal = validate.validateInput(values.role, "name");
+                if (testVal == true) {
                     $("#role_error").html("");
                     $("#inputrole").removeClass("error");
-                    test_role = true;
+                    testRole = true;
                 } else {
-                    $("#role_error").html(temp_val);
+                    $("#role_error").html(testVal);
                     $("#inputrole").addClass("error")
-                    test_role = false;
+                    testRole = false;
                 }
             }
 
             if ("phone" in values) {
-                temp_val = validate.validat_input(values.phone, "phone");
-                if (temp_val == true) {
+                testVal = validate.validateInput(values.phone, "phone");
+                if (testVal == true) {
                     $("#phone_error").html("");
-                    test_phone = true;
+                    testPhone = true;
                     $("#inputphone").removeClass("error");
                 } else {
-                    $("#phone_error").html(temp_val);
+                    $("#phone_error").html(testVal);
                     $("#inputphone").addClass("error");
-                    test_phone = false;
+                    testPhone = false;
                 }
 
 
             }
 
             if ("email" in values) {
-                temp_val = validate.validat_input(values.email, "email");
-                if (temp_val == true) {
+                testVal = validate.validateInput(values.email, "email");
+                if (testVal == true) {
                     $("#email_error").html("");
-                    test_email = true;
+                    testEmail = true;
                     $("#inputemail").removeClass("error");
                 } else {
-                    $("#email_error").html(temp_val);
+                    $("#email_error").html(testVal);
                     $("#inputemail").addClass("error");
-                    test_email = false;
+                    testEmail = false;
                 }
 
             }
 
             if ("image" in values) {
-                temp_val = validate.validat_input(values.image, "image");
-                if ((temp_val == true) || (temp_val == "You must fill all input fields!" && but_id != "new")) {
+                testVal = validate.validateInput(values.image, "image");
+                if ((testVal == true) || (testVal == "You must fill all input fields!" && but_id != "new")) {
                     $("#image_error").html("");
-                    test_image = true;
+                    testImage = true;
                     $("#st_photo").removeClass("error");
                 } else {
-                    $("#image_error").html(temp_val);
+                    $("#image_error").html(testVal);
                     $("#st_photo").addClass("error")
-                    test_image = false;
+                    testImage = false;
                 }
 
 
             }
 
             if ("password" in values) {
-                temp_val = validate.validat_input(values.password, "password");
-                if (temp_val == true) {
+                testVal = validate.validateInput(values.password, "password");
+                if (testVal == true) {
                     $("#password_error").html("");
-                    test_password = true;
+                    testPassword = true;
                     $("#inputpassword").removeClass("error");
                 } else {
-                    $("#password_error").html(temp_val);
+                    $("#password_error").html(testVal);
                     $("#inputpassword").addClass("error");
-                    test_password = false;
+                    testPassword = false;
                 }
             }
 
             switch (caller) {
                 case "courses":
-                    callback({ testName: testName, test_description: test_description, test_image: test_image });
+                    callback({ testName: testName, testDescription: testDescription, testImage: testImage });
                     break;
                 case "admin":
-                    callback({ testName: testName, test_role: test_role, test_phone: test_phone, test_email: test_email, test_image: test_image, test_password: test_password });
+                    callback({ testName: testName, testRole: testRole, testPhone: testPhone, testEmail: testEmail, testImage: testImage, testPassword: testPassword });
                     break;
                 case "student":
-                    callback({ testName: testName, test_phone: test_phone, test_email: test_email, test_image: test_email });
+                    callback({ testName: testName, testPhone: testPhone, testEmail: testEmail, testImage: testImage });
                     break;
             }
 
 
         }
     }
+
+
 }

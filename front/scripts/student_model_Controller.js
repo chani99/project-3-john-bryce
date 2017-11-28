@@ -47,7 +47,7 @@ var StudentModelController = function() {
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "student", function(returned) {
-            if (returned.testName == true && returned.test_phone == true && returned.test_email == true && returned.test_image == true) {
+            if (returned.testName == true && returned.testPhone == true && returned.testEmail == true && returned.testImage == true) {
                 data.name = values.name;
                 data.phone = values.phone;
                 data.email = values.email;
