@@ -1,15 +1,15 @@
 "use strict";
 // admin module
 function Admin(data) {
-    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ("id" in data && data.id != "") this.id = data.id;
-    if ("name" in data && data.name != "") this.name = data.name;
-    if ("image" in data && data.image != undefined) this.image = data.image;
-    if ("phone" in data && data.phone != "") this.phone = data.phone;
-    if ("role" in data && data.role != "") this.role_id = data.role;
-    if ("email" in data && data.email != "") this.email = data.email;
-    if ("password" in data && data.password != "") this.password = data.password;
-    if ("inner" in data && data.inner != "") this.inner = data.inner;
+    if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id !== "") this.id = data.id;
+    if ("name" in data && data.name !== "") this.name = data.name;
+    if ("image" in data && data.image !== undefined) this.image = data.image;
+    if ("phone" in data && data.phone !== "") this.phone = data.phone;
+    if ("role" in data && data.role !== "") this.role_id = data.role;
+    if ("email" in data && data.email !== "") this.email = data.email;
+    if ("password" in data && data.password !== "") this.password = data.password;
+    if ("inner" in data && data.inner !== "") this.inner = data.inner;
 
 }
 
@@ -41,17 +41,17 @@ var AdminModuleController = function() {
 
 
         //checks if admin is alowd to handle the passwod
-        if (but_id == "new") {
+        if (but_id === "new") {
             values.password = $("#inputpassword").val().trim();
         }
 
-        if (but_id != "new") {
+        if (but_id !== "new") {
             data.id = but_id;
 
-            if (my_role == "owner" && $("#inputpassword").val().trim() != "") {
+            if (my_role === "owner" && $("#inputpassword").val().trim() !== "") {
                 values.password = $("#inputpassword").val().trim();
 
-            } else if (my_role == "manager" && values.role == "7" && $("#inputpassword").val().trim() != "") {
+            } else if (my_role === "manager" && values.role === "7" && $("#inputpassword").val().trim() !== "") {
                 values.password = $("#inputpassword").val().trim();
             }
 
@@ -62,7 +62,7 @@ var AdminModuleController = function() {
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "admin", function(returned) {
-            if (returned.testName == true && returned.testPhone == true && returned.testEmail == true && returned.testRole == true && returned.testImage == true && returned.testPassword == true) {
+            if (returned.testName === true && returned.testPhone === true && returned.testEmail === true && returned.testRole === true && returned.testImage === true && returned.testPassword === true) {
                 data.role = values.role;
                 data.name = values.name;
                 data.phone = values.phone;
@@ -73,7 +73,7 @@ var AdminModuleController = function() {
 
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
-                if (values.image != undefined) {
+                if (values.image !== undefined) {
                     let column3 = new column3_director();
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
@@ -106,7 +106,7 @@ var AdminModuleController = function() {
 
 
     function wasDone(response_text, type) {
-        if (response_text == true) {
+        if (response_text === true) {
             alert("this admin was " + type + " sucssesfuly.");
             let mainscreen = new main_screen();
             mainscreen.loadAdminscreen();

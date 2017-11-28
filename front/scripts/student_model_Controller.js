@@ -2,12 +2,12 @@
 
 //student model
 function Student(data) {
-    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ("id" in data && data.id != "") this.id = data.id;
-    if ("name" in data && data.name != "") this.name = data.name;
-    if ("phone" in data && data.phone != "") this.phone = data.phone;
-    if ("email" in data && data.email != "") this.email = data.email;
-    if ("image" in data && data.image != "") this.image = data.image;
+    if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id !== "") this.id = data.id;
+    if ("name" in data && data.name !== "") this.name = data.name;
+    if ("phone" in data && data.phone !== "") this.phone = data.phone;
+    if ("email" in data && data.email !== "") this.email = data.email;
+    if ("image" in data && data.image !== "") this.image = data.image;
     if ("courses" in data) this.courses = data.courses;
     if ("inner" in data) this.inner = data.inner;
 
@@ -36,7 +36,7 @@ var StudentModelController = function() {
         values.email = $("#inputemail").val().trim();
         values.image = $("#browse_s").prop("files")[0];
 
-        if (but_id != "new") { data.id = but_id; }
+        if (but_id !== "new") { data.id = but_id; }
 
         $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
             courses.push($(this).attr("id"));
@@ -47,14 +47,14 @@ var StudentModelController = function() {
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "student", function(returned) {
-            if (returned.testName == true && returned.testPhone == true && returned.testEmail == true && returned.testImage == true) {
+            if (returned.testName === true && returned.testPhone === true && returned.testEmail === true && returned.testImage === true) {
                 data.name = values.name;
                 data.phone = values.phone;
                 data.email = values.email;
 
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
-                if (values.image != undefined) {
+                if (values.image !== undefined) {
                     let column3 = new column3_director();
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
@@ -78,7 +78,7 @@ var StudentModelController = function() {
 
 
     function wasDone(response_text) {
-        if (response_text == true) {
+        if (response_text === true) {
             alert("your request was done sucssesfuly.");
             let loadmain = new main_screen;
             loadmain.loadmaindcreen();
@@ -89,14 +89,6 @@ var StudentModelController = function() {
 
     }
 
-    // function wasCreated(response_text, id) {
-    //     if (response_text == true) {
-    //         alert("your request was done sucssesfuly.");
-    //         GetAllStudents();
-    //         getStudent(id);
-
-    //     }
-    // }
 
 
     function readURL(input) {
@@ -127,7 +119,7 @@ var StudentModelController = function() {
             getFormValues("new", function() {
                 let student = new Student(data);
                 sendAJAX("POST", ApiUrl, student, function(respnse) {
-                    if (respnse[0] == true) {
+                    if (respnse[0] === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
                         studentModel.GetAllStudents();
@@ -177,7 +169,7 @@ var StudentModelController = function() {
 
         deleteStudent: function(but_id) {
             let safe = confirm("Are you sure you want to delete this student?");
-            if (safe == true) {
+            if (safe === true) {
                 data.id = but_id;
                 let student = new Student(data);
                 sendAJAX("DELETE", ApiUrl, student, function(respnse) {
@@ -196,7 +188,7 @@ var StudentModelController = function() {
             getFormValues(but_id, function() {
                 let student = new Student(data);
                 sendAJAX("PUT", ApiUrl, student, function(respnse) {
-                    if (respnse == true) {
+                    if (respnse === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
                         studentModel.GetAllStudents();
@@ -231,7 +223,7 @@ $(document).on("click", "#editStudent", function() {
 $(document).on("click", "#saveStud", function() {
     let studentModel = new StudentModelController();
     let student_id = $(this).data("savestudent");
-    if (student_id == "new") {
+    if (student_id === "new") {
         studentModel.createStudent();
     } else { studentModel.updateStudent(student_id); }
 });

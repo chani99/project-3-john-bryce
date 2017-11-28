@@ -20,7 +20,7 @@ var main_screen = function() {
     }
 
     function permission(response) {
-        if (response.permission == "sales") {
+        if (response.permission === "sales") {
             $("#nav_Administration").hide();
         }
     }
@@ -47,13 +47,13 @@ var main_screen = function() {
                 "password": $("#inputPassword").val()
             };
             sendLoginAjax(user, function(response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     $("#login_error").html("");
                     $("#loginform").hide();
                     login(response);
                     permission(response);
                     $("#screen1, #navlist").show();
-                    if (response.permission == "sales") {
+                    if (response.permission === "sales") {
                         $("#nav_Administration, #add_new_course").hide();
                     }
                     var permission_for_storage = JSON.stringify(response.permission);

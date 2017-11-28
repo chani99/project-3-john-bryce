@@ -55,7 +55,7 @@ var column3_director = function() {
                     break;
                 case "manager":
                     $("select option[value=6]").attr("selected", "selected");
-                    if (permission == "manager") {
+                    if (permission === "manager") {
                         $("#passwordhide").hide();
                     }
                     break;
@@ -65,7 +65,7 @@ var column3_director = function() {
                     break;
             }
 
-            if (permission == "manager") {
+            if (permission === "manager") {
                 $("#inpurole").attr("disabled", "true");
                 $("#delete_admin").hide();
             }
@@ -295,8 +295,10 @@ var column3_director = function() {
 
         //  create cuorses checkbox list
         addCheckbox: function(studentCourses) {
-            if (!studentCourses)
+            if (!studentCourses) {
                 studentCourses = false;
+            }
+
 
             var CoursesArray = []; //gets all courses list from DOM
             $(".allCourses span h6").each(function(i, sp) {
@@ -315,7 +317,7 @@ var column3_director = function() {
                 checkbox.value = CoursesArray[i];
                 checkbox.id = Coursesid[i];
 
-                if (studentCourses != false) {
+                if (studentCourses !== false) {
                     for (var x = 0; x < studentCourses.length; x++) {
                         if (Coursesid[i] == studentCourses[x]) {
                             checkbox.checked = true;
@@ -348,7 +350,7 @@ var column3_director = function() {
                 let d = document.createElement("div");
                 d.innerHTML = c;
                 $("#main-scool").append(d);
-                if (permission == "sales") {
+                if (permission === "sales") {
                     $("#editCourse").hide();
                 }
                 student_model.GetStudentForCourse(data[0].id);
@@ -392,7 +394,7 @@ var column3_director = function() {
                 let formData = new FormData();
                 formData.append("file", image);
                 sendFileToServer(formData, function(resulet) {
-                    if (resulet[0] == true) {
+                    if (resulet[0] === true) {
                         $("#blah").attr("src", "back/uploads/" + resulet[1]);
                         $("#blah").data("name", resulet[1]);
                         let imageTop = $("#blah").position().top;

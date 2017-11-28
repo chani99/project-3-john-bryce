@@ -2,7 +2,7 @@
 var validation = function() {
 
     function NotEmpty(input) {
-        if ((input == "") || (input == undefined)) {
+        if ((input === "") || (input === undefined)) {
             return "You must fill all input fields!";
         } else {
             return true;
@@ -51,9 +51,9 @@ var validation = function() {
                 case "name":
                     empty = NotEmpty(input);
                     pattern = matchTextPattern(input);
-                    if ((empty == true) && (pattern == true)) {
+                    if ((empty === true) && (pattern === true)) {
                         return true;
-                    } else if (empty != true) {
+                    } else if (empty !== true) {
                         return empty;
                     } else {
                         return pattern;
@@ -63,9 +63,9 @@ var validation = function() {
                 case "phone":
                     empty = NotEmpty(input);
                     pattern = matchPhonePattern(input);
-                    if ((empty == true) && (pattern == true)) {
+                    if ((empty === true) && (pattern === true)) {
                         return true;
-                    } else if (empty != true) {
+                    } else if (empty !== true) {
                         return empty;
                     } else {
                         return pattern;
@@ -75,9 +75,9 @@ var validation = function() {
                 case "email":
                     empty = NotEmpty(input);
                     pattern = matchEmailPattern(input);
-                    if ((empty == true) && (pattern == true)) {
+                    if ((empty === true) && (pattern === true)) {
                         return true;
-                    } else if (empty != true) {
+                    } else if (empty !== true) {
                         return empty;
                     } else {
                         return pattern;
@@ -86,7 +86,7 @@ var validation = function() {
 
                 case "image":
                     empty = NotEmpty(input);
-                    if (empty == true) {
+                    if (empty === true) {
                         if (input.size > 1000000) {
                             return "file can't be larger then 1 MB";
                         } else {
@@ -102,7 +102,7 @@ var validation = function() {
 
                 case "password":
                     empty = NotEmpty(input);
-                    if (empty == true) {
+                    if (empty === true) {
                         return true;
                         return empty;
                     }
@@ -142,7 +142,7 @@ var SendValidation = function() {
 
             // input validation
             tempVal = validate.validateInput(values.name, "name");
-            if (tempVal == true) {
+            if (tempVal === true) {
                 $("#name_error").html("");
                 $("#inputname").removeClass("error");
                 testName = true;
@@ -154,7 +154,7 @@ var SendValidation = function() {
 
 
             tempVal = validate.validateInput(values.description, "name");
-            if (tempVal == true) {
+            if (tempVal === true) {
                 $("#description_error").html("");
                 testDescription = true;
                 $("#inputdetails").removeClass("error");
@@ -166,7 +166,7 @@ var SendValidation = function() {
 
             if ("role" in values) {
                 tempVal = validate.validateInput(values.role, "name");
-                if (tempVal == true) {
+                if (tempVal === true) {
                     $("#role_error").html("");
                     $("#inputrole").removeClass("error");
                     testRole = true;
@@ -179,7 +179,7 @@ var SendValidation = function() {
 
             if ("phone" in values) {
                 tempVal = validate.validateInput(values.phone, "phone");
-                if (tempVal == true) {
+                if (tempVal === true) {
                     $("#phone_error").html("");
                     testPhone = true;
                     $("#inputphone").removeClass("error");
@@ -194,7 +194,7 @@ var SendValidation = function() {
 
             if ("email" in values) {
                 tempVal = validate.validateInput(values.email, "email");
-                if (tempVal == true) {
+                if (tempVal === true) {
                     $("#email_error").html("");
                     testEmail = true;
                     $("#inputemail").removeClass("error");
@@ -208,7 +208,7 @@ var SendValidation = function() {
 
             if ("image" in values) {
                 tempVal = validate.validateInput(values.image, "image");
-                if ((tempVal == true) || (tempVal == "You must fill all input fields!" && but_id != "new")) {
+                if ((tempVal === true) || (tempVal == "You must fill all input fields!" && but_id != "new")) {
                     $("#image_error").html("");
                     testImage = true;
                     $("#st_photo").removeClass("error");
@@ -223,7 +223,7 @@ var SendValidation = function() {
 
             if ("password" in values) {
                 tempVal = validate.validateInput(values.password, "password");
-                if (tempVal == true) {
+                if (tempVal === true) {
                     $("#password_error").html("");
                     testPassword = true;
                     $("#inputpassword").removeClass("error");

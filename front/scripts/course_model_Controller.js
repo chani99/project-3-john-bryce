@@ -1,12 +1,12 @@
 "use strict";
 // course module
 function Course(data) {
-    if ("ctrl" in data && data.ctrl != "") this.ctrl = data.ctrl;
-    if ("id" in data && data.id != "") this.id = data.id;
-    if ("name" in data && data.name != "") this.name = data.name;
+    if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
+    if ("id" in data && data.id !== "") this.id = data.id;
+    if ("name" in data && data.name !== "") this.name = data.name;
     if ("description" in data && data.description != "") this.description = data.description;
-    if ("image" in data && data.image != "") this.image = data.image;
-    if ("inner" in data && data.inner != "") this.inner = data.inner;
+    if ("image" in data && data.image !== "") this.image = data.image;
+    if ("inner" in data && data.inner !== "") this.inner = data.inner;
 
 }
 
@@ -29,7 +29,7 @@ var CourseModuleController = function() {
         values.description = $("#inputdetails").val().trim();
         values.image = $("#st_photo").prop("files")[0];
 
-        if (but_id != "new") {
+        if (but_id !== "new") {
             data.id = but_id;
         }
 
@@ -37,11 +37,11 @@ var CourseModuleController = function() {
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
         sendForCheck.sendForValidation(values, but_id, "courses", function(returned) {
-            if (returned.testName == true && returned.testDescription == true && returned.testImage == true) {
+            if (returned.testName === true && returned.testDescription === true && returned.testImage === true) {
                 data.name = values.name;
                 data.description = values.description;
 
-                if (values.image != undefined) { //check if a image was uploaded
+                if (values.image !== undefined) { //check if a image was uploaded
                     sendFileToAjax(values.image, function(resulet) {
                         if (resulet[0]) {
                             data.image = resulet[1];
@@ -80,7 +80,7 @@ var CourseModuleController = function() {
 
 
     function wasDone(response_text) {
-        if (response_text == true) {
+        if (response_text === true) {
             alert("your request was done sucssesfuly.");
             let loadmain = new main_screen;
             loadmain.loadmaindcreen();
@@ -123,7 +123,7 @@ var CourseModuleController = function() {
 
         deleteCourse: function(but_id) {
             let safe = confirm("Are you sure you want to delete this course?");
-            if (safe == true) {
+            if (safe === true) {
                 data.id = but_id;
                 let course = new Course(data);
                 sendAJAX("DELETE", CourseApiUrl, course, function(respnse) {
@@ -190,7 +190,7 @@ $(document).on("click", "#singleCourse", function() {
 // add event to save/edit course
 $(document).on("click", "#saveCourse", function() {
     let calltype = $(this).data("curseid");
-    if (calltype == "new") {
+    if (calltype === "new") {
         let course_model = new CourseModuleController();
         course_model.createCourse(calltype);
     } else {
