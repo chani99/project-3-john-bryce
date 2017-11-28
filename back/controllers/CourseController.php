@@ -7,7 +7,7 @@
     
 
     class CourseController extends Controller {
-        private $db;
+        private $businessLogic;
         private $model;
         private $validation;        
         private $table_name = "course";
@@ -15,7 +15,7 @@
         
 
         function __construct($param) {
-            $this->db = new BL();
+            $this->businessLogic = new BL();
             $this->model = new CourseModel($param);
 
             
@@ -26,7 +26,7 @@
         function CreateNewRow($param) {
             $rows = $this->model->getRows();
             $sql_data = $this->CreateRow($rows, $this->model);
-            $update = $this->db->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
+            $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
             return $this->checkIsWasGood($update);
        
         }
@@ -35,7 +35,7 @@
 
         // Updates a line in directos table
         function ReturnSelect() {
-            $List =  $this->db->SelectAllFromTable($this->table_name, $this->classneame);
+            $List =  $this->businessLogic->SelectAllFromTable($this->table_name, $this->classneame);
             $CourseSelect="<option value='Select a Course'>Select a Course</option>";
                 for ($i = 0; $i < count($List); $i++) {
                 $CourseSelect .= "<option value=" . $List[$i]["id"] . ">" . $List[$i]["name"] . "</option>";
@@ -48,7 +48,7 @@
 
         // Selects all from Courses table and returns a object array
         function getAllCourses() {
-            $getall = $this->db->SelectAllFromTable($this->table_name, $this->classneame);
+            $getall = $this->businessLogic->SelectAllFromTable($this->table_name, $this->classneame);
             $allCourses = array();            
             for($i=0; $i<count($getall); $i++) {
                 $c = new CourseModel($getall[$i]);
@@ -61,7 +61,7 @@
          // get one course by id
          function getCourseById($param){
             if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $OneCourse =  $this->db->getLineById($this->table_name, $this->model->getId());
+                $OneCourse =  $this->businessLogic->getLineById($this->table_name, $this->model->getId());
                 return  $OneCourse;
             }
         }
@@ -70,7 +70,7 @@
         // Checks if a id exists
         function checkifidexists($param){
         if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-            $check =  $this->db->Check_if_id_exists($this->table_name, $c->getId());
+            $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
             return $this->checkIsWasGood($check);
             }else{
                 return false;
@@ -83,7 +83,7 @@
         // Deletes a line from Courses table
         function DeleteCourseById($param) {
                 if($this->model->getId() != false){
-                $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
+                $deleted =  $this->businessLogic->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
                 }else{
                     return false;
@@ -102,7 +102,7 @@
                     }else{
                         $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "'";
                     }
-                $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+                $update =  $this->businessLogic->update_table($this->table_name, $this->model->getId(), $updateValues);
                 return $this->checkIsWasGood($update);
               
             }
@@ -121,7 +121,7 @@
             $Column_equal_to = 'course.id = student_course.c_id';
             $Column_equal_to2 = 'student.id = student_course.s_id';
             $where = 'student.id = ' . $param["id"];
-            $getall = $this->db->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
+            $getall = $this->businessLogic->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
             for($i=0; $i<count($getall); $i++) {
                 $c = new CourseModel($getall[$i]);
                 array_push($innerJoinCourses, $c->jsonSerialize());
@@ -132,12 +132,12 @@
         
             //select the las course id that was added
         function selectLastId() {
-            $new_id = $this->db->selectlastRow($this->table_name);
+            $new_id = $this->businessLogic->selectlastRow($this->table_name);
             return $new_id;
         }
 
 
-            //check what couses to change for a student by compering the old courses in db to the new couses sent from client
+            //check what couses to change for a student by compering the old courses in businessLogic to the new couses sent from client
         function compare_courses($id, $old_course, $new_courses) {
             $add_courses =[];
             $remove_courses =[];
@@ -177,7 +177,7 @@
     }
 
 
-        //send new_courses to DB
+        //send new_courses to businessLogic
         function addCuorses($add_courses, $id)
         {
                 for ($c = 0; $c < count($add_courses); $c++) {
@@ -192,7 +192,7 @@
         }
 
 
-        //delete courses from DB
+        //delete courses from businessLogic
         function RemoveCourses($remove_courses, $id){
                 for ($c = 0; $c < count($remove_courses); $c++) {
                     $courses;

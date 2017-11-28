@@ -10,11 +10,11 @@ require_once '../common/PasswordHandler.php';
 class LoginController {
 
     private $controller;
-    private $db;
+    private $dataBade;
     
 
     function __construct() {
-        $this->db = new BL();
+        $this->dataBade = new BL();
         
     }
 
@@ -35,7 +35,7 @@ class LoginController {
 
     
     function getUserByNameAndPassword($name, $password) {
-            $OneAdmin =  $this->db->getUser('administratior', $name, $password);
+            $OneAdmin =  $this->dataBade->getUser('administratior', $name, $password);
             return  $OneAdmin;
         }
     

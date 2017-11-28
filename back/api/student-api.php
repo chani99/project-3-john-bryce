@@ -36,8 +36,8 @@
         }
         
         function selectLastId() {
-            $new_id = $this->db->selectlastRow($this->table_name);
-            return $new_id;
+            $newId = $this->db->selectlastRow($this->table_name);
+            return $newId;
         }
 
 
@@ -69,8 +69,8 @@
             }          
                  
             $courses = new CourseController($params);
-            $Stu_old_courses = $courses->getCoursesInnerJoin($params);
-            $compare_courses = $courses->compare_courses( $params["id"], $Stu_old_courses, $params["courses"]);
+            $stuOldCourses = $courses->getCoursesInnerJoin($params);
+            $compare_courses = $courses->compare_courses( $params["id"], $stuOldCourses, $params["courses"]);
             $Students =$this->controller->UpdateById($params);
         return $Students;
         }
@@ -79,8 +79,8 @@
         //  Delete 1 Students   
          function Delete($params, $mypermission) {
             $courses = new CourseController($params);
-            $Stu_old_courses = $courses->getCoursesInnerJoin($params);
-            $deleteCourses = $courses->RemoveCourses($Stu_old_courses, $params["id"]);
+            $stuOldCourses = $courses->getCoursesInnerJoin($params);
+            $deleteCourses = $courses->RemoveCourses($stuOldCourses, $params["id"]);
             $Students = $this->controller->DeleteCourseById($params);
 
             return $Students;

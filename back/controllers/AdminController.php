@@ -8,7 +8,7 @@
     
 
     class AdminController extends Controller {
-        private $db;
+        private $businessLogic;
         private $model;
         private $validation;        
         private $table_name = "administratior";
@@ -16,11 +16,11 @@
         
 
         function __construct($params) {
-            $this->db = new BL();
+            $this->businessLogic = new BL();
             $this->validation = new validation;
             if (array_key_exists("password", $params)){
-                $pw = new PasswordHandler();
-                $params["password"] = $pw->getHash($params["password"]);
+                $password = new PasswordHandler();
+                $params["password"] = $password->getHash($params["password"]);
             }
             $this->model = new AdminModel($params);
             
@@ -37,7 +37,7 @@
                         
                     $rows = $this->model->getRows();
                     $sql_data = $this->CreateRow($rows, $this->model);
-                    $update = $this->db->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
+                    $update = $this->dataBade->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
                     return $this->checkIsWasGood($update);
                     }
             } else {
@@ -58,10 +58,10 @@
             $table2 = 'role';
             $Column_equal_to = 'administratior.role_id = role.id';
 
-            $getall = $this->db->innerJoin($selected_tables, $this->table_name, $table2, $Column_equal_to);
+            $getall = $this->businessLogic->innerJoin($selected_tables, $this->table_name, $table2, $Column_equal_to);
             for($i=0; $i<count($getall); $i++) {
-                $c = new AdminModel($getall[$i]);
-                array_push($allAdmins, $c->jsonSerialize());
+                $aModel = new AdminModel($getall[$i]);
+                array_push($allAdmins, $aModel->jsonSerialize());
             }
             return $allAdmins;   
         }
@@ -75,10 +75,10 @@
             $Column_equal_to = 'administratior.role_id = role.id';
             $condition = ' administratior.role_id != 5';
 
-            $getall = $this->db->innerJoinExcept($selected_tables, $this->table_name, $table2, $Column_equal_to, $condition);
+            $getall = $this->businessLogic->innerJoinExcept($selected_tables, $this->table_name, $table2, $Column_equal_to, $condition);
             for($i=0; $i<count($getall); $i++) {
-                $c = new AdminModel($getall[$i]);
-                array_push($allAdmins, $c->jsonSerialize());
+                $aModel = new AdminModel($getall[$i]);
+                array_push($allAdmins, $aModel->jsonSerialize());
             }
             return $allAdmins;   
         }
@@ -86,7 +86,7 @@
         
         // Checks if a already have this name and phone
         function getAdminByNameAndPhone(){
-            $admin =  $this->db->getUserbyNameandPhone($this->table_name, $this->model->getName(), $this->model->getphone());
+            $admin =  $this->businessLogic->getUserbyNameandPhone($this->table_name, $this->model->getName(), $this->model->getphone());
             return $admin;
         }
 
@@ -95,7 +95,7 @@
         // Checks if a id exists
          function getAdminById(){
                 if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $admin =  $this->db->getLineById($this->table_name, $this->model->getId());
+                $admin =  $this->businessLogic->getLineById($this->table_name, $this->model->getId());
                 return $admin;
                 }else{
                     return false;
@@ -121,11 +121,11 @@
                         if ($oldrole[0]['role_id'] != 7) {
                             return 'No permission';
                         } else {
-                            $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
+                            $deleted =  $this->dataBade->DeleteRow($this->table_name, $this->model->getId());
                             return $this->checkIsWasGood($deleted);
                         }
                     }
-                $deleted =  $this->db->DeleteRow($this->table_name, $this->model->getId());
+                $deleted =  $this->businessLogic->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
                 }else{
                     return false;
@@ -138,8 +138,8 @@
 
 
         function selectLastId() {
-            $new_id = $this->db->selectlastRow($this->table_name);
-            return $new_id;
+            $newId = $this->businessLogic->selectlastRow($this->table_name);
+            return $newId;
         }
 
 
@@ -193,7 +193,7 @@
             }
             $updateValues .="'";
             $updateValues = substr($updateValues, 2);
-            $update =  $this->db->update_table($this->table_name, $this->model->getId(), $updateValues);
+            $update =  $this->businessLogic->update_table($this->table_name, $this->model->getId(), $updateValues);
 
             return $this->checkIsWasGood($update);
         }
