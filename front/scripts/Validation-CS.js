@@ -129,7 +129,7 @@ var SendValidation = function() {
         sendForValidation: function(values, but_id, caller, callback) {
 
             let validate = new validation();
-            let testVal;
+            let tempVal;
             let testName = false;
             let testDescription = false;
             let testImage = true;
@@ -141,50 +141,50 @@ var SendValidation = function() {
 
 
             // input validation
-            testVal = validate.validateInput(values.name, "name");
-            if (testVal == true) {
+            tempVal = validate.validateInput(values.name, "name");
+            if (tempVal == true) {
                 $("#name_error").html("");
                 $("#inputname").removeClass("error");
                 testName = true;
             } else {
-                $("#name_error").html(testVal);
+                $("#name_error").html(tempVal);
                 $("#inputname").addClass("error")
                 testName = false;
             }
 
 
-            testVal = validate.validateInput(values.description, "name");
-            if (testVal == true) {
+            tempVal = validate.validateInput(values.description, "name");
+            if (tempVal == true) {
                 $("#description_error").html("");
                 testDescription = true;
                 $("#inputdetails").removeClass("error");
             } else {
-                $("#description_error").html(testVal);
+                $("#description_error").html(tempVal);
                 $("#inputdetails").addClass("error");
                 testDescription = false;
             }
 
             if ("role" in values) {
-                testVal = validate.validateInput(values.role, "name");
-                if (testVal == true) {
+                tempVal = validate.validateInput(values.role, "name");
+                if (tempVal == true) {
                     $("#role_error").html("");
                     $("#inputrole").removeClass("error");
                     testRole = true;
                 } else {
-                    $("#role_error").html(testVal);
+                    $("#role_error").html(tempVal);
                     $("#inputrole").addClass("error")
                     testRole = false;
                 }
             }
 
             if ("phone" in values) {
-                testVal = validate.validateInput(values.phone, "phone");
-                if (testVal == true) {
+                tempVal = validate.validateInput(values.phone, "phone");
+                if (tempVal == true) {
                     $("#phone_error").html("");
                     testPhone = true;
                     $("#inputphone").removeClass("error");
                 } else {
-                    $("#phone_error").html(testVal);
+                    $("#phone_error").html(tempVal);
                     $("#inputphone").addClass("error");
                     testPhone = false;
                 }
@@ -193,13 +193,13 @@ var SendValidation = function() {
             }
 
             if ("email" in values) {
-                testVal = validate.validateInput(values.email, "email");
-                if (testVal == true) {
+                tempVal = validate.validateInput(values.email, "email");
+                if (tempVal == true) {
                     $("#email_error").html("");
                     testEmail = true;
                     $("#inputemail").removeClass("error");
                 } else {
-                    $("#email_error").html(testVal);
+                    $("#email_error").html(tempVal);
                     $("#inputemail").addClass("error");
                     testEmail = false;
                 }
@@ -207,13 +207,13 @@ var SendValidation = function() {
             }
 
             if ("image" in values) {
-                testVal = validate.validateInput(values.image, "image");
-                if ((testVal == true) || (testVal == "You must fill all input fields!" && but_id != "new")) {
+                tempVal = validate.validateInput(values.image, "image");
+                if ((tempVal == true) || (tempVal == "You must fill all input fields!" && but_id != "new")) {
                     $("#image_error").html("");
                     testImage = true;
                     $("#st_photo").removeClass("error");
                 } else {
-                    $("#image_error").html(testVal);
+                    $("#image_error").html(tempVal);
                     $("#st_photo").addClass("error")
                     testImage = false;
                 }
@@ -222,13 +222,13 @@ var SendValidation = function() {
             }
 
             if ("password" in values) {
-                testVal = validate.validateInput(values.password, "password");
-                if (testVal == true) {
+                tempVal = validate.validateInput(values.password, "password");
+                if (tempVal == true) {
                     $("#password_error").html("");
                     testPassword = true;
                     $("#inputpassword").removeClass("error");
                 } else {
-                    $("#password_error").html(testVal);
+                    $("#password_error").html(tempVal);
                     $("#inputpassword").addClass("error");
                     testPassword = false;
                 }
