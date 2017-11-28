@@ -52,7 +52,7 @@ var main_screen = function() {
                     $("#loginform").hide();
                     login(response);
                     permission(response);
-                    $("#screen1, #navlist").show();
+                    $("#screen1, #navlist, #nav_Administration, #add_new_course").show();
                     if (response.permission === "sales") {
                         $("#nav_Administration, #add_new_course").hide();
                     }

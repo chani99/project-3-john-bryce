@@ -37,7 +37,7 @@
                         
                     $rows = $this->model->getRows();
                     $sql_data = $this->CreateRow($rows, $this->model);
-                    $update = $this->dataBade->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
+                    $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
                     return $this->checkIsWasGood($update);
                     }
             } else {

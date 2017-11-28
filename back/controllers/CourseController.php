@@ -196,9 +196,10 @@
         function RemoveCourses($remove_courses, $id){
                 for ($c = 0; $c < count($remove_courses); $c++) {
                     $courses;
-                    $courses = $remove_courses[$c];
+                    is_array($remove_courses[$c]) ? $courses = $remove_courses[$c]['Course_id'] : $courses = $remove_courses[$c];;
                     $param = [
                         "id" => $id,
+                    
                         "courses" => $courses
                         ];
                     
