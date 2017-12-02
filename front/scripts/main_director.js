@@ -96,7 +96,7 @@ var main_screen = function() {
                 courseController.GetAllCourse(permission);
                 let studentController = new StudentModelController();
                 studentController.GetAllStudents();
-                permission == "" ? location.hash = "school" : location.hash = "main";
+                permission === "" ? location.hash = "school" : location.hash = "main";
 
             });
 
