@@ -142,11 +142,11 @@ var CourseModuleController = function() {
         },
 
 
-        GetAllCourse: function(permission) {
+        GetAllCourse: function() {
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
                 let column1 = new column1_director();
-                column1.allcourses(returned_data, permission);
+                column1.allcourses(returned_data);
             });
 
         },

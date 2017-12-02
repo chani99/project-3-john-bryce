@@ -8,7 +8,7 @@ var column1_director = function() {
 
     return {
 
-        allcourses: function(data, permission) {
+        allcourses: function(data) {
             $("#course").html("");
             $("#Csum").html(data.length);
             $.ajax("front/views/course_temp.html").always(function(courseTemplate) {

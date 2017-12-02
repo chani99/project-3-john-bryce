@@ -36,6 +36,7 @@
         
                  // Get all results or check if a id exists
                 function Read($params, $mypermission) {
+                    $mypermission = $mypermission;
                                 if (array_key_exists("id", $params)) {
 
                                         if (array_key_exists("inner", $params)) {
@@ -66,8 +67,13 @@
                     
                 //  Delete 1 result   
                  function Delete($params, $mypermission) {
+                    if($mypermission != 'sales'){
+                        
                             $result = $this->controller->DeleteCourseById($params);
                             return $result;
+                    } else{
+                        return 'No permission';                        
+                    }
                 }
 
     }

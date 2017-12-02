@@ -20,6 +20,7 @@
 
         // Create a new Students
         function Create($params, $mypermission) {
+            $mypermission = $mypermission;            
             $this->controller->CreateStudents($params);
             $get_new_row =  $this->controller->selectLastId();
             $new_id = $get_new_row[0]['id'];
@@ -43,7 +44,8 @@
 
          // Get all Studentss or check if a id exists
         function Read($params, $mypermission) {
-
+            $mypermission = $mypermission;            
+            
             if (array_key_exists("id", $params)) {
 
                 if (array_key_exists("inner", $params)) {
@@ -64,6 +66,8 @@
 
         // Update a Students
         function Update($params, $mypermission) {
+            $mypermission = $mypermission;            
+            
             if (!array_key_exists("courses", $params)) {
                 $params['courses'] = [];
             }          
@@ -78,6 +82,7 @@
             
         //  Delete 1 Students   
          function Delete($params, $mypermission) {
+            $mypermission = $mypermission;            
             $courses = new CourseController($params);
             $stuOldCourses = $courses->getCoursesInnerJoin($params);
             $deleteCourses = $courses->RemoveCourses($stuOldCourses, $params["id"]);

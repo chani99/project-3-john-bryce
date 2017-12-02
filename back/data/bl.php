@@ -38,8 +38,8 @@ function getUser($table_name,  $name, $password) {
     return $res;
 }
 
-function getUserbyNameandPhone($table_name,  $name, $phnoe) {
-    $res =  $this->dataBade->getLineById("SELECT * FROM ".$table_name." WHERE name ='$name'AND phone ='$phnoe'");
+function getAdminByNameAndpassword($table_name,  $name, $password) {
+    $res =  $this->dataBade->getLineById("SELECT * FROM ".$table_name." WHERE name ='$name'AND password ='$password'");
     return $res;
 }
  // updates data in a table 

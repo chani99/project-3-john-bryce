@@ -14,7 +14,7 @@
 
         // Create a new Admins
         function Create($params, $mypermission) {
-            return $this->controller->CreateAdmins($params);
+            return $this->controller->CreateAdmins($params, $mypermission);
         }
         
 

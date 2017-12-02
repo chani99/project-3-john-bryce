@@ -28,21 +28,25 @@
 
 
         // Creates a new line in a table
-        function CreateAdmins($param) {
-            if($this->model->getrole_id() != 5) {
-                    $checkIfexists = $this->getAdminByNameAndPhone();
-                    if (count($checkIfexists) > 0){
-                        return 'This user already exists on the system';
-                    } else {
-                        
-                    $rows = $this->model->getRows();
-                    $sql_data = $this->CreateRow($rows, $this->model);
-                    $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
-                    return $this->checkIsWasGood($update);
-                    }
-            } else {
-                return "Unable to add owner";
-            }
+        function CreateAdmins($param, $mypermission) {
+            if($mypermission != 7) {
+                if($this->model->getrole_id() != 5) {
+                        $checkIfexists = $this->getAdminByNameAndPassword();
+                        if (count($checkIfexists) > 0){
+                            return 'This user already exists on the system';
+                        } else {
+                            
+                        $rows = $this->model->getRows();
+                        $sql_data = $this->CreateRow($rows, $this->model);
+                        $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
+                        return $this->checkIsWasGood($update);
+                        }
+                } else {
+                    return "Unable to add owner";
+                }
+            return "sales coldn't create administrators";
+            
+        }
        
         }
 
@@ -85,8 +89,8 @@
         
         
         // Checks if a already have this name and phone
-        function getAdminByNameAndPhone(){
-            $admin =  $this->businessLogic->getUserbyNameandPhone($this->table_name, $this->model->getName(), $this->model->getphone());
+        function getAdminByNameAndpassword(){
+            $admin =  $this->businessLogic->getAdminByNameAndpassword($this->table_name, $this->model->getName(), $this->model->getpassword());
             return $admin;
         }
 
