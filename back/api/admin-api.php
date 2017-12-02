@@ -23,7 +23,7 @@
         function Read($params, $mypermission) {
 
             if (array_key_exists("id", $params)) {
-                $Admins = $controller->getById();
+                $Admins = $this->controller->getById();
                 return $Admins;
             }
 
