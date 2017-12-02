@@ -14,7 +14,8 @@
 
         // Create a new Admins
         function Create($params, $mypermission) {
-            return $this->controller->CreateAdmins($params, $mypermission);
+            $prm = $params;
+            return $this->controller->CreateAdmins($mypermission);
         }
         
 
@@ -22,19 +23,19 @@
         function Read($params, $mypermission) {
 
             if (array_key_exists("id", $params)) {
-                $Admins = $controller->getById($params);
+                $Admins = $controller->getById();
                 return $Admins;
             }
 
             else {
                 switch ($mypermission){
                 case 'owner':
-                    return [$this->controller->getAllAdmins($params), $mypermission];
+                    return [$this->controller->getAllAdmins(), $mypermission];
                      
                 break;
                 
                 case 'manager':
-                    return [$this->controller->getAdminsExceptOwner($params), $mypermission];
+                    return [$this->controller->getAdminsExceptOwner(), $mypermission];
                 break;
                 
                 case 'sales':
@@ -47,14 +48,16 @@
 
         // Update a Admins
         function Update($params, $mypermission) {
-            $Admins =$this->controller->UpdateById($params, $mypermission);
+            $prm = $params;            
+            $Admins =$this->controller->UpdateById($mypermission);
             return $Admins;
             }
 
             
         //  Delete 1 Admins   
-         function Delete($param, $mypermission) {
-            $Admins = $this->controller->DeleteAdminById($param, $mypermission);
+         function Delete($params, $mypermission) {
+            $prm = $params;            
+            $Admins = $this->controller->DeleteAdminById($mypermission);
             return $Admins;
             
         }

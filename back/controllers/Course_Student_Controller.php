@@ -24,7 +24,7 @@
         
 
         // Creates a new line in a table
-        function UpdateTable($param) {
+        function UpdateTable() {
             $courses = $this->model->getc_id();
             for($i=0; $i<count($courses); $i++) {
             $updateValues= "c_id =  '".$courses[i]."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
@@ -36,7 +36,7 @@
                 
         
         // Creates a new line in a table
-        function CreateNewRow($param) {
+        function CreateNewRow() {
             $rows = $this->model->getRows();
             $sql_data = $this->CreateRow($rows, $this->model);
             $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
@@ -73,7 +73,7 @@
 
 
         // Checks if a id exists
-         function getCourseById($param){
+         function getCourseById(){
                 if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
                 $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
                 return $this->checkIsWasGood($check);
@@ -87,7 +87,7 @@
 
 
         // Deletes a line from Courses table
-        function DeleteCourseById($param) {
+        function DeleteCourseById() {
                 if($this->model->getc_id() != false){
                 $deleted =  $this->businessLogic->DeleteRow($this->table_name, $c->getc_id());
                 return $this->checkIsWasGood($deleted);
@@ -100,7 +100,7 @@
         
 
         // Deletes a line from Courses table
-        function DeleteCourseByRowName($param) {
+        function DeleteCourseByRowName() {
             if($this->model->getc_id() != false){
             $deleted =  $this->businessLogic->DeleteRowbyRowName($this->table_name, 'c_id', $this->model->getc_id(), 's_id', $this->model->gets_id());
             return $this->checkIsWasGood($deleted);
@@ -113,7 +113,7 @@
 
 
         // Updates a line in directos table
-        function UpdateById($param) {
+        function UpdateById() {
                 if($this->model->getId() != false || $this->model->getId() != false){
                     if($this->model->getName() != false) {
                         $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";

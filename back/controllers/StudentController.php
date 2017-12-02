@@ -24,7 +24,7 @@
         
 
         // Creates a new line in a table
-        function CreateStudents($param) {
+        function CreateStudents() {
             $rows = $this->model->getRows();
             $sql_data = $this->CreateRow($rows, $this->model);
             $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
@@ -64,7 +64,7 @@
         
     
 
-        function getById($id) {
+        function getById() {
             if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
                 
                 $OneStudent =  $this->businessLogic->getLineById($this->table_name, $this->model->getId());
@@ -90,7 +90,7 @@
 
 
         // Checks if a id exists
-         function getCourseById($param){
+         function getCourseById(){
                 if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
                 $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
                 return $this->checkIsWasGood($check);
@@ -104,7 +104,7 @@
 
 
         // Deletes a line from Courses table
-        function DeleteCourseById($param) {
+        function DeleteCourseById() {
                 if($this->model->getId() != false){
                 $deleted =  $this->businessLogic->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
@@ -122,7 +122,7 @@
 
 
         // Updates a line in directos table
-        function UpdateById($param) {
+        function UpdateById() {
                 if($this->model->getId() != false || $this->model->getId() != false){
                             if($this->model->getimage() != "" ) {
                                 $updateValues= "name =  '".$this->model->getName()."', phone = '" .$this->model->getphone(). "', email = '" .$this->model->getemail(). "', image = '". $this->model->getimage()."'";

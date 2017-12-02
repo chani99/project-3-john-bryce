@@ -52,14 +52,14 @@
                     $result = $this->controller->getStudentsInnerJoin($params);
                     return $result;
                     } else {
-                    $Students = $this->controller->getById($params);
+                    $Students = $this->controller->getById();
                      return $Students;
                     }
 
             }
 
             else {
-                return $this->controller->getAllStudents($params);
+                return $this->controller->getAllStudents();
             }
         } 
 
@@ -71,12 +71,11 @@
             if (!array_key_exists("courses", $params)) {
                 $params['courses'] = [];
             }          
-                 
             $courses = new CourseController($params);
             $stuOldCourses = $courses->getCoursesInnerJoin($params);
             $compare_courses = $courses->compare_courses( $params["id"], $stuOldCourses, $params["courses"]);
-            $Students =$this->controller->UpdateById($params);
-        return $Students;
+            $Students =$this->controller->UpdateById();
+            return $Students;
         }
 
             
@@ -86,8 +85,7 @@
             $courses = new CourseController($params);
             $stuOldCourses = $courses->getCoursesInnerJoin($params);
             $deleteCourses = $courses->RemoveCourses($stuOldCourses, $params["id"]);
-            $Students = $this->controller->DeleteCourseById($params);
-
+            $Students = $this->controller->DeleteCourseById();
             return $Students;
             
         }

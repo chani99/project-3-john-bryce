@@ -23,7 +23,7 @@
         
 
         // Creates a new line in a table
-        function CreateNewRow($param) {
+        function CreateNewRow() {
             $rows = $this->model->getRows();
             $sql_data = $this->CreateRow($rows, $this->model);
             $update = $this->businessLogic->create_new_row($this->table_name, $sql_data[0], $sql_data[1],  $sql_data[2]);
@@ -59,7 +59,7 @@
 
 
          // get one course by id
-         function getCourseById($param){
+         function getCourseById(){
             if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
                 $OneCourse =  $this->businessLogic->getLineById($this->table_name, $this->model->getId());
                 return  $OneCourse;
@@ -68,9 +68,9 @@
 
         
         // Checks if a id exists
-        function checkifidexists($param){
+        function checkifidexists(){
         if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-            $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
+            $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $this->model->getId());
             return $this->checkIsWasGood($check);
             }else{
                 return false;
@@ -81,7 +81,7 @@
 
 
         // Deletes a line from Courses table
-        function DeleteCourseById($param) {
+        function DeleteCourseById() {
                 if($this->model->getId() != false){
                 $deleted =  $this->businessLogic->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);
@@ -95,7 +95,7 @@
 
 
         // Updates a line in directos table
-        function UpdateById($param) {
+        function UpdateById() {
                 if($this->model->getId() != false || $this->model->getId() != false){
                     if($this->model->getimage() != "" ) {
                         $updateValues= "name =  '".$this->model->getName()."', description = '" .$this->model->getdescription(). "', image = '". $this->model->getimage()."'";
@@ -108,8 +108,6 @@
             }
 
         }
-
-
         
 
         // get the courses for a student by id
@@ -136,29 +134,8 @@
             return $new_id;
         }
 
-
-            //check what couses to change for a student by compering the old courses in businessLogic to the new couses sent from client
-        function compare_courses($id, $old_course, $new_courses) {
-            $add_courses =[];
-            $remove_courses =[];
-        if ($old_course == $new_courses) {
-                return true;
-        } else {
-
-                //check what courses to remove
-            for ($i = 0; $i < count($old_course); $i++) {
-                $temp = 0;
-                        for ($x = 0; $x < count($new_courses); $x++) {
-                            if ($old_course[$i]['Course_id'] == $new_courses[$x]) {
-                                $temp = 1;
-                            }
-                        }
-                if ($temp == 0) {
-                    array_push($remove_courses, $old_course[$i]['Course_id']);
-                }
-            }
-            
-                //check what courses to add
+        function getaddCuorses($old_course, $new_courses){
+            $add_courses =[];            
             for ($z = 0; $z < count($new_courses); $z++) {
                 $temp = 0;
                         for ($y = 0; $y < count($old_course); $y++) {
@@ -170,19 +147,48 @@
                     array_push($add_courses, $new_courses[$z]);
                     }    
             }
-            $this->addCuorses($add_courses, $id);
-            $this->RemoveCourses($remove_courses, $id);
+            return $add_courses;
+        }
+
+
+        function getremoveCuorses($old_course, $new_courses){
+            $remove_courses =[];            
+            for ($i = 0; $i < count($old_course); $i++) {
+                $temp = 0;
+                        for ($x = 0; $x < count($new_courses); $x++) {
+                            if ($old_course[$i]['Course_id'] == $new_courses[$x]) {
+                                $temp = 1;
+                            }
+                        }
+                if ($temp == 0) {
+                    array_push($remove_courses, $old_course[$i]['Course_id']);
+                }
+            }
+            return  $remove_courses;
+
+         }
+
+            //check what couses to change for a student by compering the old courses in businessLogic to the new couses sent from client
+        function compare_courses($idNum, $old_course, $new_courses) {
+        if ($old_course == $new_courses) {
+                return true;
+        } else {
+
+            $remove_courses = $this->getremoveCuorses($old_course, $new_courses);
+            $add_courses = $this->getaddCuorses($old_course, $new_courses);
+            $this->addCuorses($add_courses, $idNum);
+            $this->RemoveCourses($remove_courses, $idNum);
         }
        
     }
 
 
         //send new_courses to businessLogic
-        function addCuorses($add_courses, $id)
+        function addCuorses($add_courses, $idNum)
         {
                 for ($c = 0; $c < count($add_courses); $c++) {
                     $param = [
-                        "id" => $id,
+                        "id" => $idNum,
                         "courses" => $add_courses[$c] 
                     ];
     
@@ -193,12 +199,12 @@
 
 
         //delete courses from businessLogic
-        function RemoveCourses($remove_courses, $id){
+        function RemoveCourses($remove_courses, $idNum){
                 for ($c = 0; $c < count($remove_courses); $c++) {
                     $courses;
                     is_array($remove_courses[$c]) ? $courses = $remove_courses[$c]['Course_id'] : $courses = $remove_courses[$c];;
                     $param = [
-                        "id" => $id,
+                        "id" => $idNum,
                         "courses" => $courses
                         ];
                     

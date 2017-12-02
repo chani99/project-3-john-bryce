@@ -113,7 +113,7 @@
 
 
         // Deletes a line from Courses table
-        function DeleteAdminById($param, $mypermission) {
+        function DeleteAdminById($mypermission) {
             $oldrole = $this->getAdminById();            
             if ($oldrole[0]['role_id'] == 5) {
                 return "can't delete the owner";
@@ -148,7 +148,7 @@
 
 
         // Updates a line in directos table
-        function UpdateById($param, $mypermission){ 
+        function UpdateById($mypermission){ 
             if($this->model->getId() != false){
                 if($mypermission != 'sales'){
                     if($mypermission == 'manager'){

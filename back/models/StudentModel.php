@@ -3,7 +3,7 @@
     
     
     class StudentModel extends Model implements JsonSerializable {
-        private $id;
+        private $idNum;
         private $name;
         private $phone;
         private $email;        
@@ -12,7 +12,7 @@
         function __construct($params) {
             $this->tableName ='course';
             $this->tableRows = array("name", "phone", "email","image");
-            if (array_key_exists("id", $params)) $this->id = $params["id"];  
+            if (array_key_exists("id", $params)) $this->idNum = $params["id"];  
             if (array_key_exists("name", $params)) $this->name = $params["name"];
             if (array_key_exists("phone", $params)) $this->phone = $params["phone"];
             if (array_key_exists("email", $params)) $this->email = $params["email"];
@@ -27,7 +27,7 @@
     
 
         public function getid(){
-            return $this->id;
+            return $this->idNum;
         }
 
         public function getphone(){
@@ -47,7 +47,7 @@
 
         public function jsonSerialize() {
             return [
-                "Student_id" => $this->id,
+                "Student_id" => $this->idNum,
                 "Student_name" => $this->name,
                 "Student_phone" => $this->phone,
                 "Student_email" => $this->email,

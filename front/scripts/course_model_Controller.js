@@ -99,7 +99,7 @@ var CourseModuleController = function() {
             getFormValues(but_id, function() {
                 let course = new Course(data);
                 sendAJAX("POST", CourseApiUrl, course, function(respnse) {
-                    if (respnse === true) {
+                    if (respnse[0] === true) {
                         alert("this caouse was created sucssesfuly.");
                         let course_model = new CourseModuleController();
                         course_model.GetAllCourse();
@@ -142,11 +142,11 @@ var CourseModuleController = function() {
         },
 
 
-        GetAllCourse: function() {
+        GetAllCourse: function(permission) {
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
                 let column1 = new column1_director();
-                column1.allcourses(returned_data);
+                column1.allcourses(returned_data, permission);
             });
 
         },

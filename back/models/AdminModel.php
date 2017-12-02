@@ -3,7 +3,7 @@
     
     
     class AdminModel extends Model implements JsonSerializable {
-        private $id;
+        private $idNum;
         private $name;
         private $phone;
         private $email;
@@ -16,7 +16,7 @@
         function __construct($params) {
             $this->tableName ='course';
             $this->tableRows = array("name", "role_id", "phone", "email", "password", "image");
-            if (array_key_exists("id", $params)) $this->id = $params["id"];  
+            if (array_key_exists("id", $params)) $this->idNum = $params["id"];  
             if (array_key_exists("name", $params)) $this->name = $params["name"];
             if (array_key_exists("role_id", $params)) $this->role_id = $params["role_id"];
             if (array_key_exists("phone", $params)) $this->phone = $params["phone"];
@@ -34,7 +34,7 @@
         }
     
         public function getid(){
-            return $this->id;
+            return $this->idNum;
         }
 
         public function getphone(){
@@ -60,7 +60,7 @@
 
         public function jsonSerialize() {
             return [
-                "Admin_id" => $this->id,
+                "Admin_id" => $this->idNum,
                 "Admin_name" => $this->name,
                 "Admin_phone" => $this->phone,
                 "Admin_email" => $this->email,

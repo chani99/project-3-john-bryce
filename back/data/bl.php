@@ -19,15 +19,15 @@ private $dataBade;
     }
     
 // checks if a id exists on a id row in a dataBade and returns true or false
- function Check_if_id_exists($table_name, $id) {
-        $res =  $this->dataBade->CheckId("SELECT id FROM ".$table_name." WHERE id='$id'");
+ function Check_if_id_exists($table_name, $idNumw) {
+        $res =  $this->dataBade->CheckId("SELECT id FROM ".$table_name." WHERE id='$idNumw'");
         $istrue = ($res > 0 ?  true : false);
         return $istrue;
     }
 
     // 
- function getLineById($table_name, $id) {
-    $res =  $this->dataBade->getLineById("SELECT * FROM ".$table_name." WHERE id=$id");
+ function getLineById($table_name, $idNumw) {
+    $res =  $this->dataBade->getLineById("SELECT * FROM ".$table_name." WHERE id=$idNumw");
     return $res;
 }
 
@@ -43,8 +43,8 @@ function getAdminByNameAndpassword($table_name,  $name, $password) {
     return $res;
 }
  // updates data in a table 
- function update_table($table_name, $id, $updateValues) {
-        $update = $this->dataBade->updateSQL("UPDATE ".$table_name." SET ".$updateValues." WHERE id='$id'");
+ function update_table($table_name, $idNumw, $updateValues) {
+        $update = $this->dataBade->updateSQL("UPDATE ".$table_name." SET ".$updateValues." WHERE id='$idNumw'");
         return $update;
 
 }
@@ -65,8 +65,8 @@ function selectlastRow($table_name){
     
 }
 
- function DeleteRow($table_name, $id) {
-        $delete = $this->dataBade->deleteSQL("DELETE FROM ".$table_name." WHERE id =". $id);
+ function DeleteRow($table_name, $idNumw) {
+        $delete = $this->dataBade->deleteSQL("DELETE FROM ".$table_name." WHERE id =". $idNumw);
         return $delete;
 
 }
