@@ -27,9 +27,7 @@
         $.ajax({
             type: method,
             url: url,
-            success: function() {
-                callback();
-            }
+            success: callback()
 
         });
     }

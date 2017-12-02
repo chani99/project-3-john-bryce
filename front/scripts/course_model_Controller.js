@@ -101,9 +101,9 @@ var CourseModuleController = function() {
                 sendAJAX("POST", CourseApiUrl, course, function(respnse) {
                     if (respnse[0] === true) {
                         alert("this caouse was created sucssesfuly.");
-                        let course_model = new CourseModuleController();
-                        course_model.GetAllCourse();
-                        course_model.getOneCourse(respnse[1]);
+                        let courseModel = new CourseModuleController();
+                        courseModel.GetAllCourse();
+                        courseModel.getOneCourse(respnse[1]);
                     } else {
                         alert(respnse);
 

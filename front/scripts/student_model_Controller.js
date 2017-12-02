@@ -104,9 +104,9 @@ var StudentModelController = function() {
 
 
     function sendFileToAjax(image, callback) {
-        let form_data = new FormData();
-        form_data.append("file", image);
-        sendFileToServer(form_data, function(respnse) {
+        let formData = new FormData();
+        formData.append("file", image);
+        sendFileToServer(formData, function(respnse) {
             callback(respnse);
         });
     }
@@ -142,7 +142,7 @@ var StudentModelController = function() {
 
 
 
-        getStudent: function(id, but_id) {
+        getStudent: function(id, butId) {
             data.id = id;
             let manu = "get_one";
             let student = new Student(data);
@@ -224,10 +224,10 @@ $(document).on("click", "#editStudent", function() {
 //add event to save or update student 
 $(document).on("click", "#saveStud", function() {
     let studentModel = new StudentModelController();
-    let student_id = $(this).data("savestudent");
-    if (student_id === "new") {
+    let studentId = $(this).data("savestudent");
+    if (studentId === "new") {
         studentModel.createStudent();
-    } else { studentModel.updateStudent(student_id); }
+    } else { studentModel.updateStudent(studentId); }
 });
 
 //add event to student delete

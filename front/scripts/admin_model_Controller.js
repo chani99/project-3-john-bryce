@@ -4,7 +4,7 @@ function Admin(data) {
     if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
     if ("id" in data && data.id !== "") this.id = data.id;
     if ("name" in data && data.name !== "") this.name = data.name;
-    if ("image" in data && data.image !== undefined) this.image = data.image;
+    if ("image" in data && data.image) this.image = data.image;
     if ("phone" in data && data.phone !== "") this.phone = data.phone;
     if ("role" in data && data.role !== "") this.role_id = data.role;
     if ("email" in data && data.email !== "") this.email = data.email;
@@ -97,21 +97,21 @@ var AdminModuleController = function() {
 
 
     function sendFileToAjax(image, callback) {
-        let form_data = new FormData();
-        form_data.append("file", image);
-        sendFileToServer(form_data, function(respnse) {
+        let formData = new FormData();
+        formData.append("file", image);
+        sendFileToServer(formData, function(respnse) {
             callback(respnse);
         });
     }
 
 
-    function wasDone(response_text, type) {
-        if (response_text === true) {
+    function wasDone(responseText, type) {
+        if (responseText === true) {
             alert("this admin was " + type + " sucssesfuly.");
             let mainscreen = new main_screen();
             mainscreen.loadAdminscreen();
         } else {
-            alert(response_text);
+            alert(responseText);
         }
     }
 

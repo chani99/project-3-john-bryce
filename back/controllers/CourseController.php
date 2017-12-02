@@ -51,8 +51,8 @@
             $getall = $this->businessLogic->SelectAllFromTable($this->table_name, $this->classneame);
             $allCourses = array();            
             for($i=0; $i<count($getall); $i++) {
-                $c = new CourseModel($getall[$i]);
-                array_push($allCourses, $c->jsonSerialize());
+                $cursre_c = new CourseModel($getall[$i]);
+                array_push($allCourses, $cursre_c->jsonSerialize());
             }
             return $allCourses;   
         }
@@ -121,8 +121,8 @@
             $where = 'student.id = ' . $param["id"];
             $getall = $this->businessLogic->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
             for($i=0; $i<count($getall); $i++) {
-                $c = new CourseModel($getall[$i]);
-                array_push($innerJoinCourses, $c->jsonSerialize());
+                $cursre_c = new CourseModel($getall[$i]);
+                array_push($innerJoinCourses, $cursre_c->jsonSerialize());
             }
             return $innerJoinCourses;   
         }

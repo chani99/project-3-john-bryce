@@ -23,13 +23,13 @@ class CropController {
                     
                     $image_type = getimagesize("../uploads/$name");
                             if($image_type['mime'] == "image/jpeg"){
-                                $im =imagecreatefromjpeg("../uploads/$name");
+                                $im1 =imagecreatefromjpeg("../uploads/$name");
                             }else{
-                                $im =imagecreatefrompng("../uploads/$name");
+                                $im1 =imagecreatefrompng("../uploads/$name");
                             }
                     
-                    $size = min(imagesx($im), imagesy($im));
-                    $im2 = imagecrop($im, ['x' => $src_x, 'y' => $src_y, 'width' => $dst_w, 'height' => $dst_h]);
+                    $size = min(imagesx($im1), imagesy($im1));
+                    $im2 = imagecrop($im1, ['x' => $src_x, 'y' => $src_y, 'width' => $dst_w, 'height' => $dst_h]);
                     if ($im2 !== FALSE) {
                         $image_type = getimagesize("../uploads/$name");
                                 if($image_type['mime'] == "image/jpeg"){

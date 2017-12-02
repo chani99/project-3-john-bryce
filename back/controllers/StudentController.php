@@ -56,8 +56,8 @@
                     $where = 'course.id = ' . $param["id"];
                     $getall = $this->businessLogic->innerJoin3table($selected_rows, $this->table_name, $table2, $table3, $Column_equal_to, $Column_equal_to2, $where);
                     for($i=0; $i<count($getall); $i++) {
-                        $c = new StudentModel($getall[$i]);
-                        array_push($innerJoinstudents, $c->jsonSerialize());
+                        $sModel = new StudentModel($getall[$i]);
+                        array_push($innerJoinstudents, $sModel->jsonSerialize());
                     }
                     return $innerJoinstudents;   
                 }

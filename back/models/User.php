@@ -32,8 +32,8 @@
             return $this->permission;
         }
         public function setUserPassword($password) {
-            $pw = new PasswordHandler();
-            $this->userPassword = $pw->getHash($password);
+            $p_w = new PasswordHandler();
+            $this->userPassword = $p_w->getHash($password);
         }
 
         public function jsonSerialize() {
