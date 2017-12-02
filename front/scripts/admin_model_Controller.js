@@ -200,6 +200,7 @@ var AdminModuleController = function() {
 // add event to get admin update window
 $(document).on("click", "#singleAdmin", function() {
     let column3_model = new column3_director();
+    location.hash = "edit admin" + " " + $(this).data("adminid");
     column3_model.UpdateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
 
@@ -225,7 +226,7 @@ $(document).on("click", "#delete_admin", function() {
 });
 
 
-//  add event to course details
+//  add event to save admin chages
 $(document).on("click", "#editAdmin", function() {
     let column3_model = new column3_director();
     column3_model.UpdateAdmins($(this).data("editid"));
@@ -234,6 +235,7 @@ $(document).on("click", "#editAdmin", function() {
 // add event for + new admin
 $("#add_new_administrator").click(function() {
     let column3 = new column3_director();
+    location.hash = "add new admin";
     column3.newAdminScreen($(this).data("permission"));
 });
 

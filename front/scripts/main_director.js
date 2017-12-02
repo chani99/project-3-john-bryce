@@ -37,6 +37,8 @@ var main_screen = function() {
                 let d = document.createElement("div");
                 d.innerHTML = c;
                 $("#loginform").append(d);
+                location.hash = "login";
+
             });
 
         },
@@ -72,9 +74,12 @@ var main_screen = function() {
 
         logout: function() {
             sendlogoutAJAX("logout", "back/api/logoutAPI.php", function() {
+                localStorage.clear();
                 $("#screen2, #screen1, #navlist").hide();
                 $("#loginform").show();
-                $("#login").html("");
+                $("#login, #Administratos").html("");
+                location.hash = "login";
+
             });
         },
 
@@ -89,9 +94,7 @@ var main_screen = function() {
                 courseController.GetAllCourse(permission);
                 let studentController = new StudentModelController();
                 studentController.GetAllStudents();
-
-
-
+                permission == "" ? location.hash = "school" : location.hash = "main";
 
             });
 
@@ -102,7 +105,7 @@ var main_screen = function() {
             let column33 = new column3_director();
             $("#screen1").hide();
             $("#screen2").show();
-
+            location.hash = "administration screen";
             column33.main_screen2(function() {
                 let AdminController = new AdminModuleController();
                 AdminController.GetAllAdmins();

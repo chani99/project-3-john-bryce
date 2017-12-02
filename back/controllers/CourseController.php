@@ -199,7 +199,6 @@
                     is_array($remove_courses[$c]) ? $courses = $remove_courses[$c]['Course_id'] : $courses = $remove_courses[$c];;
                     $param = [
                         "id" => $id,
-                    
                         "courses" => $courses
                         ];
                     

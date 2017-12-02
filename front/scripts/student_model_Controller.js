@@ -210,11 +210,13 @@ var StudentModelController = function() {
 // add event to student details
 $(document).on("click", "#singleStudent", function() {
     let studentModel = new StudentModelController();
+    location.hash = "student " + $(this).data("studentid") + " details";
     studentModel.getStudent($(this).data("studentid"));
 });
 
 //add event to student edit
 $(document).on("click", "#editStudent", function() {
+    location.hash = "edit student " + $(this).data("editid");
     let column3 = new column3_director();
     column3.Update_studentTemp("edit", $(this).data("editid"));
 });
@@ -243,6 +245,7 @@ $(document).on("change", "#browse", function(e) {
 
 // add event for + new student
 $("#add_new_student").click(function() {
+    $(this).data("new student")
     let column3 = new column3_director();
     column3.newStudentScreen();
 });

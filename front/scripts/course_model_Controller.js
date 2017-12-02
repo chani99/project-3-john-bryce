@@ -99,10 +99,15 @@ var CourseModuleController = function() {
             getFormValues(but_id, function() {
                 let course = new Course(data);
                 sendAJAX("POST", CourseApiUrl, course, function(respnse) {
-                    alert("this caouse was created sucssesfuly.");
-                    let course_model = new CourseModuleController();
-                    course_model.GetAllCourse();
-                    course_model.getOneCourse(respnse[1]);
+                    if (respnse === true) {
+                        alert("this caouse was created sucssesfuly.");
+                        let course_model = new CourseModuleController();
+                        course_model.GetAllCourse();
+                        course_model.getOneCourse(respnse[1]);
+                    } else {
+                        alert(respnse);
+
+                    }
                 });
             });
 
@@ -112,10 +117,14 @@ var CourseModuleController = function() {
             getFormValues(but_id, function() {
                 let course = new Course(data);
                 sendAJAX("PUT", CourseApiUrl, course, function(respnse) {
-                    alert("this caouse was updated sucssesfuly.");
-                    let course_model = new CourseModuleController();
-                    course_model.GetAllCourse();
-                    course_model.getOneCourse(data.id);
+                    if (respnse === true) {
+                        alert("this caouse was updated sucssesfuly.");
+                        let course_model = new CourseModuleController();
+                        course_model.GetAllCourse();
+                        course_model.getOneCourse(data.id);
+                    } else {
+                        alert(respnse);
+                    }
                 });
             });
         },
@@ -182,6 +191,7 @@ var CourseModuleController = function() {
 
 // add event to get course details
 $(document).on("click", "#singleCourse", function() {
+    location.hash = "course " + $(this).data("courseid") + " details";
     let course_model = new CourseModuleController();
     course_model.getOneCourse($(this).data("courseid"), $(this).data("permission"));
 });
@@ -209,12 +219,14 @@ $(document).on("click", "#deleteCourse", function() {
 
 //  add event to course details
 $(document).on("click", "#editCourse", function() {
+    location.hash = "edit course " + $(this).data("editid");
     let column3_model = new column3_director();
     column3_model.UpdateCourses($(this).data("editid"));
 });
 
 // add event for + new course
 $("#add_new_course").click(function() {
+    location.hash = "add new course";
     let column3 = new column3_director();
     column3.newCourseScreen();
 });
