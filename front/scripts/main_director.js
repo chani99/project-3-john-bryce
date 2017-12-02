@@ -83,11 +83,13 @@ var main_screen = function() {
             });
         },
 
-        loadmaindcreen: function(permission) {
+        loadmaindcreen: function(permission2) {
             //get cuorse list & student list
             let column33 = new column3_director();
             column33.main_screen(function() {
-                $("#add_new_administrator").data("permission", permission);
+                $("#add_new_administrator").data("permission", permission2);
+                let permission = localStorage.getItem("permission");
+                permission = JSON.parse(permission);
                 $("#screen2").hide();
                 $("#screen1").show();
                 let courseController = new CourseModuleController();
