@@ -208,7 +208,7 @@ var SendValidation = function() {
 
             if ("image" in values) {
                 tempVal = validate.validateInput(values.image, "image");
-                if ((tempVal === true) || (tempVal == "You must fill all input fields!" && but_id != "new")) {
+                if ((tempVal === true) || (tempVal === "You must fill all input fields!" && but_id !== "new")) {
                     $("#image_error").html("");
                     testImage = true;
                     $("#st_photo").removeClass("error");

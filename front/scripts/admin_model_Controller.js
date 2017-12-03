@@ -67,7 +67,7 @@ var AdminModuleController = function() {
                 data.name = values.name;
                 data.phone = values.phone;
                 data.email = values.email;
-                if (values.password != undefined) {
+                if (!values.password) {
                     data.password = values.password;
                 }
 
@@ -154,7 +154,7 @@ var AdminModuleController = function() {
 
         deleteAdmin: function(but_id) {
             let safe = confirm("Are you sure you want to delete this administrator?");
-            if (safe == true) {
+            if (safe) {
                 data.id = but_id;
                 let admin = new Admin(data);
                 sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
@@ -182,7 +182,7 @@ var AdminModuleController = function() {
             data.id = id;
             let admin = new Admin(data);
             sendAJAX("GET", AdminApiUrl, admin, function(respnse) {
-                if (respnse.constructor != Array) {
+                if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {
                     let column3 = new column3_director();
