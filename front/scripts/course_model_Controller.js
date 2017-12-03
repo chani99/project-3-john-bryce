@@ -157,7 +157,7 @@ var CourseModuleController = function() {
             data.inner = true;
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(respnse) {
-                let column3 = new column3_director();
+                let column3 = new Column3Director();;
                 column3.getinnerJoin(respnse);
 
             });
@@ -176,7 +176,7 @@ var CourseModuleController = function() {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {
-                    let column3 = new column3_director();
+                    let column3 = new Column3Director();;
                     column3.get_one_course(respnse, permission);
 
                 }
@@ -220,14 +220,14 @@ $(document).on("click", "#deleteCourse", function() {
 //  add event to course details
 $(document).on("click", "#editCourse", function() {
     location.hash = "edit course " + $(this).data("editid");
-    let column3_model = new column3_director();
+    let column3_model = new Column3Director();;
     column3_model.UpdateCourses($(this).data("editid"));
 });
 
 // add event for + new course
 $("#add_new_course").click(function() {
     location.hash = "add new course";
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     column3.newCourseScreen();
 });
 

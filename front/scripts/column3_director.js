@@ -1,6 +1,6 @@
 "use strict";
 
-var column3_director = function() {
+var Column3Director = function() {
     var column3_data = {};
     var course_model = new CourseModuleController();
     var student_model = new StudentModelController();
@@ -25,7 +25,7 @@ var column3_director = function() {
             $("#inputname").val(details.name);
 
             //add checkbox
-            column3 = new column3_director();
+            column3 = new Column3Director();;
             column3.addCheckbox(studentCourses);
 
         });
@@ -90,7 +90,7 @@ var column3_director = function() {
             $("#main-scool").html("");
             $("#main-scool").append(d);
             $("#delete_student").hide();
-            column3 = new column3_director();
+            column3 = new Column3Director();;
             column3.addCheckbox();
 
 

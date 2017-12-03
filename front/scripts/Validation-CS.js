@@ -214,7 +214,7 @@ var SendValidation = function() {
                     $("#st_photo").removeClass("error");
                 } else {
                     $("#image_error").html(tempVal);
-                    $("#st_photo").addClass("error")
+                    $("#st_photo").addClass("error");
                     testImage = false;
                 }
 

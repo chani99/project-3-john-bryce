@@ -55,7 +55,7 @@ var StudentModelController = function() {
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
                 if (values.image !== undefined) {
-                    let column3 = new column3_director();
+                    let column3 = new Column3Director();;
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
                             if (resulet[0]) {
@@ -147,7 +147,7 @@ var StudentModelController = function() {
             let manu = "get_one";
             let student = new Student(data);
             sendAJAX("GET", ApiUrl, student, function(respnse) {
-                let column3 = new column3_director();
+                let column3 = new Column3Director();;
                 column3.get_one_student(respnse);
             });
 
@@ -159,7 +159,7 @@ var StudentModelController = function() {
             data.inner = true;
             let stedents = new Student(data);
             sendAJAX("GET", ApiUrl, stedents, function(respnse) {
-                let column3 = new column3_director();
+                let column3 = new Column3Director();;
                 column3.getinnerJoinstudents(respnse);
 
             });
@@ -217,7 +217,7 @@ $(document).on("click", "#singleStudent", function() {
 //add event to student edit
 $(document).on("click", "#editStudent", function() {
     location.hash = "edit student " + $(this).data("editid");
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     column3.Update_studentTemp("edit", $(this).data("editid"));
 });
 
@@ -246,7 +246,7 @@ $(document).on("change", "#browse", function(e) {
 // add event for + new student
 $("#add_new_student").click(function() {
     $(this).data("new student")
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     column3.newStudentScreen();
 });
 
@@ -254,7 +254,7 @@ $("#add_new_student").click(function() {
 // add event to show image
 $(document).on("change", "#browse_s", function(e) {
     let image = $("#browse_s").prop("files")[0];
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     column3.uploadFile(image);
 
 });

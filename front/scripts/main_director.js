@@ -1,6 +1,6 @@
 "use strict";
 
-var main_screen = function() {
+var MainScreen = function() {
     // let column1ApiMethod = "Student";
     // let ApiUrl = "back/api/api.php";
     // var column1_data = {};
@@ -62,7 +62,7 @@ var main_screen = function() {
                     localStorage.setItem("permission", permission_for_storage);
 
 
-                    let main = new main_screen();
+                    let main = new MainScreen();
                     main.loadmaindcreen(response.permission);
 
                 } else {
@@ -85,7 +85,7 @@ var main_screen = function() {
 
         loadmaindcreen: function(permission2) {
             //get cuorse list & student list
-            let column33 = new column3_director();
+            let column33 = new Column3Director();;
             column33.main_screen(function() {
                 $("#add_new_administrator").data("permission", permission2);
                 let permission = localStorage.getItem("permission");
@@ -104,7 +104,7 @@ var main_screen = function() {
 
         loadAdminscreen: function() {
             //get cuorse list & student list
-            let column33 = new column3_director();
+            let column33 = new Column3Director();;
             $("#screen1").hide();
             $("#screen2").show();
             location.hash = "administration screen";
@@ -125,25 +125,25 @@ var main_screen = function() {
 
 // add event for nav bar school
 $("#nav_school").click(function() {
-    let loadmain = new main_screen();
+    let loadmain = new MainScreen();
     loadmain.loadmaindcreen();
 });
 
 
 // add event for nav bar school
 $("#nav_Administration").click(function() {
-    let loadmain = new main_screen();
+    let loadmain = new MainScreen();
     loadmain.loadAdminscreen();
 });
 
 
 $(document).on("click", "#submitlogin", function() {
-    let login = new main_screen();
+    let login = new MainScreen();
     login.handleLogin();
 });
 
 // add event for logout
 $(document).on("click", "#logout", function() {
-    let loadmain = new main_screen();
+    let loadmain = new MainScreen();
     loadmain.logout();
 });

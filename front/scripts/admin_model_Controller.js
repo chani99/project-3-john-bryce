@@ -74,7 +74,7 @@ var AdminModuleController = function() {
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
                 if (values.image !== undefined) {
-                    let column3 = new column3_director();
+                    let column3 = new Column3Director();;
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
                             if (resulet[0]) {
@@ -108,7 +108,7 @@ var AdminModuleController = function() {
     function wasDone(responseText, type) {
         if (responseText === true) {
             alert("this admin was " + type + " sucssesfuly.");
-            let mainscreen = new main_screen();
+            let mainscreen = new MainScreen();
             mainscreen.loadAdminscreen();
         } else {
             alert(responseText);
@@ -185,7 +185,7 @@ var AdminModuleController = function() {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {
-                    let column3 = new column3_director();
+                    let column3 = new Column3Director();;
                     column3.get_one_admin(respnse);
                 }
             });
@@ -199,7 +199,7 @@ var AdminModuleController = function() {
 
 // add event to get admin update window
 $(document).on("click", "#singleAdmin", function() {
-    let column3_model = new column3_director();
+    let column3_model = new Column3Director();;
     location.hash = "edit admin" + " " + $(this).data("adminid");
     column3_model.UpdateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
@@ -228,13 +228,13 @@ $(document).on("click", "#delete_admin", function() {
 
 //  add event to save admin chages
 $(document).on("click", "#editAdmin", function() {
-    let column3_model = new column3_director();
+    let column3_model = new Column3Director();;
     column3_model.UpdateAdmins($(this).data("editid"));
 });
 
 // add event for + new admin
 $("#add_new_administrator").click(function() {
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     location.hash = "add new admin";
     column3.newAdminScreen($(this).data("permission"));
 });
@@ -242,7 +242,7 @@ $("#add_new_administrator").click(function() {
 // add event for show image
 $(document).on("change", "#browse_a", function(e) {
     let image = $("#browse_a").prop("files")[0];
-    let column3 = new column3_director();
+    let column3 = new Column3Director();;
     column3.uploadFile(image);
 
 });

@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(function() {
-    let login = new main_screen();
+    let login = new MainScreen();
     login.login_screen();
 
 
