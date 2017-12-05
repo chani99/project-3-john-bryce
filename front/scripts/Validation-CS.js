@@ -2,7 +2,7 @@
 var validation = function() {
 
     function NotEmpty(input) {
-        if ((input === "") || (input === undefined)) {
+        if ((input === "") || (!input)) {
             return "You must fill all input fields!";
         } else {
             return true;
@@ -58,6 +58,7 @@ var validation = function() {
                     } else {
                         return pattern;
                     }
+
                     break;
 
                 case "phone":
@@ -108,10 +109,6 @@ var validation = function() {
                     }
                     break;
 
-
-
-
-                    break;
                 default:
             }
         }

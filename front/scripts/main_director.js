@@ -93,9 +93,9 @@ var MainScreen = function() {
                 $("#screen2").hide();
                 $("#screen1").show();
                 let courseController = new CourseModuleController();
-                courseController.GetAllCourse(permission);
+                courseController.getAllCourse(permission);
                 let studentController = new StudentModelController();
-                studentController.GetAllStudents();
+                studentController.getAllStudents();
                 permission === "" ? location.hash = "school" : location.hash = "main";
 
             });
@@ -110,7 +110,7 @@ var MainScreen = function() {
             location.hash = "administration screen";
             column33.main_screen2(function() {
                 let AdminController = new AdminModuleController();
-                AdminController.GetAllAdmins();
+                AdminController.getAllAdmins();
             });
         }
 

@@ -76,7 +76,7 @@ var Column3Director = function() {
     }
 
     //loads new student form screen
-    function NewStudenttemp() {
+    function newStudenttemp() {
         $.ajax("front/views/new_update_student_temp.html").always(function(updateTemplate) {
 
             var c = updateTemplate;
@@ -99,7 +99,7 @@ var Column3Director = function() {
     }
 
     //loads new admin form screen
-    function NewAdmintemp(permission) {
+    function newAdmintemp(permission) {
         $.ajax("front/views/new_update_admin_temp.html").always(function(updateTemplate) {
 
             var c = updateTemplate;
@@ -120,7 +120,7 @@ var Column3Director = function() {
     }
 
     //loads new course form screen
-    function NewCoursetemp() {
+    function newCoursetemp() {
         $.ajax("front/views/new_update_course_temp.html").always(function(NewCourseTemplate) {
 
             var c = NewCourseTemplate;
@@ -145,7 +145,7 @@ var Column3Director = function() {
 
 
     //loads update course form screen
-    function CouseUpdateTemp(details, course_id) {
+    function couseUpdateTemp(details, course_id) {
         $.ajax("front/views/new_update_course_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update Course: " + details.name);
@@ -213,7 +213,7 @@ var Column3Director = function() {
                 d.innerHTML = c;
                 $("#main-scool").append(d);
 
-                course_model.GetCourseForStudent(data[0].id);
+                course_model.getCourseForStudent(data[0].id);
 
             });
 
@@ -262,7 +262,7 @@ var Column3Director = function() {
 
 
         // founction to load the main student update/new window
-        Update_studentTemp: function(calltype, studen_id) { //data
+        update_studentTemp: function(calltype, studen_id) { //data
             var details = {
                 name: $("#student_name").html(),
                 phone: $("#student_phone").html(),
@@ -279,7 +279,7 @@ var Column3Director = function() {
 
 
         // founction to load the main student update/new window
-        UpdateAdmins: function(admin_id, permission) {
+        updateAdmins: function(admin_id, permission) {
 
             var details = {
                 name: $("#admin_name" + admin_id).html().slice(0, -2),
@@ -353,13 +353,13 @@ var Column3Director = function() {
                 if (permission === "sales") {
                     $("#editCourse").hide();
                 }
-                student_model.GetStudentForCourse(data[0].id);
+                student_model.getStudentForCourse(data[0].id);
             });
 
         },
 
 
-        UpdateCourses: function(course_id) {
+        updateCourses: function(course_id) {
             $("input:checkbox[name='courses ']:checked").each(function() { //get courses checked
                 courses.push($(this).attr("id"));
             });
@@ -369,21 +369,21 @@ var Column3Director = function() {
                 studentsSum: $("[id^=StudentinCourse]").length
             };
 
-            CouseUpdateTemp(details, course_id);
+            couseUpdateTemp(details, course_id);
         },
 
 
         newCourseScreen: function() {
-            NewCoursetemp();
+            newCoursetemp();
         },
 
         newStudentScreen: function() {
-            NewStudenttemp();
+            newStudenttemp();
 
         },
 
         newAdminScreen: function(permission) {
-            NewAdmintemp(permission);
+            newAdmintemp(permission);
         },
 
         // sends file to server befor croping

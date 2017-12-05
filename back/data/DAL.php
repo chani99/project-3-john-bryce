@@ -5,7 +5,7 @@ class DAL {
     private $my_Data_Base;
 
             private $host = '127.0.0.1';
-            private $dataBade   = 'school';
+            private $dataBade = 'school';
             private $user = 'root';
             private $pass = '';
             private $charset = 'utf8';

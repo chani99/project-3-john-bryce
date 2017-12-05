@@ -54,7 +54,7 @@ var StudentModelController = function() {
 
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
-                if (values.image !== undefined) {
+                if (values.image) {
                     let column3 = new Column3Director();
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
@@ -122,7 +122,7 @@ var StudentModelController = function() {
                     if (respnse[0] === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
-                        studentModel.GetAllStudents();
+                        studentModel.getAllStudents();
                         studentModel.getStudent(respnse[1]);
                     }
 
@@ -132,7 +132,7 @@ var StudentModelController = function() {
 
 
 
-        GetAllStudents: function() {
+        getAllStudents: function() {
             let student = new Student(data);
             let allStudents = sendAJAX("GET", ApiUrl, student, function(respnse) {
                 let column2 = new column2_director();
@@ -154,7 +154,7 @@ var StudentModelController = function() {
 
         },
 
-        GetStudentForCourse: function(id) {
+        getStudentForCourse: function(id) {
             data.id = id;
             data.inner = true;
             let stedents = new Student(data);
@@ -191,7 +191,7 @@ var StudentModelController = function() {
                     if (respnse === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
-                        studentModel.GetAllStudents();
+                        studentModel.getAllStudents();
                         studentModel.getStudent(data.id);
                     }
 
@@ -218,7 +218,7 @@ $(document).on("click", "#singleStudent", function() {
 $(document).on("click", "#editStudent", function() {
     location.hash = "edit student " + $(this).data("editid");
     let column3 = new Column3Director();
-    column3.Update_studentTemp("edit", $(this).data("editid"));
+    column3.update_studentTemp("edit", $(this).data("editid"));
 });
 
 //add event to save or update student 

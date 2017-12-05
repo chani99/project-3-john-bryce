@@ -67,13 +67,13 @@ var AdminModuleController = function() {
                 data.name = values.name;
                 data.phone = values.phone;
                 data.email = values.email;
-                if (!values.password) {
+                if (values.password) {
                     data.password = values.password;
                 }
 
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
-                if (values.image !== undefined) {
+                if (values.image) {
                     let column3 = new Column3Director();
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
@@ -164,7 +164,7 @@ var AdminModuleController = function() {
         },
 
 
-        GetAllAdmins: function() {
+        getAllAdmins: function() {
             let admin = new Admin(data);
             sendAJAX("GET", AdminApiUrl, admin, function(returned_data) {
                 let column1 = new column1_director();
@@ -201,7 +201,7 @@ var AdminModuleController = function() {
 $(document).on("click", "#singleAdmin", function() {
     let column3_model = new Column3Director();;
     location.hash = "edit admin" + " " + $(this).data("adminid");
-    column3_model.UpdateAdmins($(this).data("adminid"), $(this).data("permission"));
+    column3_model.updateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
 
 
@@ -229,7 +229,7 @@ $(document).on("click", "#delete_admin", function() {
 //  add event to save admin chages
 $(document).on("click", "#editAdmin", function() {
     let column3_model = new Column3Director();;
-    column3_model.UpdateAdmins($(this).data("editid"));
+    column3_model.updateAdmins($(this).data("editid"));
 });
 
 // add event for + new admin

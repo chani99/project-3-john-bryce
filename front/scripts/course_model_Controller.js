@@ -41,7 +41,7 @@ var CourseModuleController = function() {
                 data.name = values.name;
                 data.description = values.description;
 
-                if (values.image !== undefined) { //check if a image was uploaded
+                if (values.image) { //check if a image was uploaded
                     sendFileToAjax(values.image, function(resulet) {
                         if (resulet[0]) {
                             data.image = resulet[1];
@@ -102,7 +102,7 @@ var CourseModuleController = function() {
                     if (respnse[0] === true) {
                         alert("this caouse was created sucssesfuly.");
                         let courseModel = new CourseModuleController();
-                        courseModel.GetAllCourse();
+                        courseModel.getAllCourse();
                         courseModel.getOneCourse(respnse[1]);
                     } else {
                         alert(respnse);
@@ -120,7 +120,7 @@ var CourseModuleController = function() {
                     if (respnse === true) {
                         alert("this caouse was updated sucssesfuly.");
                         let course_model = new CourseModuleController();
-                        course_model.GetAllCourse();
+                        course_model.getAllCourse();
                         course_model.getOneCourse(data.id);
                     } else {
                         alert(respnse);
@@ -142,7 +142,7 @@ var CourseModuleController = function() {
         },
 
 
-        GetAllCourse: function(permission) {
+        getAllCourse: function(permission) {
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
                 let column1 = new column1_director();
@@ -152,7 +152,7 @@ var CourseModuleController = function() {
         },
 
 
-        GetCourseForStudent: function(id) {
+        getCourseForStudent: function(id) {
             data.id = id;
             data.inner = true;
             let course = new Course(data);
@@ -221,7 +221,7 @@ $(document).on("click", "#deleteCourse", function() {
 $(document).on("click", "#editCourse", function() {
     location.hash = "edit course " + $(this).data("editid");
     let column3_model = new Column3Director();;
-    column3_model.UpdateCourses($(this).data("editid"));
+    column3_model.updateCourses($(this).data("editid"));
 });
 
 // add event for + new course

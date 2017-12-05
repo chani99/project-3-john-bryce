@@ -9,7 +9,7 @@ require_once '../common/PasswordHandler.php';
 
 class LoginController {
 
-    private $controller;
+    // private $controller;
     private $dataBade;
     
 

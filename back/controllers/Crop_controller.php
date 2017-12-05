@@ -14,8 +14,8 @@ class CropController {
             function CropImage(){
 
                     $name = $this->image_to_crop['name'];
-                    $dst_x = 0;
-                    $dst_y = 0;
+                    // $dst_x = 0;
+                    // $dst_y = 0;
                     $src_x = $this->image_to_crop['start_x'];
                     $src_y = $this->image_to_crop['start_y'];
                     $dst_h = $this->image_to_crop['heigth'];
