@@ -90,21 +90,21 @@
 
 
         // Checks if a id exists
-         function getCourseById(){
-                if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
-                return $this->checkIsWasGood($check);
-                }else{
-                    return false;
-                }
+        //  function getCourseById(){
+        //         if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
+        //         $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
+        //         return $this->checkIsWasGood($check);
+        //         }else{
+        //             return false;
+        //         }
 
-            }
+        //     }
 
 
 
 
         // Deletes a line from Courses table
-        function DeleteCourseById() {
+        function DeleteStudentById() {
                 if($this->model->getId() != false){
                 $deleted =  $this->businessLogic->DeleteRow($this->table_name, $this->model->getId());
                 return $this->checkIsWasGood($deleted);

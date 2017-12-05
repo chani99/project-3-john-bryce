@@ -28,7 +28,7 @@
             if (array_key_exists('courses', $params)){
             $corses_new_user = $params['courses'];
             $courses = new CourseController($params);
-            $new_courses = $courses->addCuorses($corses_new_user, $new_id);            
+            $courses->addCuorses($corses_new_user, $new_id);            
             }
             return [true, $new_id];
              
@@ -82,11 +82,17 @@
         //  Delete 1 Students   
          function Delete($params, $mypermission) {
             $mypermission = $mypermission;            
-            $courses = new CourseController($params);
+            $courses = new CourseController($params); //get all courses for student and delete them first
             $stuOldCourses = $courses->getCoursesInnerJoin($params);
             $deleteCourses = $courses->RemoveCourses($stuOldCourses, $params["id"]);
-            $Students = $this->controller->DeleteCourseById();
-            return $Students;
+                if($deleteCourses){ //delete the student
+                    $Students = $this->controller->DeleteStudentById();
+                    return $Students;
+                }  else {
+                    return "there was a problem, please try again";
+                }
+                
+                
             
         }
 

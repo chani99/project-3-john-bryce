@@ -12,7 +12,7 @@
         private $model;
         private $validation;        
         private $table_name = "administratior";
-        private $classneame = "AdminController";
+        // private $classneame = "AdminController";
         
 
         function __construct($params) {

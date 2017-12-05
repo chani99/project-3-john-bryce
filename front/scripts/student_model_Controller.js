@@ -80,7 +80,7 @@ var StudentModelController = function() {
     function wasDone(response_text) {
         if (response_text === true) {
             alert("your request was done sucssesfuly.");
-            let loadmain = new main_screen;
+            let loadmain = new MainScreen();
             loadmain.loadmaindcreen();
 
         } else {

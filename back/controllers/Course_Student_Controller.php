@@ -47,15 +47,15 @@
 
 
         // Updates a line in directos table
-        function ReturnSelect() {
-            $List =  $this->businessLogic->SelectAllFromTable($this->table_name, $this->classneame);
-            $CourseSelect="<option value='Select a Course'>Select a Course</option>";
-                for ($i = 0; $i < count($List); $i++) {
-                $CourseSelect .= "<option value=" . $List[$i]["id"] . ">" . $List[$i]["name"] . "</option>";
-                }
+        // function ReturnSelect() {
+        //     $List =  $this->businessLogic->SelectAllFromTable($this->table_name, $this->classneame);
+        //     $CourseSelect="<option value='Select a Course'>Select a Course</option>";
+        //         for ($i = 0; $i < count($List); $i++) {
+        //         $CourseSelect .= "<option value=" . $List[$i]["id"] . ">" . $List[$i]["name"] . "</option>";
+        //         }
         
-            return $CourseSelect; 
-        }
+        //     return $CourseSelect; 
+        // }
     
 
 
@@ -73,30 +73,30 @@
 
 
         // Checks if a id exists
-         function getCourseById(){
-                if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
-                $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $c->getId());
-                return $this->checkIsWasGood($check);
-                }else{
-                    return false;
-                }
+        //  function getCourseById(){
+        //         if($this->model->getId() != 'null' || $this->model->getId() != 'NaN'){
+        //         $check =  $this->businessLogic->Check_if_id_exists($this->table_name, $this->model->getId());
+        //         return $this->checkIsWasGood($check);
+        //         }else{
+        //             return false;
+        //         }
 
-            }
+        //     }
 
 
 
 
         // Deletes a line from Courses table
-        function DeleteCourseById() {
-                if($this->model->getc_id() != false){
-                $deleted =  $this->businessLogic->DeleteRow($this->table_name, $c->getc_id());
-                return $this->checkIsWasGood($deleted);
-                }else{
-                    return false;
-                }
+        // function DeleteCourseById() {
+        //         if($this->model->getc_id() != false){
+        //         $deleted =  $this->businessLogic->DeleteRow($this->table_name, $c->getc_id());
+        //         return $this->checkIsWasGood($deleted);
+        //         }else{
+        //             return false;
+        //         }
 
     
-        }
+        // }
         
 
         // Deletes a line from Courses table

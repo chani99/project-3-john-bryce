@@ -9,7 +9,6 @@
     class CourseController extends Controller {
         private $businessLogic;
         private $model;
-        private $validation;        
         private $table_name = "course";
         private $classneame = "CourseController";
         
@@ -211,6 +210,7 @@
                 $S_C = new S_C_Controller($param);
                 $S_C->DeleteCourseByRowName($param);
                 }
+                return true;
         }
 }
         
