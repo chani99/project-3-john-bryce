@@ -226,16 +226,16 @@ $(document).on("click", "#delete_admin", function() {
 });
 
 
-//  add event to save admin chages
+//  add event to open edit admin screen
 $(document).on("click", "#editAdmin", function() {
-    let column3model = new Column3Director();;
+    let column3model = new Column3Director();
     column3model.updateAdmins($(this).data("editid"));
 });
 
 // add event for + new admin
 $("#add_new_administrator").click(function() {
-    let column3 = new Column3Director();
     location.hash = "add new admin";
+    let column3 = new Column3Director();
     column3.newAdminScreen($(this).data("permission"));
 });
 
