@@ -157,7 +157,7 @@ var CourseModuleController = function() {
             data.inner = true;
             let course = new Course(data);
             sendAJAX("GET", CourseApiUrl, course, function(respnse) {
-                let column3 = new Column3Director();;
+                let column3 = new Column3Director();
                 column3.getinnerJoin(respnse);
 
             });
@@ -176,7 +176,7 @@ var CourseModuleController = function() {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {
-                    let column3 = new Column3Director();;
+                    let column3 = new Column3Director();
                     column3.get_one_course(respnse, permission);
 
                 }
@@ -227,7 +227,7 @@ $(document).on("click", "#editCourse", function() {
 // add event for + new course
 $("#add_new_course").click(function() {
     location.hash = "add new course";
-    let column3 = new Column3Director();;
+    let column3 = new Column3Director();
     column3.newCourseScreen();
 });
 

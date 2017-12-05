@@ -74,7 +74,7 @@ var AdminModuleController = function() {
                 //check if a image was uploaded and if was get the croped image
                 // and send it for croping at server 
                 if (values.image !== undefined) {
-                    let column3 = new Column3Director();;
+                    let column3 = new Column3Director();
                     column3.getImageCropSize(function(crop_sizes) {
                         sendFileToCrop(crop_sizes, function(resulet) {
                             if (resulet[0]) {
@@ -185,7 +185,7 @@ var AdminModuleController = function() {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {
-                    let column3 = new Column3Director();;
+                    let column3 = new Column3Director();
                     column3.get_one_admin(respnse);
                 }
             });
@@ -234,7 +234,7 @@ $(document).on("click", "#editAdmin", function() {
 
 // add event for + new admin
 $("#add_new_administrator").click(function() {
-    let column3 = new Column3Director();;
+    let column3 = new Column3Director();
     location.hash = "add new admin";
     column3.newAdminScreen($(this).data("permission"));
 });
@@ -242,7 +242,7 @@ $("#add_new_administrator").click(function() {
 // add event for show image
 $(document).on("change", "#browse_a", function(e) {
     let image = $("#browse_a").prop("files")[0];
-    let column3 = new Column3Director();;
+    let column3 = new Column3Director();
     column3.uploadFile(image);
 
 });
