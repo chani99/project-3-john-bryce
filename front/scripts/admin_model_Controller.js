@@ -199,9 +199,9 @@ var AdminModuleController = function() {
 
 // add event to get admin update window
 $(document).on("click", "#singleAdmin", function() {
-    let column3_model = new Column3Director();;
     location.hash = "edit admin" + " " + $(this).data("adminid");
-    column3_model.updateAdmins($(this).data("adminid"), $(this).data("permission"));
+    let column3model = new Column3Director();
+    column3model.updateAdmins($(this).data("adminid"), $(this).data("permission"));
 });
 
 
@@ -210,26 +210,26 @@ $(document).on("click", "#saveAdmin2", function() {
     let calltype = $(this).data("adid");
     console.log(calltype);
     if (calltype == "new") {
-        let admin_model = new AdminModuleController();
-        admin_model.createAdmin(calltype);
+        let adminModel = new AdminModuleController();
+        adminModel.createAdmin(calltype);
     } else {
-        let admin_model = new AdminModuleController();
-        admin_model.updateAdmin(calltype);
+        let adminModel = new AdminModuleController();
+        adminModel.updateAdmin(calltype);
     }
 });
 
 
 //  add event to delete admin
 $(document).on("click", "#delete_admin", function() {
-    let admin_model = new AdminModuleController();
-    admin_model.deleteAdmin($(this).data("deleteadmin"));
+    let adminModel = new AdminModuleController();
+    adminModel.deleteAdmin($(this).data("deleteadmin"));
 });
 
 
 //  add event to save admin chages
 $(document).on("click", "#editAdmin", function() {
-    let column3_model = new Column3Director();;
-    column3_model.updateAdmins($(this).data("editid"));
+    let column3model = new Column3Director();;
+    column3model.updateAdmins($(this).data("editid"));
 });
 
 // add event for + new admin

@@ -192,8 +192,8 @@ var CourseModuleController = function() {
 // add event to get course details
 $(document).on("click", "#singleCourse", function() {
     location.hash = "course " + $(this).data("courseid") + " details";
-    let course_model = new CourseModuleController();
-    course_model.getOneCourse($(this).data("courseid"), $(this).data("permission"));
+    let courseModel = new CourseModuleController();
+    courseModel.getOneCourse($(this).data("courseid"), $(this).data("permission"));
 });
 
 
@@ -201,27 +201,27 @@ $(document).on("click", "#singleCourse", function() {
 $(document).on("click", "#saveCourse", function() {
     let calltype = $(this).data("curseid");
     if (calltype === "new") {
-        let course_model = new CourseModuleController();
-        course_model.createCourse(calltype);
+        let courseModel = new CourseModuleController();
+        courseModel.createCourse(calltype);
     } else {
-        let course_model = new CourseModuleController();
-        course_model.updateCourses(calltype);
+        let courseModel = new CourseModuleController();
+        courseModel.updateCourses(calltype);
     }
 });
 
 
 //  add event to delete course
 $(document).on("click", "#deleteCourse", function() {
-    let course_model = new CourseModuleController();
-    course_model.deleteCourse($(this).data("curseid"));
+    let courseModel = new CourseModuleController();
+    courseModel.deleteCourse($(this).data("curseid"));
 });
 
 
 //  add event to course details
 $(document).on("click", "#editCourse", function() {
     location.hash = "edit course " + $(this).data("editid");
-    let column3_model = new Column3Director();;
-    column3_model.updateCourses($(this).data("editid"));
+    let column3model = new Column3Director();;
+    column3model.updateCourses($(this).data("editid"));
 });
 
 // add event for + new course
@@ -232,7 +232,7 @@ $("#add_new_course").click(function() {
 });
 
 $(document).on("change", "#st_photo", function(e) {
-    let course_model = new CourseModuleController();
-    course_model.checkfile(this);
+    let courseModel = new CourseModuleController();
+    courseModel.checkfile(this);
 
 });
