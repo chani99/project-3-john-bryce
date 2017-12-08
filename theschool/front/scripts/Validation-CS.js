@@ -1,5 +1,5 @@
 "use strict";
-var validation = function() {
+var Validation = function() {
 
     function notEmpty(input) {
         if ((input === "") || (!input)) {
@@ -125,7 +125,7 @@ var SendValidation = function() {
     return {
         sendForValidation: function(values, but_id, caller, callback) {
 
-            let validate = new validation();
+            let validate = new Validation();
             let tempVal;
             let testName = false;
             let testDescription = false;

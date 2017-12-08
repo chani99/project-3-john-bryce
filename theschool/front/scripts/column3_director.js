@@ -387,7 +387,7 @@ var Column3Director = function() {
 
         // sends file to server befor croping
         uploadFile: function(image) {
-            let sendForCheck = new validation();
+            let sendForCheck = new Validation();
             sendForCheck.validateInput(image, "image");
             if (sendForCheck) {
                 let formData = new FormData();
