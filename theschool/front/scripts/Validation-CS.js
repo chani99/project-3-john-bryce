@@ -1,7 +1,7 @@
 "use strict";
 var validation = function() {
 
-    function NotEmpty(input) {
+    function notEmpty(input) {
         if ((input === "") || (!input)) {
             return "You must fill all input fields!";
         } else {
@@ -49,7 +49,7 @@ var validation = function() {
             let pattern;
             switch (type) {
                 case "name":
-                    empty = NotEmpty(input);
+                    empty = notEmpty(input);
                     pattern = matchTextPattern(input);
                     if ((empty === true) && (pattern === true)) {
                         return true;
@@ -62,7 +62,7 @@ var validation = function() {
                     break;
 
                 case "phone":
-                    empty = NotEmpty(input);
+                    empty = notEmpty(input);
                     pattern = matchPhonePattern(input);
                     if ((empty === true) && (pattern === true)) {
                         return true;
@@ -74,7 +74,7 @@ var validation = function() {
                     break;
 
                 case "email":
-                    empty = NotEmpty(input);
+                    empty = notEmpty(input);
                     pattern = matchEmailPattern(input);
                     if ((empty === true) && (pattern === true)) {
                         return true;
@@ -86,7 +86,7 @@ var validation = function() {
                     break;
 
                 case "image":
-                    empty = NotEmpty(input);
+                    empty = notEmpty(input);
                     if (empty === true) {
                         if (input.size > 1000000) {
                             return "file can't be larger then 1 MB";
@@ -102,7 +102,7 @@ var validation = function() {
                     break;
 
                 case "password":
-                    empty = NotEmpty(input);
+                    empty = notEmpty(input);
                     if (empty === true) {
                         return true;
                         return empty;
