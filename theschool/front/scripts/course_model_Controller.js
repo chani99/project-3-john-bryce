@@ -21,7 +21,7 @@ var CourseModuleController = function() {
     };
 
 
-    function getFormValues(but_id, callback) {
+    function getFormValues(butID, callback) {
         let image;
         let values = [];
 
@@ -29,14 +29,14 @@ var CourseModuleController = function() {
         values.description = $("#inputdetails").val().trim();
         values.image = $("#st_photo").prop("files")[0];
 
-        if (but_id !== "new") {
-            data.id = but_id;
+        if (butID !== "new") {
+            data.id = butID;
         }
 
 
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
-        sendForCheck.sendForValidation(values, but_id, "courses", function(returned) {
+        sendForCheck.sendForValidation(values, butID, "courses", function(returned) {
             if (returned.testName === true && returned.testDescription === true && returned.testImage === true) {
                 data.name = values.name;
                 data.description = values.description;
@@ -95,8 +95,8 @@ var CourseModuleController = function() {
 
     return {
 
-        createCourse: function(but_id) {
-            getFormValues(but_id, function() {
+        createCourse: function(butID) {
+            getFormValues(butID, function() {
                 let course = new Course(data);
                 sendAJAX("POST", CourseApiUrl, course, function(respnse) {
                     if (respnse[0] === true) {
@@ -113,8 +113,8 @@ var CourseModuleController = function() {
 
         },
 
-        updateCourses: function(but_id) {
-            getFormValues(but_id, function() {
+        updateCourses: function(butID) {
+            getFormValues(butID, function() {
                 let course = new Course(data);
                 sendAJAX("PUT", CourseApiUrl, course, function(respnse) {
                     if (respnse === true) {
@@ -130,10 +130,10 @@ var CourseModuleController = function() {
         },
 
 
-        deleteCourse: function(but_id) {
+        deleteCourse: function(butID) {
             let safe = confirm("Are you sure you want to delete this course?");
             if (safe === true) {
-                data.id = but_id;
+                data.id = butID;
                 let course = new Course(data);
                 sendAJAX("DELETE", CourseApiUrl, course, function(respnse) {
                     wasDone(respnse);
@@ -144,9 +144,9 @@ var CourseModuleController = function() {
 
         getAllCourse: function(permission) {
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(returned_data) {
+            sendAJAX("GET", CourseApiUrl, course, function(returnedData) {
                 let column1 = new column1_director();
-                column1.allcourses(returned_data, permission);
+                column1.allcourses(returnedData, permission);
             });
 
         },
@@ -177,7 +177,7 @@ var CourseModuleController = function() {
                     alert(respnse);
                 } else {
                     let column3 = new Column3Director();
-                    column3.get_one_course(respnse, permission);
+                    column3.getOneCourse(respnse, permission);
 
                 }
             });

@@ -2,8 +2,8 @@
 
 var Column3Director = function() {
     var column3_data = {};
-    var course_model = new CourseModuleController();
-    var student_model = new StudentModelController();
+    var courseModel = new CourseModuleController();
+    var studentModel = new StudentModelController();
     let column3;
 
 
@@ -144,13 +144,13 @@ var Column3Director = function() {
 
 
     //loads update course form screen
-    function couseUpdateTemp(details, course_id) {
+    function couseUpdateTemp(details, courseId) {
         $.ajax("front/views/new_update_course_temp.html").always(function(updateTemplate) {
             var c = updateTemplate;
             c = c.replace("{{form_name}}", "Update Course: " + details.name);
             c = c.replace("{{new?}}", "update");
-            c = c.replace("{{C_id}}", course_id);
-            c = c.replace("{{C_id2}}", course_id);
+            c = c.replace("{{C_id}}", courseId);
+            c = c.replace("{{C_id2}}", courseId);
 
             let d = document.createElement("div");
             d.innerHTML = c;
@@ -183,7 +183,7 @@ var Column3Director = function() {
         },
 
         //loads main admin screen
-        main_screen2: function(callback) {
+        mainScreen2: function(callback) {
             $.ajax("front/views/main_screenAdmins.html").always(function(main_temp) {
                 var c = main_temp;
                 $("#main_admin").html("");
@@ -196,7 +196,7 @@ var Column3Director = function() {
 
 
 
-        get_one_student: function(data) {
+        getOneStudent: function(data) {
             $.ajax("front/views/student_details_temp.html").always(function(student_temp) {
                 $("#main-scool").html("");
 
@@ -212,7 +212,7 @@ var Column3Director = function() {
                 d.innerHTML = c;
                 $("#main-scool").append(d);
 
-                course_model.getCourseForStudent(data[0].id);
+                courseModel.getCourseForStudent(data[0].id);
 
             });
 
@@ -226,7 +226,7 @@ var Column3Director = function() {
                     var c = courseTemplate;
                     c = c.replace("{{name}}", data[i].Course_name);
                     c = c.replace("{{singleCourse}}", "singlecourseIJ");
-                    c = c.replace("{{course_id}}", data[i].Course_id);
+                    c = c.replace("{{courseId}}", data[i].courseId);
                     c = c.replace("{{descrip}}", "");
                     c = c.replace("{{imgsrc}}", "uploads/" + data[i].Course_image);
                     let d = document.createElement("div");
@@ -261,7 +261,7 @@ var Column3Director = function() {
 
 
         // founction to load the main student update/new window
-        update_studentTemp: function(calltype, studen_id) { //data
+        updateStudentTemp: function(calltype, studen_id) { //data
             var details = {
                 name: $("#student_name").html(),
                 phone: $("#student_phone").html(),
@@ -278,16 +278,16 @@ var Column3Director = function() {
 
 
         // founction to load the main student update/new window
-        updateAdmins: function(admin_id, permission) {
+        updateAdmins: function(adminId, permission) {
 
             var details = {
-                name: $("#admin_name" + admin_id).html().slice(0, -2),
-                phone: $("#admin_phone" + admin_id).html(),
-                mail: $("#admin_mail" + admin_id).html(),
-                role: $("#admin_role" + admin_id).html().trim()
+                name: $("#admin_name" + adminId).html().slice(0, -2),
+                phone: $("#admin_phone" + adminId).html(),
+                mail: $("#admin_mail" + adminId).html(),
+                role: $("#admin_role" + adminId).html().trim()
             };
 
-            temtAdminFunction(details, admin_id, permission);
+            temtAdminFunction(details, adminId, permission);
         },
 
 
@@ -337,7 +337,7 @@ var Column3Director = function() {
 
 
         //shoes course detaills
-        get_one_course: function(data, permission) {
+        getOneCourse: function(data, permission) {
 
             $.ajax("front/views/course_details_temp.html").always(function(courseTemp) {
                 $("#main-scool").html("");
@@ -352,13 +352,13 @@ var Column3Director = function() {
                 if (permission === "sales") {
                     $("#editCourse").hide();
                 }
-                student_model.getStudentForCourse(data[0].id);
+                studentModel.getStudentForCourse(data[0].id);
             });
 
         },
 
 
-        updateCourses: function(course_id) {
+        updateCourses: function(courseId) {
             $("input:checkbox[name='courses ']:checked").each(function() { //get courses checked
                 courses.push($(this).attr("id"));
             });
@@ -368,7 +368,7 @@ var Column3Director = function() {
                 studentsSum: $("[id^=StudentinCourse]").length
             };
 
-            couseUpdateTemp(details, course_id);
+            couseUpdateTemp(details, courseId);
         },
 
 

@@ -26,7 +26,7 @@ var StudentModelController = function() {
     let send;
 
 
-    function getFormValues(but_id, callback) {
+    function getFormValues(butId, callback) {
         let image;
         let courses = [];
         let values = [];
@@ -36,7 +36,7 @@ var StudentModelController = function() {
         values.email = $("#inputemail").val().trim();
         values.image = $("#browse_s").prop("files")[0];
 
-        if (but_id !== "new") { data.id = but_id; }
+        if (butId !== "new") { data.id = butId; }
 
         $("input:checkbox[name='courses']:checked").each(function() { //get courses checked
             courses.push($(this).attr("id"));
@@ -46,7 +46,7 @@ var StudentModelController = function() {
 
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
-        sendForCheck.sendForValidation(values, but_id, "student", function(returned) {
+        sendForCheck.sendForValidation(values, butId, "student", function(returned) {
             if (returned.testName === true && returned.testPhone === true && returned.testEmail === true && returned.testImage === true) {
                 data.name = values.name;
                 data.phone = values.phone;
@@ -148,7 +148,7 @@ var StudentModelController = function() {
             let student = new Student(data);
             sendAJAX("GET", ApiUrl, student, function(respnse) {
                 let column3 = new Column3Director();
-                column3.get_one_student(respnse);
+                column3.getOneStudent(respnse);
             });
 
 
@@ -167,10 +167,10 @@ var StudentModelController = function() {
 
 
 
-        deleteStudent: function(but_id) {
+        deleteStudent: function(butId) {
             let safe = confirm("Are you sure you want to delete this student?");
             if (safe === true) {
-                data.id = but_id;
+                data.id = butId;
                 let student = new Student(data);
                 sendAJAX("DELETE", ApiUrl, student, function(respnse) {
                     wasDone(respnse);
@@ -184,8 +184,8 @@ var StudentModelController = function() {
         },
 
 
-        updateStudent: function(but_id) {
-            getFormValues(but_id, function() {
+        updateStudent: function(butId) {
+            getFormValues(butId, function() {
                 let student = new Student(data);
                 sendAJAX("PUT", ApiUrl, student, function(respnse) {
                     if (respnse === true) {
@@ -218,7 +218,7 @@ $(document).on("click", "#singleStudent", function() {
 $(document).on("click", "#editStudent", function() {
     location.hash = "edit student " + $(this).data("editid");
     let column3 = new Column3Director();
-    column3.update_studentTemp("edit", $(this).data("editid"));
+    column3.updateStudentTemp("edit", $(this).data("editid"));
 });
 
 //add event to save or update student 

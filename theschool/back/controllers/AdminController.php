@@ -151,13 +151,13 @@
         // Updates a line in directos table
         function UpdateById($mypermission){ 
             if($this->model->getId()){
+                $oldrole = $this->getAdminById();                
                 if($mypermission != 'sales'){
                     if($mypermission == 'manager'){
-                        $oldrole = $this->getAdminById();
-                        if ($oldrole[0]['role_id'] == 5 || $this->model->getrole_id() == "5") {
+                        if ($oldrole[0]['role_id'] === 5 || $this->model->getrole_id() == "5") {
                             return 'No permission';
                         } else { 
-                            if($this->model->getpassword() != ""){
+                            if($this->model->getpassword() !== ""){
                                     if ($this->model->getpassword() && $oldrole[0]['role_id'] != 7) {
                                         return 'No permission to update password';    
                                         
@@ -172,7 +172,10 @@
                     } else {
                             if($this->model->getrole_id() == "5"){
                                 return "can't create another owner";
-                            }  else {
+                            }  else if($oldrole[0]['role_id'] === 5 && $this->model->getrole_id() !== "5") {
+                                    return 'No permission';
+                            }
+                            else {
                                 return $this->sendUpdate();  
                             }                      
                     }

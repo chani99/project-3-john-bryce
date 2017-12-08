@@ -24,11 +24,11 @@ var AdminModuleController = function() {
     };
 
 
-    function getFormValues(but_id, callback) {
+    function getFormValues(butId, callback) {
         let image;
         let values = [];
         let GetLohalStotage = localStorage.getItem("permission");
-        let my_role = JSON.parse(GetLohalStotage);
+        let myRole = JSON.parse(GetLohalStotage);
 
 
         values.name = $("#inputname").val().trim();
@@ -41,17 +41,17 @@ var AdminModuleController = function() {
 
 
         //checks if admin is alowd to handle the passwod
-        if (but_id === "new") {
+        if (butId === "new") {
             values.password = $("#inputpassword").val().trim();
         }
 
-        if (but_id !== "new") {
-            data.id = but_id;
+        if (butId !== "new") {
+            data.id = butId;
 
-            if (my_role === "owner" && $("#inputpassword").val().trim() !== "") {
+            if (myRole === "owner" && $("#inputpassword").val().trim() !== "") {
                 values.password = $("#inputpassword").val().trim();
 
-            } else if (my_role === "manager" && values.role === "7" && $("#inputpassword").val().trim() !== "") {
+            } else if (myRole === "manager" && values.role === "7" && $("#inputpassword").val().trim() !== "") {
                 values.password = $("#inputpassword").val().trim();
             }
 
@@ -61,7 +61,7 @@ var AdminModuleController = function() {
 
         //sends all input values for validation in if ok senbs them to sever...
         let sendForCheck = new SendValidation();
-        sendForCheck.sendForValidation(values, but_id, "admin", function(returned) {
+        sendForCheck.sendForValidation(values, butId, "admin", function(returned) {
             if (returned.testName === true && returned.testPhone === true && returned.testEmail === true && returned.testRole === true && returned.testImage === true && returned.testPassword === true) {
                 data.role = values.role;
                 data.name = values.name;
@@ -131,8 +131,8 @@ var AdminModuleController = function() {
 
     return {
 
-        createAdmin: function(but_id) {
-            getFormValues(but_id, function() {
+        createAdmin: function(butId) {
+            getFormValues(butId, function() {
                 let admin = new Admin(data);
                 sendAJAX("POST", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "created");
@@ -141,8 +141,8 @@ var AdminModuleController = function() {
 
         },
 
-        updateAdmin: function(but_id) {
-            getFormValues(but_id, function() {
+        updateAdmin: function(butId) {
+            getFormValues(butId, function() {
                 let admin = new Admin(data);
                 sendAJAX("PUT", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "updated");
@@ -152,10 +152,10 @@ var AdminModuleController = function() {
         },
 
 
-        deleteAdmin: function(but_id) {
+        deleteAdmin: function(butId) {
             let safe = confirm("Are you sure you want to delete this administrator?");
             if (safe) {
-                data.id = but_id;
+                data.id = butId;
                 let admin = new Admin(data);
                 sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "deleted");
@@ -166,9 +166,9 @@ var AdminModuleController = function() {
 
         getAllAdmins: function() {
             let admin = new Admin(data);
-            sendAJAX("GET", AdminApiUrl, admin, function(returned_data) {
+            sendAJAX("GET", AdminApiUrl, admin, function(returnedData) {
                 let column1 = new column1_director();
-                column1.allAdmins(returned_data);
+                column1.allAdmins(returnedData);
 
             });
         },

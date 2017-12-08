@@ -108,7 +108,7 @@ var MainScreen = function() {
             $("#screen1").hide();
             $("#screen2").show();
             location.hash = "administration screen";
-            column33.main_screen2(function() {
+            column33.mainScreen2(function() {
                 let AdminController = new AdminModuleController();
                 AdminController.getAllAdmins();
             });
