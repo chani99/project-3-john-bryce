@@ -12,7 +12,7 @@ var MainScreen = function() {
             var c = logoutemp;
             c = c.replace("{{name}}", user.userName);
             c = c.replace("{{role}}", user.permission);
-            c = c.replace("{{imgsrc}}", "back/uploads/" + user.image);
+            c = c.replace("{{imgsrc}}", "uploads/" + user.image);
             let d = document.createElement("div");
             d.innerHTML = c;
             $("#login").append(d);

@@ -59,7 +59,6 @@ var Column3Director = function() {
                         $("#passwordhide").hide();
                     }
                     break;
-
                 case "sales":
                     $("select option[value=7]").attr("selected", "selected");
                     break;
@@ -207,7 +206,7 @@ var Column3Director = function() {
                 c = c.replace("{{name}}", data[0].name);
                 c = c.replace("{{phone}}", data[0].phone);
                 c = c.replace("{{email}}", data[0].email);
-                c = c.replace("{{imgsrc}}", "back/uploads/" + data[0].image);
+                c = c.replace("{{imgsrc}}", "uploads/" + data[0].image);
 
                 let d = document.createElement("div");
                 d.innerHTML = c;
@@ -229,7 +228,7 @@ var Column3Director = function() {
                     c = c.replace("{{singleCourse}}", "singlecourseIJ");
                     c = c.replace("{{course_id}}", data[i].Course_id);
                     c = c.replace("{{descrip}}", "");
-                    c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Course_image);
+                    c = c.replace("{{imgsrc}}", "uploads/" + data[i].Course_image);
                     let d = document.createElement("div");
                     d.innerHTML = c;
                     $("#main-scool .courselist").append(d);
@@ -249,7 +248,7 @@ var Column3Director = function() {
                     c = c.replace("{{studentid}}", data[i].Student_id);
                     c = c.replace("{{name}}", data[i].Student_name);
                     c = c.replace("{{phone}}", data[i].Student_phone);
-                    c = c.replace("{{imgsrc}}", "back/uploads/" + data[i].Student_image);
+                    c = c.replace("{{imgsrc}}", "uploads/" + data[i].Student_image);
                     c = c.replace("{{sum}}", data.length);
 
                     let d = document.createElement("div");
@@ -346,7 +345,7 @@ var Column3Director = function() {
                 c = c.replace("{{editid}}", data[0].id);
                 c = c.replace("{{name}}", data[0].name);
                 c = c.replace("{{details}}", data[0].description);
-                c = c.replace("{{imgsrc}}", "back/uploads/" + data[0].image);
+                c = c.replace("{{imgsrc}}", "uploads/" + data[0].image);
                 let d = document.createElement("div");
                 d.innerHTML = c;
                 $("#main-scool").append(d);
@@ -395,7 +394,7 @@ var Column3Director = function() {
                 formData.append("file", image);
                 sendFileToServer(formData, function(resulet) {
                     if (resulet[0] === true) {
-                        $("#blah").attr("src", "back/uploads/" + resulet[1]);
+                        $("#blah").attr("src", "uploads/" + resulet[1]);
                         $("#blah").data("name", resulet[1]);
                         let imageTop = $("#blah").position().top;
                         let imageLeft = $("#blah").position().left;

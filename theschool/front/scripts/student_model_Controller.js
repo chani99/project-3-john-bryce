@@ -2,12 +2,12 @@
 
 //student model
 function Student(data) {
-    if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
-    if ("id" in data && data.id !== "") this.id = data.id;
-    if ("name" in data && data.name !== "") this.name = data.name;
-    if ("phone" in data && data.phone !== "") this.phone = data.phone;
-    if ("email" in data && data.email !== "") this.email = data.email;
-    if ("image" in data && data.image !== "") this.image = data.image;
+    if ("ctrl" in data && data.ctrl) this.ctrl = data.ctrl;
+    if ("id" in data && data.id) this.id = data.id;
+    if ("name" in data && data.name) this.name = data.name;
+    if ("phone" in data && data.phone) this.phone = data.phone;
+    if ("email" in data && data.email) this.email = data.email;
+    if ("image" in data && data.image) this.image = data.image;
     if ("courses" in data) this.courses = data.courses;
     if ("inner" in data) this.inner = data.inner;
 

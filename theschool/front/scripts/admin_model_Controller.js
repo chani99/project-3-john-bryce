@@ -1,15 +1,15 @@
 "use strict";
 // admin module
 function Admin(data) {
-    if ("ctrl" in data && data.ctrl !== "") this.ctrl = data.ctrl;
-    if ("id" in data && data.id !== "") this.id = data.id;
-    if ("name" in data && data.name !== "") this.name = data.name;
+    if ("ctrl" in data && data.ctrl) this.ctrl = data.ctrl;
+    if ("id" in data && data.id) this.id = data.id;
+    if ("name" in data && data.name) this.name = data.name;
     if ("image" in data && data.image) this.image = data.image;
-    if ("phone" in data && data.phone !== "") this.phone = data.phone;
-    if ("role" in data && data.role !== "") this.role_id = data.role;
-    if ("email" in data && data.email !== "") this.email = data.email;
-    if ("password" in data && data.password !== "") this.password = data.password;
-    if ("inner" in data && data.inner !== "") this.inner = data.inner;
+    if ("phone" in data && data.phone) this.phone = data.phone;
+    if ("role" in data && data.role) this.role_id = data.role;
+    if ("email" in data && data.email) this.email = data.email;
+    if ("password" in data && data.password) this.password = data.password;
+    if ("inner" in data && data.inner) this.inner = data.inner;
 
 }
 

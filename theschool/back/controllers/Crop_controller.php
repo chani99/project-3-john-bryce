@@ -21,24 +21,24 @@ class CropController {
                     $dst_h = $this->image_to_crop['heigth'];
                     $dst_w = $this->image_to_crop['width'];
                     
-                    $image_type = getimagesize("../uploads/$name");
+                    $image_type = getimagesize("../../uploads/$name");
                             if($image_type['mime'] == "image/jpeg"){
-                                $im1 =imagecreatefromjpeg("../uploads/$name");
+                                $im1 =imagecreatefromjpeg("../../uploads/$name");
                             }else{
-                                $im1 =imagecreatefrompng("../uploads/$name");
+                                $im1 =imagecreatefrompng("../../uploads/$name");
                             }
                     
                     $size = min(imagesx($im1), imagesy($im1));
                     $im2 = imagecrop($im1, ['x' => $src_x, 'y' => $src_y, 'width' => $dst_w, 'height' => $dst_h]);
                     if ($im2 !== FALSE) {
-                        $image_type = getimagesize("../uploads/$name");
+                        $image_type = getimagesize("../../uploads/$name");
                                 if($image_type['mime'] == "image/jpeg"){
-                                    imagejpeg($im2, "../uploads/C_$name");
+                                    imagejpeg($im2, "../../uploads/C_$name");
                                 }else{
-                                    imagepng($im2, "../uploads/C_$name");
+                                    imagepng($im2, "../../uploads/C_$name");
                                 }
                         
-                        $DeleteOriginal="../uploads/$name";
+                        $DeleteOriginal="../../uploads/$name";
                         unlink($DeleteOriginal);
                         return [true, "C_".$name];
 

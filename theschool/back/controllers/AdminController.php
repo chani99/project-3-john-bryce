@@ -146,30 +146,35 @@
             return $newId;
         }
 
+     
 
         // Updates a line in directos table
         function UpdateById($mypermission){ 
-            if($this->model->getId() != false){
+            if($this->model->getId()){
                 if($mypermission != 'sales'){
                     if($mypermission == 'manager'){
                         $oldrole = $this->getAdminById();
-                        if ($oldrole[0]['role_id'] == 5) {
+                        if ($oldrole[0]['role_id'] == 5 || $this->model->getrole_id() == "5") {
                             return 'No permission';
                         } else { 
                             if($this->model->getpassword() != ""){
-                                    if ($this->model->getpassword() !="" && $oldrole[0]['role_id'] != 7) {
+                                    if ($this->model->getpassword() && $oldrole[0]['role_id'] != 7) {
                                         return 'No permission to update password';    
                                         
                                     } else {
-                                        return $this->sendUpdate($mypermission);    
+                                        return $this->sendUpdate();    
                                     }
 
                             } else {
-                                return $this->sendUpdate($mypermission);
+                                return $this->sendUpdate();
                             }
                         }
                     } else {
-                        return $this->sendUpdate($mypermission);                        
+                            if($this->model->getrole_id() == "5"){
+                                return "can't create another owner";
+                            }  else {
+                                return $this->sendUpdate();  
+                            }                      
                     }
                   
 
@@ -185,16 +190,14 @@
         }
 
         
-        function sendUpdate($mypermission){
+        function sendUpdate(){
             $updateValues ="";
-            if($this->model->getname() != "" ){$updateValues .= ", name = '" .$this->model->getName();}                  
-            if($this->model->getphone() != "" ){$updateValues .= "', phone = '" .$this->model->getphone();}
-            if($this->model->getemail() != ""){$updateValues .=  "', email = '" .$this->model->getemail();}
-            if($this->model->getimage() != ""){$updateValues .= "', image = '". $this->model->getimage();}
-            if($this->model->getpassword() != ""){$updateValues .= "', password = '". $this->model->getpassword();}
-            if($mypermission == 'owner'){
-                if($this->model->getrole_id() != ""){$updateValues .= "', role_id = '". $this->model->getrole_id();}
-            }
+            if($this->model->getname()){$updateValues .= ", name = '" .$this->model->getName();}                  
+            if($this->model->getphone()){$updateValues .= "', phone = '" .$this->model->getphone();}
+            if($this->model->getemail()){$updateValues .=  "', email = '" .$this->model->getemail();}
+            if($this->model->getimage()){$updateValues .= "', image = '". $this->model->getimage();}
+            if($this->model->getpassword()){$updateValues .= "', password = '". $this->model->getpassword();}
+            if($this->model->getrole_id()){$updateValues .= "', role_id = '". $this->model->getrole_id();}
             $updateValues .="'";
             $updateValues = substr($updateValues, 2);
             $update =  $this->businessLogic->update_table($this->table_name, $this->model->getId(), $updateValues);
