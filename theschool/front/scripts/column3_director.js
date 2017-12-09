@@ -58,9 +58,11 @@ var Column3Director = function() {
                     if (permission === "manager") {
                         $("#passwordhide").hide();
                     }
+                    $("select option[value=5]").attr("disabled", "true");
                     break;
                 case "sales":
                     $("select option[value=7]").attr("selected", "selected");
+                    $("select option[value=5]").attr("disabled", "true");
                     break;
             }
 
@@ -392,7 +394,8 @@ var Column3Director = function() {
             if (sendForCheck) {
                 let formData = new FormData();
                 formData.append("file", image);
-                sendFileToServer(formData, function(resulet) {
+                let myAjax = new SendAJAX();
+                myAjax.sendFileToServer(formData, function(resulet) {
                     if (resulet[0] === true) {
                         $("#blah").attr("src", "uploads/" + resulet[1]);
                         $("#blah").data("name", resulet[1]);

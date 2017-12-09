@@ -19,6 +19,7 @@ function Admin(data) {
 var AdminModuleController = function() {
     let AdminApiMethod = "Admin";
     let AdminApiUrl = "back/api/api.php";
+    let myAjax = new SendAJAX();
     var data = {
         ctrl: AdminApiMethod
     };
@@ -99,7 +100,7 @@ var AdminModuleController = function() {
     function sendFileToAjax(image, callback) {
         let formData = new FormData();
         formData.append("file", image);
-        sendFileToServer(formData, function(respnse) {
+        myAjax.sendFileToServer(formData, function(respnse) {
             callback(respnse);
         });
     }
@@ -134,7 +135,7 @@ var AdminModuleController = function() {
         createAdmin: function(butId) {
             getFormValues(butId, function() {
                 let admin = new Admin(data);
-                sendAJAX("POST", AdminApiUrl, admin, function(respnse) {
+                myAjax.sendAJAX("POST", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "created");
                 });
             });
@@ -144,7 +145,7 @@ var AdminModuleController = function() {
         updateAdmin: function(butId) {
             getFormValues(butId, function() {
                 let admin = new Admin(data);
-                sendAJAX("PUT", AdminApiUrl, admin, function(respnse) {
+                myAjax.sendAJAX("PUT", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "updated");
 
                 });
@@ -157,7 +158,7 @@ var AdminModuleController = function() {
             if (safe) {
                 data.id = butId;
                 let admin = new Admin(data);
-                sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
+                myAjax.sendAJAX("DELETE", AdminApiUrl, admin, function(respnse) {
                     wasDone(respnse, "deleted");
                 });
             }
@@ -166,7 +167,7 @@ var AdminModuleController = function() {
 
         getAllAdmins: function() {
             let admin = new Admin(data);
-            sendAJAX("GET", AdminApiUrl, admin, function(returnedData) {
+            myAjax.sendAJAX("GET", AdminApiUrl, admin, function(returnedData) {
                 let column1 = new column1_director();
                 column1.allAdmins(returnedData);
 
@@ -181,7 +182,7 @@ var AdminModuleController = function() {
         getOneAdmin: function(id) {
             data.id = id;
             let admin = new Admin(data);
-            sendAJAX("GET", AdminApiUrl, admin, function(respnse) {
+            myAjax.sendAJAX("GET", AdminApiUrl, admin, function(respnse) {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {

@@ -152,9 +152,9 @@
         function UpdateById($mypermission){ 
             if($this->model->getId()){
                 $oldrole = $this->getAdminById();                
-                if($mypermission != 'sales'){
-                    if($mypermission == 'manager'){
-                        if ($oldrole[0]['role_id'] === 5 || $this->model->getrole_id() == "5") {
+                if($mypermission !== 'sales'){
+                    if($mypermission === 'manager'){
+                        if ($oldrole[0]['role_id'] === 5 || $this->model->getrole_id() === "5") {
                             return 'No permission';
                         } else { 
                             if($this->model->getpassword() !== ""){
@@ -170,12 +170,11 @@
                             }
                         }
                     } else {
-                            if($this->model->getrole_id() == "5"){
-                                return "can't create another owner";
-                            }  else if($oldrole[0]['role_id'] === 5 && $this->model->getrole_id() !== "5") {
-                                    return 'No permission';
-                            }
-                            else {
+
+                         if($oldrole[0]['role_id'] === 5 && $this->model->getrole_id() !== "5")
+                         {       
+                                return 'No permission';
+                         } else {
                                 return $this->sendUpdate();  
                             }                      
                     }

@@ -1,6 +1,6 @@
 "use strict";
 
-var column2_director = function() {
+var Column2Director = function() {
     // let column1ApiMethod = "Student";
     // let ApiUrl = "back/api/api.php";
     var column2_data = {};

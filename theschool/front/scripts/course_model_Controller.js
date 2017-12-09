@@ -20,15 +20,15 @@ var CourseModuleController = function() {
     var data = {
         ctrl: CourseApiMethod
     };
+    let myAjax = new SendAJAX();
 
     function sendFileToAjax(image, callback) {
         let form_data = new FormData();
         form_data.append("file", image);
-        sendFileToServer(form_data, function(respnse) {
+        myAjax.sendFileToServer(form_data, function(respnse) {
             callback(respnse);
         });
     }
-
 
 
     function getFormValues(butID, callback) {
@@ -101,7 +101,7 @@ var CourseModuleController = function() {
         createCourse: function(butID) {
             getFormValues(butID, function() {
                 let course = new Course(data);
-                sendAJAX("POST", CourseApiUrl, course, function(respnse) {
+                myAjax.sendAJAX("POST", CourseApiUrl, course, function(respnse) {
                     if (respnse[0] === true) {
                         alert("this caouse was created sucssesfuly.");
                         let courseModel = new CourseModuleController();
@@ -119,7 +119,7 @@ var CourseModuleController = function() {
         updateCourses: function(butID) {
             getFormValues(butID, function() {
                 let course = new Course(data);
-                sendAJAX("PUT", CourseApiUrl, course, function(respnse) {
+                myAjax.sendAJAX("PUT", CourseApiUrl, course, function(respnse) {
                     if (respnse === true) {
                         alert("this caouse was updated sucssesfuly.");
                         let course_model = new CourseModuleController();
@@ -138,7 +138,7 @@ var CourseModuleController = function() {
             if (safe === true) {
                 data.id = butID;
                 let course = new Course(data);
-                sendAJAX("DELETE", CourseApiUrl, course, function(respnse) {
+                myAjax.sendAJAX("DELETE", CourseApiUrl, course, function(respnse) {
                     wasDone(respnse);
                 });
             }
@@ -147,7 +147,7 @@ var CourseModuleController = function() {
 
         getAllCourse: function(permission) {
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(returnedData) {
+            myAjax.sendAJAX("GET", CourseApiUrl, course, function(returnedData) {
                 let column1 = new column1_director();
                 column1.allcourses(returnedData, permission);
             });
@@ -159,7 +159,7 @@ var CourseModuleController = function() {
             data.id = id;
             data.inner = true;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(respnse) {
+            myAjax.sendAJAX("GET", CourseApiUrl, course, function(respnse) {
                 let column3 = new Column3Director();
                 column3.getinnerJoin(respnse);
 
@@ -175,7 +175,7 @@ var CourseModuleController = function() {
         getOneCourse: function(id, permission) {
             data.id = id;
             let course = new Course(data);
-            sendAJAX("GET", CourseApiUrl, course, function(respnse) {
+            myAjax.sendAJAX("GET", CourseApiUrl, course, function(respnse) {
                 if (respnse.constructor !== Array) {
                     alert(respnse);
                 } else {

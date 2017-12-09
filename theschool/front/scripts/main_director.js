@@ -1,9 +1,7 @@
 "use strict";
 
 var MainScreen = function() {
-    // let column1ApiMethod = "Student";
-    // let ApiUrl = "back/api/api.php";
-    // var column1_data = {};
+    let myAjax = new SendAJAX();
 
 
 
@@ -48,7 +46,7 @@ var MainScreen = function() {
                 "user": $("#loginame").val(),
                 "password": $("#inputPassword").val()
             };
-            sendLoginAjax(user, function(response) {
+            myAjax.sendLoginAjax(user, function(response) {
                 if (response.status === true) {
                     $("#login_error").html("");
                     $("#loginform").hide();
@@ -73,7 +71,7 @@ var MainScreen = function() {
         },
 
         logout: function() {
-            sendlogoutAJAX("logout", "back/api/logoutAPI.php", function() {
+            myAjax.sendlogoutAJAX("logout", "back/api/logoutAPI.php", function() {
                 localStorage.clear();
                 $("#screen2, #screen1, #navlist").hide();
                 $("#loginform").show();

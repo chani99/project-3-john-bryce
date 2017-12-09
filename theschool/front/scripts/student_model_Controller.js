@@ -24,6 +24,7 @@ var StudentModelController = function() {
         ctrl: StudebtApiMethod
     };
     let send;
+    let myAjax = new SendAJAX();
 
 
     function getFormValues(butId, callback) {
@@ -57,7 +58,7 @@ var StudentModelController = function() {
                 if (values.image) {
                     let column3 = new Column3Director();
                     column3.getImageCropSize(function(crop_sizes) {
-                        sendFileToCrop(crop_sizes, function(resulet) {
+                        myAjax.sendFileToCrop(crop_sizes, function(resulet) {
                             if (resulet[0]) {
                                 data.image = resulet[1];
                                 callback();
@@ -106,7 +107,7 @@ var StudentModelController = function() {
     function sendFileToAjax(image, callback) {
         let formData = new FormData();
         formData.append("file", image);
-        sendFileToServer(formData, function(respnse) {
+        myAjax.sendFileToServer(formData, function(respnse) {
             callback(respnse);
         });
     }
@@ -118,7 +119,7 @@ var StudentModelController = function() {
         createStudent: function() {
             getFormValues("new", function() {
                 let student = new Student(data);
-                sendAJAX("POST", ApiUrl, student, function(respnse) {
+                myAjax.sendAJAX("POST", ApiUrl, student, function(respnse) {
                     if (respnse[0] === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
@@ -134,8 +135,8 @@ var StudentModelController = function() {
 
         getAllStudents: function() {
             let student = new Student(data);
-            let allStudents = sendAJAX("GET", ApiUrl, student, function(respnse) {
-                let column2 = new column2_director();
+            let allStudents = myAjax.sendAJAX("GET", ApiUrl, student, function(respnse) {
+                let column2 = new Column2Director();
                 column2.allstudends(respnse);
             });
         },
@@ -146,7 +147,7 @@ var StudentModelController = function() {
             data.id = id;
             let manu = "get_one";
             let student = new Student(data);
-            sendAJAX("GET", ApiUrl, student, function(respnse) {
+            myAjax.sendAJAX("GET", ApiUrl, student, function(respnse) {
                 let column3 = new Column3Director();
                 column3.getOneStudent(respnse);
             });
@@ -158,7 +159,7 @@ var StudentModelController = function() {
             data.id = id;
             data.inner = true;
             let stedents = new Student(data);
-            sendAJAX("GET", ApiUrl, stedents, function(respnse) {
+            myAjax.sendAJAX("GET", ApiUrl, stedents, function(respnse) {
                 let column3 = new Column3Director();
                 column3.getinnerJoinstudents(respnse);
 
@@ -172,7 +173,7 @@ var StudentModelController = function() {
             if (safe === true) {
                 data.id = butId;
                 let student = new Student(data);
-                sendAJAX("DELETE", ApiUrl, student, function(respnse) {
+                myAjax.sendAJAX("DELETE", ApiUrl, student, function(respnse) {
                     wasDone(respnse);
                 });
             }
@@ -187,7 +188,7 @@ var StudentModelController = function() {
         updateStudent: function(butId) {
             getFormValues(butId, function() {
                 let student = new Student(data);
-                sendAJAX("PUT", ApiUrl, student, function(respnse) {
+                myAjax.sendAJAX("PUT", ApiUrl, student, function(respnse) {
                     if (respnse === true) {
                         alert("your request was done sucssesfuly.");
                         let studentModel = new StudentModelController();
