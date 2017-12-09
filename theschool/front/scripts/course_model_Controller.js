@@ -12,6 +12,7 @@ function Course(data) {
 
 
 
+
 // course director
 var CourseModuleController = function() {
     let CourseApiMethod = "Course";
@@ -19,6 +20,15 @@ var CourseModuleController = function() {
     var data = {
         ctrl: CourseApiMethod
     };
+
+    function sendFileToAjax(image, callback) {
+        let form_data = new FormData();
+        form_data.append("file", image);
+        sendFileToServer(form_data, function(respnse) {
+            callback(respnse);
+        });
+    }
+
 
 
     function getFormValues(butID, callback) {
@@ -70,13 +80,6 @@ var CourseModuleController = function() {
     }
 
 
-    function sendFileToAjax(image, callback) {
-        let form_data = new FormData();
-        form_data.append("file", image);
-        sendFileToServer(form_data, function(respnse) {
-            callback(respnse);
-        });
-    }
 
 
     function wasDone(response_text) {
