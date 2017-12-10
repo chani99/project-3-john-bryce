@@ -77,7 +77,7 @@ var AdminModuleController = function() {
                 if (values.image) {
                     let column3 = new Column3Director();
                     column3.getImageCropSize(function(crop_sizes) {
-                        sendFileToCrop(crop_sizes, function(resulet) {
+                        myAjax.sendFileToCrop(crop_sizes, function(resulet) {
                             if (resulet[0]) {
                                 data.image = resulet[1];
                                 callback();
