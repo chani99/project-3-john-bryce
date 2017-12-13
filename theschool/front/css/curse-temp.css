@@ -22,6 +22,9 @@
 #login_error {
   color: red;
 }
+#delete_admin {
+  margin-bottom: 20px;
+}
 label {
   margin-top: 15px;
 }
