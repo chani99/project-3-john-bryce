@@ -4,7 +4,7 @@ function Course(data) {
     if ("ctrl" in data && data.ctrl) this.ctrl = data.ctrl;
     if ("id" in data && data.id) this.id = data.id;
     if ("name" in data && data.name) this.name = data.name;
-    if ("description" in data && data.descriptio) this.description = data.description;
+    if ("description" in data && data.description) this.description = data.description;
     if ("image" in data && data.image) this.image = data.image;
     if ("inner" in data && data.inner) this.inner = data.inner;
 
